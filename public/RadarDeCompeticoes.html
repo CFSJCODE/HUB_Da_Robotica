@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar de Competições | Hub Da Robótica</title>
+
+    <!-- Otimização de Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração do Tailwind (Mesma filosofia da Landing Page) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        academic: {
+                            blue: '#1b4b6b',    
+                            deep: '#0f2d40',    
+                            gold: '#f18821',    
+                            gold_hover: '#d8761a',
+                            light: '#f8fafc',   
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'gold': '0 10px 30px -10px rgba(241, 136, 33, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="assets/scripts/config.js"></script>
+    <script src="assets/scripts/app.js"></script>
+
+    <style>
+        body {
+            background-color: #07131d;
+            background-image:
+                radial-gradient(circle at 15% 10%, rgba(34, 211, 238, 0.10), transparent 32rem),
+                radial-gradient(circle at 86% 20%, rgba(241, 136, 33, 0.11), transparent 30rem),
+                radial-gradient(circle at 50% 85%, rgba(27, 75, 107, 0.28), transparent 36rem);
+            color: #cbd5e1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .glass-nav {
+            background: rgba(15, 45, 64, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        }
+
+        .glass-nav nav,
+        .glass-nav nav > div,
+        .glass-nav nav ul {
+            gap: 1rem !important;
+        }
+
+        .glass-nav nav a,
+        #nav-auth-btn button {
+            white-space: nowrap;
+        }
+
+        #nav-auth-btn button {
+            color: #ffffff !important;
+            min-width: max-content;
+        }
+
+        .flow-link-active {
+            color: #f18821 !important;
+            border-bottom: 2px solid #f18821;
+            padding-bottom: 0.25rem;
+        }
+
+        .flow-search {
+            background: rgba(15, 45, 64, 0.42) !important;
+            color: #f8fafc !important;
+            border-color: rgba(34, 211, 238, 0.22) !important;
+        }
+
+        .flow-search::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        .flow-visual-card {
+            background: rgba(15, 45, 64, 0.38);
+            border: 1px solid rgba(34, 211, 238, 0.14);
+            box-shadow: 0 22px 50px -24px rgba(34, 211, 238, 0.28);
+            backdrop-filter: blur(18px);
+        }
+
+        @media (min-width: 1024px) and (max-width: 1360px) {
+            .glass-nav .max-w-7xl {
+                max-width: none;
+            }
+
+            .glass-nav nav,
+            .glass-nav nav > div,
+            .glass-nav nav ul {
+                gap: 0.55rem !important;
+            }
+
+            .glass-nav nav a,
+            #nav-auth-btn button {
+                font-size: 0.78rem !important;
+            }
+
+            #nav-auth-btn button {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            background: rgba(27, 75, 107, 0.46) !important;
+            box-shadow: 0 24px 56px -18px rgba(34, 211, 238, 0.35), 0 18px 42px -18px rgba(241, 136, 33, 0.32);
+            border-color: rgba(34, 211, 238, 0.45) !important;
+        }
+
+        /* --- SPA View System --- */
+        .view-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #07131d; }
+        ::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.35); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(241, 136, 33, 0.65); }
+
+        /* Vanilla JS Carousel Transitions */
+        .carousel-item-custom {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 0;
+        }
+        .carousel-item-custom.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .carousel-item-custom::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(90deg, rgba(2, 6, 23, 0.80) 0%, rgba(2, 6, 23, 0.52) 48%, rgba(2, 6, 23, 0.18) 100%),
+                linear-gradient(0deg, rgba(2, 6, 23, 0.68) 0%, rgba(2, 6, 23, 0.18) 60%);
+            pointer-events: none;
+        }
+
+        .carousel-title {
+            color: #ffffff !important;
+            text-shadow: 0 5px 24px rgba(0, 0, 0, 0.78);
+        }
+
+        .carousel-description {
+            color: #f8fafc !important;
+            font-weight: 500;
+            text-shadow: 0 3px 16px rgba(0, 0, 0, 0.72);
+        }
+
+        main,
+        .view-section {
+            background: transparent;
+        }
+
+        section.bg-white,
+        section.bg-academic-light,
+        footer.bg-white {
+            background: transparent !important;
+        }
+
+        .bg-white,
+        .bg-slate-50,
+        .bg-slate-100,
+        .bg-slate-200,
+        .bg-academic-light {
+            background: rgba(15, 45, 64, 0.38) !important;
+            border-color: rgba(34, 211, 238, 0.14) !important;
+            backdrop-filter: blur(20px);
+        }
+
+        .text-academic-deep,
+        .text-slate-800,
+        .text-slate-700 {
+            color: #f8fafc !important;
+        }
+
+        .text-slate-600,
+        .text-slate-500 {
+            color: #94a3b8 !important;
+        }
+
+        .border-slate-50,
+        .border-slate-100,
+        .border-slate-200 {
+            border-color: rgba(34, 211, 238, 0.14) !important;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 22px 50px -22px rgba(34, 211, 238, 0.28), 0 18px 42px -20px rgba(0, 0, 0, 0.55) !important;
+        }
+
+        input,
+        textarea,
+        select {
+            background-color: rgba(2, 6, 23, 0.45) !important;
+            color: #f8fafc !important;
+            border-color: rgba(34, 211, 238, 0.18) !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #64748b !important;
+        }
+
+        table,
+        thead,
+        tbody {
+            color: #cbd5e1;
+        }
+
+        .hover\:bg-slate-50:hover,
+        .hover\:bg-slate-100:hover {
+            background: rgba(27, 75, 107, 0.46) !important;
+        }
+
+        .carousel-cta {
+            background: linear-gradient(135deg, #ff7a1a 0%, #f18821 58%, #ff9f43 100%);
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            box-shadow: 0 20px 46px -18px rgba(241, 136, 33, 0.86), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .carousel-cta:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #ff8a2b 0%, #ff6f15 55%, #f18821 100%);
+            box-shadow: 0 24px 54px -16px rgba(241, 136, 33, 0.95);
+        }
+
+        .carousel-cta i {
+            color: #ffffff !important;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
+        }
+
+        .event-card-link {
+            color: #22d3ee !important;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            text-shadow: 0 0 16px rgba(34, 211, 238, 0.34);
+        }
+
+        .event-card-link i {
+            color: #22d3ee !important;
+        }
+
+        .group:hover .event-card-link,
+        .group:hover .event-card-link i {
+            color: #fb923c !important;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="text-slate-700 font-sans flex flex-col min-h-screen">
+
+    <!-- Cabeçalho Institucional -->
+    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 gap-8">
+                
+                <!-- Logo -->
+                <a href="#home" onclick="app.navigate('home')" class="flex items-center gap-3 group cursor-pointer shrink-0 min-w-[11.5rem]">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-11 h-11 rounded-xl border border-white/10 shadow-gold group-hover:scale-105 transition-transform">
+                    <div>
+                        <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Competições</p>
+                    </div>
+                </a>
+
+                <!-- Nav Links Dinâmicos -->
+                <nav aria-label="Navegação principal" class="hidden lg:flex flex-1 items-center justify-end gap-4 min-w-0">
+                    <div class="flex items-center justify-end gap-4 min-w-0">
+                        <!-- Links Externos (Outras Páginas) -->
+                        <ul class="flex items-center gap-6 m-0 p-0 list-none">
+                            <li><a href="index.html#home" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Início</a></li>
+                            <li><a href="Garagem_De_Projetos.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Garagem</a></li>
+                            <li><a href="RadarDeCompeticoes.html" class="text-sm font-medium text-academic-gold transition-colors pb-1 border-b-2 border-academic-gold">Radar de Competições</a></li>
+                            <li><a href="EquipesBrasil.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Equipes do Brasil</a></li>
+                            <li><a href="Contatos.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Contatos</a></li>
+                        </ul>
+                        
+                        <!-- Separador Vertical -->
+                        <span class="block h-6 w-px bg-white/20"></span>
+                        
+                        <!-- Links Internos da SPA (Views) -->
+                        <ul class="flex items-center gap-6 m-0 p-0 list-none" id="nav-menu">
+                            <li>
+                                <a onclick="app.navigate('home')" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                                    <i class="fa-solid fa-house"></i> Visão Geral
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a onclick="app.navigate('rules')" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                                    <i class="fa-solid fa-book-journal-whills"></i> Regulamentos
+                                </a>
+                            </li>
+
+                            <li id="nav-crud" style="display: none;">
+                                <a onclick="app.navigate('crud')" data-flow-link="crud" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                                    <i class="fa-solid fa-plus"></i> Cadastro
+                                </a>
+                            </li>
+                            
+                            <li id="nav-favorites" style="display: none;">
+                                <a onclick="app.navigate('favorites')" data-flow-link="favorites" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                                    <i class="fa-solid fa-heart"></i> Favoritos
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a onclick="app.navigate('metrics')" data-flow-link="metrics" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-pie"></i> Métricas
+                                </a>
+                            </li>
+
+                            <li>
+                                <button id="theme-toggle" type="button" onclick="HubTheme.toggle()" aria-pressed="false" class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-white/85 hover:border-academic-gold/70 hover:text-white transition-colors" title="Alternar tema">
+                                    <span id="theme-toggle-label">Dark</span>
+                                    <span class="relative inline-flex h-5 w-10 rounded-full bg-slate-950/70 border border-white/10 p-0.5">
+                                        <span id="theme-toggle-knob" class="h-4 w-4 rounded-full bg-academic-gold shadow-gold transition-transform duration-200"></span>
+                                    </span>
+                                </button>
+                            </li>
+                            
+                            <li id="nav-auth-btn">
+                                <!-- Injetado via JS -->
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Área de Renderização (SPA Views) -->
+    <main id="app-content" class="flex-grow pt-20">
+        
+        <!-- ================= HOME VIEW ================= -->
+        <section id="view-home" class="view-section active">
+            
+            <!-- Hero Carousel Customizado -->
+            <div class="relative w-full h-[60vh] bg-academic-deep overflow-hidden group">
+                <div class="absolute inset-0 z-10 bg-gradient-to-t from-academic-deep via-academic-deep/50 to-transparent"></div>
+                <div class="absolute inset-0 z-10 bg-pattern opacity-20"></div>
+                
+                <div id="carousel-content" class="w-full h-full relative">
+                    <!-- Injetado via JS -->
+                </div>
+
+                <!-- Controladores do Carrossel -->
+                <button onclick="app.prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-academic-gold backdrop-blur border border-white/20 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="app.nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-academic-gold backdrop-blur border border-white/20 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                
+                <!-- Acesso às Métricas e Regulamentos (Botões Portal) -->
+                <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <button onclick="app.navigate('crud')" class="bg-white border border-slate-200 hover:border-academic-gold hover:shadow-soft text-academic-deep px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-full bg-academic-gold/10 text-academic-gold flex items-center justify-center group-hover:bg-academic-gold group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        Cadastro de Itens
+                    </button>
+
+                    <button onclick="app.navigate('favorites')" class="bg-white border border-slate-200 hover:border-red-400 hover:shadow-soft text-academic-deep px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        Meus Favoritos
+                    </button>
+
+                    <button onclick="app.navigate('metrics')" class="bg-white border border-slate-200 hover:border-academic-blue hover:shadow-soft text-academic-deep px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-full bg-academic-blue/10 text-academic-blue flex items-center justify-center group-hover:bg-academic-blue group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        Métricas Do Ecossistema
+                    </button>
+
+                    <button onclick="app.navigate('rules')" class="bg-white border border-slate-200 hover:border-academic-gold hover:shadow-soft text-academic-deep px-8 py-4 rounded-2xl font-bold transition-all flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-full bg-academic-gold/10 text-academic-gold flex items-center justify-center group-hover:bg-academic-gold group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-book-journal-whills"></i>
+                        </div>
+                        Regras e Requisitos
+                    </button>
+                </div>
+
+                <!-- Grid de Eventos (Catálogo) -->
+                <div class="grid lg:grid-cols-[1fr_22rem] gap-8 items-end mb-12 mt-8">
+                    <div>
+                        <span class="text-academic-gold font-bold text-sm tracking-widest uppercase mb-2 block">Todos os itens</span>
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mb-4">Próximas Competições</h2>
+                        <p class="text-slate-600 text-lg">O seu radar técnico. Programe-se para os maiores desafios da robótica nacional e internacional.</p>
+                    </div>
+
+                    <label class="relative block">
+                        <span class="sr-only">Pesquisar itens</span>
+                        <input id="catalog-search" type="search" oninput="app.filterCatalog(this.value)" placeholder="Pesquisar por nome, local ou categoria"
+                            class="flow-search w-full rounded-2xl px-5 py-4 pr-12 text-sm font-medium outline-none focus:ring-2 focus:ring-academic-gold/50 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-academic-gold"></i>
+                    </label>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="catalog-content">
+                    <!-- Cards inseridos via JS -->
+                </div>
+
+                <section class="mt-20">
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="flow-visual-card rounded-3xl p-8">
+                            <div class="flex items-center justify-between mb-8">
+                                <div>
+                                    <span class="text-academic-gold font-bold text-xs tracking-widest uppercase">Visualização de Mapa ou Gráfico</span>
+                                    <h3 class="font-serif text-2xl font-bold text-white mt-2">Distribuição do Radar</h3>
+                                </div>
+                                <button onclick="app.navigate('metrics')" class="w-11 h-11 rounded-full bg-academic-gold text-white flex items-center justify-center hover:scale-105 transition-transform" title="Abrir métricas">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                </button>
+                            </div>
+
+                            <div id="home-visual-content" class="grid sm:grid-cols-2 gap-4">
+                                <!-- Resumo visual inserido via JS -->
+                            </div>
+                        </div>
+
+                        <div class="flow-visual-card rounded-3xl p-8">
+                            <span class="text-academic-gold font-bold text-xs tracking-widest uppercase">Informações do(a) Aluno(a)</span>
+                            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mt-6">
+                                <img src="assets/img/img1.jpg" alt="Foto de Cláudio" class="w-24 h-24 rounded-2xl object-cover border border-cyan-400/20 shadow-soft">
+                                <div class="text-center sm:text-left">
+                                    <h3 class="font-serif text-2xl font-bold text-white">Cláudio Francisco Dos Santos Júnior</h3>
+                                    <p class="text-academic-gold text-sm font-semibold mt-1">Engenharia de Computação - PUC Minas</p>
+                                    <p class="text-slate-300 text-sm leading-relaxed mt-4">
+                                        Projeto acadêmico de fluxo web com autenticação, cadastro, favoritos, detalhes e CRUD usando JSON Server.
+                                    </p>
+                                    <div class="flex justify-center sm:justify-start gap-3 mt-5">
+                                        <a href="https://github.com/CFSJCODE?tab=repositories" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-cyan-300 flex items-center justify-center hover:bg-academic-gold hover:text-white transition-colors" aria-label="GitHub de Cláudio Francisco">
+                                            <i class="fa-brands fa-github"></i>
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/claudio-francisco-dos-santos-junior/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-cyan-300 flex items-center justify-center hover:bg-academic-gold hover:text-white transition-colors" aria-label="LinkedIn de Cláudio Francisco">
+                                            <i class="fa-brands fa-linkedin"></i>
+                                        </a>
+                                        <a href="https://cfsjcode.github.io/CFSJ_TECH/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-cyan-300 flex items-center justify-center hover:bg-academic-gold hover:text-white transition-colors" aria-label="Site CFSJ TECH">
+                                            <i class="fa-solid fa-globe"></i>
+                                        </a>
+                                        <a href="http://lattes.cnpq.br/9581278395342699" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 border border-white/10 text-cyan-300 flex items-center justify-center hover:bg-academic-gold hover:text-white transition-colors" aria-label="Currículo Lattes de Cláudio Francisco">
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- ================= METRICS VIEW (NOVA SUBPÁGINA) ================= -->
+        <section id="view-metrics" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="mb-8">
+                    <button onclick="app.navigate('home')" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-5 py-2.5 rounded-full font-semibold transition-colors flex items-center gap-2 text-sm shadow-sm">
+                        <i class="fa-solid fa-arrow-left"></i> Retornar ao Radar
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 lg:p-12 shadow-soft border border-slate-100">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-academic-gold font-bold text-sm tracking-widest uppercase mb-2 block">Data Science & Analytics</span>
+                            <h2 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mb-4">Métricas do Ecossistema</h2>
+                            <p class="text-slate-600 mb-6 leading-relaxed text-lg">
+                                Distribuição técnica das modalidades presentes na base de dados de eventos. O gráfico vetorial responde dinamicamente às adições feitas no painel de administração (CRUD).
+                            </p>
+                            <ul class="space-y-5 border-t border-slate-100 pt-6">
+                                <li class="flex items-center gap-4 text-sm text-slate-700 font-medium bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                                    <div class="w-12 h-12 rounded-xl bg-academic-blue/10 text-academic-blue flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-microchip"></i></div> 
+                                    <div class="flex flex-col"><span class="font-bold text-academic-deep">Alta Engenharia e Autonomia</span><span class="text-xs text-slate-500">Sistemas Embarcados & IA</span></div>
+                                </li>
+                                <li class="flex items-center gap-4 text-sm text-slate-700 font-medium bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                                    <div class="w-12 h-12 rounded-xl bg-academic-gold/10 text-academic-gold flex items-center justify-center text-lg flex-shrink-0"><i class="fa-solid fa-gears"></i></div> 
+                                    <div class="flex flex-col"><span class="font-bold text-academic-deep">Foco Mecânico em Combate</span><span class="text-xs text-slate-500">Torque e Energia Cinética</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="h-80 flex justify-center items-center relative">
+                            <canvas id="categoriaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RULES VIEW (REGRAS E REQUISITOS) ================= -->
+        <section id="view-rules" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="mb-8">
+                    <button onclick="app.navigate('home')" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-5 py-2.5 rounded-full font-semibold transition-colors flex items-center gap-2 text-sm shadow-sm">
+                        <i class="fa-solid fa-arrow-left"></i> Retornar ao Radar
+                    </button>
+                </div>
+
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="w-16 h-16 bg-academic-gold/10 text-academic-gold rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fa-solid fa-book-journal-whills"></i>
+                    </div>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mb-4">Regulamentos e Requisitos Técnicos</h2>
+                    <p class="text-slate-600 text-lg">Diretrizes oficiais, normas de segurança e especificações de engenharia essenciais para a inspeção de robôs nas principais competições.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Card 1: Peso e Dimensões -->
+                    <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-soft card-hover-effect">
+                        <h4 class="font-serif text-xl font-bold text-academic-deep mb-4 flex items-center gap-3">
+                            <i class="fa-solid fa-scale-balanced text-academic-blue"></i> Limites de Peso
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4 text-justify">A classificação nas arenas de combate e sumô é estritamente definida pelo peso. Robôs com locomoção não-convencional (shufflers, walkers) podem receber um bônus percentual na pesagem oficial.</p>
+                        <ul class="space-y-2 text-sm text-slate-500 font-medium">
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>Fairyweight / Antweight</span> <span class="font-bold text-slate-700">150g / 454g (1lb)</span></li>
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>Beetleweight / Hobbyweight</span> <span class="font-bold text-slate-700">1.36kg (3lb) / 5.44kg (12lb)</span></li>
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>Featherweight / Lightweight</span> <span class="font-bold text-slate-700">13.6kg (30lb) / 27.2kg (60lb)</span></li>
+                            <li class="flex justify-between pt-1"><span>Heavyweight</span> <span class="font-bold text-slate-700">113.4kg (250lb)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2: Eletrônica e Baterias -->
+                    <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-soft card-hover-effect">
+                        <h4 class="font-serif text-xl font-bold text-academic-deep mb-4 flex items-center gap-3">
+                            <i class="fa-solid fa-battery-full text-academic-gold"></i> Eletrônica e Baterias (LiPo)
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4 text-justify">Rigor extremo no manuseamento de energia. Todas as baterias de Polímero de Lítio (LiPo) devem ser transportadas em *LiPo Safe Bags* antichamas e inspecionadas quanto a avarias ou inchaços.</p>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <strong>Tensão Máxima:</strong> Limitado usualmente a 36V ou 48V nominais dependendo da categoria de combate.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <strong>Master Switch:</strong> Chave geral mecânica, de fácil acesso por fora da armadura, é obrigatória.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <strong>Failsafe:</strong> Receptores devem cortar sinal aos ESCs imediatamente caso percam contato com o rádio transmissor.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 3: Materiais e Blindagem -->
+                    <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-soft card-hover-effect">
+                        <h4 class="font-serif text-xl font-bold text-academic-deep mb-4 flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved text-slate-700"></i> Materiais e Blindagem
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed text-justify">A seleção de materiais é inspecionada para garantir a integridade da arena. Materiais proibidos incluem líquidos, explosivos, redes e projéteis soltos (não-tethered).</p>
+                        <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <strong class="text-slate-700 text-sm block mb-3">Materiais Premium Recomendados:</strong>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 shadow-sm">Aço Hardox 450/500</span>
+                                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 shadow-sm">Titânio Grau 5</span>
+                                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 shadow-sm">Alumínio 7075-T6</span>
+                                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 shadow-sm">UHMW & Policarbonato</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Segurança e Inspeção -->
+                    <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-soft card-hover-effect">
+                        <h4 class="font-serif text-xl font-bold text-academic-deep mb-4 flex items-center gap-3">
+                            <i class="fa-solid fa-lock text-red-500"></i> Trava de Arma e Inspeção
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4 text-justify">Nenhum robô de combate com arma ativa pode ser operado ou manipulado fora da arena sem as suas travas de arma ("Weapon Locks") físicas engatadas diretamente no sistema mecânico.</p>
+                        <div class="flex items-center gap-4 bg-red-50 p-4 rounded-xl border border-red-100 text-red-700 text-sm font-medium">
+                            <i class="fa-solid fa-triangle-exclamation text-3xl"></i>
+                            <p>A não conformidade com a trava de segurança ("Weapon Lock") ou rádio controle ativado acidentalmente fora da arena resulta em desclassificação imediata no Safety Check pré-competição.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DETAILS VIEW ================= -->
+        <section id="view-details" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="details-content">
+                <!-- Detalhes do evento inseridos via JS -->
+            </div>
+        </section>
+
+        <!-- ================= FAVORITES VIEW ================= -->
+        <section id="view-favorites" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mb-4">Meus Itens Favoritos</h2>
+                    <p class="text-slate-600 text-lg">Gestão inteligente dos eventos técnicos que você favoritou e deseja acompanhar de perto.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="favorites-content">
+                    <!-- Cards favoritados inseridos via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= LOGIN VIEW ================= -->
+        <section id="view-login" class="view-section">
+            <div class="max-w-md mx-auto px-4 py-24">
+                <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-soft border border-slate-100">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-academic-blue/10 text-academic-blue rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-academic-deep">Login</h3>
+                        <p class="text-sm text-slate-500 mt-2">Entre para favoritar itens, ver sua lista e acessar o cadastro.</p>
+                    </div>
+
+                    <form onsubmit="auth.login(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">IDENTIFICAÇÃO (LOGIN)</label>
+                            <input type="text" id="login-user" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50 focus:border-academic-blue transition-all" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">SENHA SEGURA</label>
+                            <input type="password" id="login-pass" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50 focus:border-academic-blue transition-all" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button type="button" onclick="app.navigate('register')" class="bg-academic-blue/10 hover:bg-academic-blue/20 text-academic-blue border border-academic-blue/20 rounded-xl py-3.5 font-semibold transition-colors">
+                                Cadastrar
+                            </button>
+                            <button type="submit" class="bg-academic-deep hover:bg-academic-blue text-white rounded-xl py-3.5 font-semibold transition-colors">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <span class="text-slate-500 text-sm">Pesquisador novo? </span>
+                        <a onclick="app.navigate('register')" class="text-academic-gold hover:text-academic-gold_hover font-semibold cursor-pointer transition-colors">Solicitar Acesso</a>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-100 text-center text-xs text-slate-500">
+                        <strong class="block mb-2 text-slate-700">Credenciais de Teste / Avaliação:</strong>
+                        Módulo Admin: <code class="bg-white px-2 py-1 rounded shadow-sm">admin</code> / <code class="bg-white px-2 py-1 rounded shadow-sm">123</code><br>
+                        Módulo Comum: <code class="bg-white px-2 py-1 rounded shadow-sm mt-2 inline-block">user</code> / <code class="bg-white px-2 py-1 rounded shadow-sm">123</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= REGISTER VIEW ================= -->
+        <section id="view-register" class="view-section">
+            <div class="max-w-lg mx-auto px-4 py-20">
+                <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-soft border border-slate-100">
+                    <div class="text-center mb-8">
+                        <h3 class="font-serif text-2xl font-bold text-academic-deep">Cadastro de Usuário</h3>
+                        <p class="text-sm text-slate-500 mt-2">Crie seu perfil para salvar favoritos e interagir.</p>
+                    </div>
+
+                    <form onsubmit="auth.register(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">LOGIN</label>
+                            <input type="text" id="reg-login" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">NOME</label>
+                            <input type="text" id="reg-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">EMAIL</label>
+                            <input type="email" id="reg-email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">SENHA</label>
+                            <input type="password" id="reg-pass" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-academic-blue/50" required>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-academic-blue to-academic-deep text-white rounded-xl py-3.5 font-semibold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 mt-4">
+                            Cadastrar
+                        </button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <a onclick="app.navigate('login')" class="text-slate-500 hover:text-academic-blue text-sm font-medium cursor-pointer transition-colors"><i class="fa-solid fa-arrow-left me-1"></i> Retornar à Autenticação</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CRUD ADMIN VIEW ================= -->
+        <section id="view-crud" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-6">
+                    <div class="w-12 h-12 bg-academic-gold/10 text-academic-gold rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-2xl font-bold text-academic-deep mb-1">Cadastro de Itens (CRUD)</h2>
+                        <p class="text-sm text-slate-500">Inserção, alteração, exclusão e listagem dos itens do radar.</p>
+                    </div>
+                </div>
+                
+                <!-- Formulário CRUD -->
+                <div class="bg-white rounded-3xl p-8 shadow-soft border border-slate-100 mb-10">
+                    <h5 class="text-lg font-bold text-academic-deep mb-6 flex items-center gap-2" id="crud-form-title">
+                        <i class="fa-solid fa-pen-to-square text-academic-gold"></i> Cadastro de Item
+                    </h5>
+                    
+                    <form id="crud-form" onsubmit="admin.saveEvent(event)">
+                        <input type="hidden" id="crud-id">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                            
+                            <div class="md:col-span-6">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">NOME DA COMPETIÇÃO</label>
+                                <input type="text" id="crud-nome" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required>
+                            </div>
+                            
+                            <div class="md:col-span-3">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">CATEGORIA</label>
+                                <select id="crud-tipo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required>
+                                    <option value="Combate">Combate</option>
+                                    <option value="Educacional">Educacional (STEM)</option>
+                                    <option value="Autônomo">Navegação Autônoma</option>
+                                </select>
+                            </div>
+                            
+                            <div class="md:col-span-3">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">DATA PREVISTA</label>
+                                <input type="text" id="crud-data" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" placeholder="Ex: Março 2026" required>
+                            </div>
+                            
+                            <div class="md:col-span-6">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">SEDE OPERACIONAL (LOCAL)</label>
+                                <input type="text" id="crud-local" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required>
+                            </div>
+                            
+                            <div class="md:col-span-6">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">ORGANIZAÇÃO MATRIZ</label>
+                                <input type="text" id="crud-organizador" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required>
+                            </div>
+                            
+                            <div class="md:col-span-9">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">URL DA IMAGEM PRINCIPAL</label>
+                                <input type="url" id="crud-img" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required>
+                            </div>
+                            
+                            <div class="md:col-span-3 flex items-center pb-2">
+                                <label class="flex items-center cursor-pointer relative mt-6">
+                                    <input type="checkbox" id="crud-destaque" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-academic-gold"></div>
+                                    <span class="ml-3 text-sm font-bold text-slate-600">Destaque Hero</span>
+                                </label>
+                            </div>
+                            
+                            <div class="md:col-span-12">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">DESCRIÇÃO CURTA (CARD)</label>
+                                <input type="text" id="crud-desc" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required maxlength="120">
+                            </div>
+                            
+                            <div class="md:col-span-12">
+                                <label class="block text-xs font-bold text-slate-500 tracking-wider mb-2">CONTEÚDO DETALHADO (VISÃO GERAL)</label>
+                                <textarea id="crud-conteudo" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-academic-blue/50 outline-none" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-4">
+                            <button type="submit" class="bg-academic-deep hover:bg-academic-blue text-white px-8 py-3 rounded-xl font-semibold transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> <span id="crud-submit-label">Inserir</span>
+                            </button>
+                            <button type="button" class="bg-academic-blue hover:bg-academic-deep text-white px-8 py-3 rounded-xl font-semibold transition-colors flex items-center gap-2" onclick="admin.submitSelectedUpdate()">
+                                <i class="fa-solid fa-pen"></i> Alterar
+                            </button>
+                            <button type="button" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-xl font-semibold transition-colors flex items-center gap-2" onclick="admin.deleteSelected()">
+                                <i class="fa-solid fa-trash"></i> Excluir
+                            </button>
+                            <button type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-8 py-3 rounded-xl font-semibold transition-colors" onclick="admin.resetForm()">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabela de Dados -->
+                <div class="bg-white rounded-3xl border border-slate-100 shadow-soft overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200">
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider">SYS ID</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider">COMPETIÇÃO</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider">CATEGORIA</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider">DATA</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider text-center">DESTAQUE</th>
+                                    <th class="py-4 px-6 text-xs font-bold text-slate-500 tracking-wider text-right">AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crud-table-body" class="divide-y divide-slate-100">
+                                <!-- Injetado via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé Acadêmico -->
+    <footer class="bg-white border-t border-slate-200 pt-12 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-medium">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-microchip text-academic-blue text-lg"></i>
+                    <span>&copy; 2026 Radar de Competições - HUB Da Robótica. Desenvolvido por Cláudio Francisco.</span>
+                </div>
+                <div class="flex gap-4 text-lg">
+                    <a href="https://github.com/CFSJCODE?tab=repositories" target="_blank" rel="noopener noreferrer" class="hover:text-academic-blue transition-colors" aria-label="GitHub de Cláudio Francisco"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/claudio-francisco-dos-santos-junior/" target="_blank" rel="noopener noreferrer" class="hover:text-academic-blue transition-colors" aria-label="LinkedIn de Cláudio Francisco"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://cfsjcode.github.io/CFSJ_TECH/" target="_blank" rel="noopener noreferrer" class="hover:text-academic-blue transition-colors" aria-label="Site CFSJ TECH"><i class="fa-solid fa-globe"></i></a>
+                    <a href="http://lattes.cnpq.br/9581278395342699" target="_blank" rel="noopener noreferrer" class="hover:text-academic-blue transition-colors" aria-label="Currículo Lattes de Cláudio Francisco"><i class="fa-solid fa-graduation-cap"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- System Core Logic (Vanilla JS + JSON Server Backend) -->
+    <script>
+        const API_URL = window.HUB_ROBOTICA_CONFIG?.API_URL || "http://localhost:3000";
+
+        // ==========================================
+        // 1. CAMADA DE PERSISTÊNCIA (JSON Server)
+        // ==========================================
+        const api = {
+            async request(path, options = {}) {
+                const response = await fetch(`${API_URL}/${path}`, options);
+                if (!response.ok) {
+                    throw new Error(`Falha ao acessar ${path}: ${response.status}`);
+                }
+                if (response.status === 204) return null;
+                return response.json();
+            },
+            async get(endpoint) {
+                return this.request(endpoint);
+            },
+            async post(endpoint, data) {
+                return this.request(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+            },
+            async put(endpoint, id, data) {
+                return this.request(`${endpoint}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...data, id })
+                });
+            },
+            async delete(endpoint, id) {
+                return this.request(`${endpoint}/${id}`, { method: 'DELETE' });
+            }
+        };
+
+        // ==========================================
+        // 2. MÓDULO DE AUTENTICAÇÃO
+        // ==========================================
+        const auth = {
+            getUser: () => JSON.parse(sessionStorage.getItem('hub_user')),
+            
+            async login(e) {
+                e.preventDefault();
+                const loginStr = document.getElementById('login-user').value;
+                const passStr = document.getElementById('login-pass').value;
+                
+                const users = await api.get('usuarios');
+                const user = users.find(u => u.login === loginStr && u.senha === passStr);
+                
+                if (user) {
+                    sessionStorage.setItem('hub_user', JSON.stringify(user));
+                    const targetView = app.pendingView || 'home';
+                    app.pendingView = null;
+                    app.updateMenu();
+                    await app.loadHomeData();
+                    app.navigate(targetView);
+                } else {
+                    alert('Credenciais inválidas. Operação não autorizada.');
+                }
+            },
+
+            logout() {
+                sessionStorage.removeItem('hub_user');
+                app.init();
+                app.navigate('home');
+            },
+
+            async register(e) {
+                e.preventDefault();
+                const users = await api.get('usuarios');
+                const login = document.getElementById('reg-login').value.trim();
+                if (users.some(user => user.login.toLowerCase() === login.toLowerCase())) {
+                    alert('Este login já está cadastrado. Escolha outro identificador.');
+                    return;
+                }
+                const newUser = {
+                    nome: document.getElementById('reg-name').value,
+                    email: document.getElementById('reg-email').value,
+                    login,
+                    senha: document.getElementById('reg-pass').value,
+                    admin: false,
+                    favoritos: []
+                };
+                await api.post('usuarios', newUser);
+                alert('Registro validado. Faça login na plataforma.');
+                app.navigate('login');
+            }
+        };
+
+        // ==========================================
+        // 4. MÓDULO DE FAVORITOS (O(1) Toggle)
+        // ==========================================
+        const favorites = {
+            async toggle(eventoId, fromDetails = false) {
+                let user = auth.getUser();
+                if (!user) {
+                    alert('Controlo de acesso restrito. Autentique-se para utilizar o Radar.');
+                    app.navigate('login');
+                    return;
+                }
+
+                if (user.favoritos.includes(eventoId)) {
+                    user.favoritos = user.favoritos.filter(id => id !== eventoId);
+                } else {
+                    user.favoritos.push(eventoId);
+                }
+
+                await api.put('usuarios', user.id, user);
+                sessionStorage.setItem('hub_user', JSON.stringify(user));
+
+                if (fromDetails) {
+                    app.showDetails(eventoId);
+                } else if (document.getElementById('view-favorites').classList.contains('active')) {
+                    this.loadFavorites();
+                } else {
+                    app.loadHomeData(); 
+                }
+            },
+
+            async loadFavorites() {
+                const user = auth.getUser();
+                if(!user) {
+                    app.requestAuth('favorites');
+                    return;
+                }
+                
+                const eventos = await api.get('eventos');
+                const favEventos = eventos.filter(e => user.favoritos.includes(e.id));
+                
+                const html = favEventos.length > 0 
+                    ? favEventos.map(e => app.createEventCard(e, user)).join('')
+                    : `<div class="col-span-full text-center py-16 bg-white rounded-3xl border border-slate-100 shadow-soft">
+                        <i class="fa-solid fa-satellite-dish text-5xl text-slate-300 mb-4 block"></i>
+                        <h4 class="font-serif text-xl font-bold text-academic-deep">Radar Vazio</h4>
+                        <p class="text-slate-500 mt-2">Ainda não marcou competições para monitorizar.</p>
+                       </div>`;
+                
+                document.getElementById('favorites-content').innerHTML = html;
+            }
+        };
+
+        // ==========================================
+        // 5. NÚCLEO ARQUITETURAL (SPA & Rendering)
+        // ==========================================
+        let renderChartInstance = null;
+
+        const app = {
+            currentSlide: 0,
+            carouselItems: [],
+            pendingView: null,
+            searchTerm: '',
+
+            async init() {
+                this.updateMenu();
+                await this.loadHomeData();
+                this.handleRoute();
+            },
+
+            handleRoute() {
+                const hash = (window.location.hash || '').replace('#', '');
+                if (hash) {
+                    // Suporte direto para views conhecidas
+                    const views = ['home', 'metrics', 'favorites', 'crud', 'details', 'login', 'register', 'rules'];
+                    if (views.includes(hash)) {
+                        this.navigate(hash);
+                    } else if (hash.startsWith('details-')) {
+                        // Formato: #details-<id>
+                        const parts = hash.split('-');
+                        const id = parts[1];
+                        if (id) {
+                            // Aguarda carregamento inicial da base e abre a visão detalhada.
+                            setTimeout(() => app.showDetails(id), 200);
+                        }
+                    }
+                }
+            },
+
+            navigate(viewId) {
+                const user = auth.getUser();
+
+                if ((viewId === 'favorites' || viewId === 'crud') && !user) {
+                    this.requestAuth(viewId);
+                    return;
+                }
+
+                if (viewId === 'crud' && !user.admin) {
+                    alert('Cadastro de itens disponível apenas para usuários administradores.');
+                    viewId = 'home';
+                }
+
+                const view = document.getElementById(`view-${viewId}`);
+                if (!view) {
+                    viewId = 'home';
+                }
+
+                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                document.getElementById(`view-${viewId}`).classList.add('active');
+                this.updateActiveNav(viewId);
+                if (viewId !== 'details') {
+                    history.replaceState(null, '', `#${viewId}`);
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                if (viewId === 'home') this.loadHomeData();
+                if (viewId === 'crud') admin.loadTable();
+                if (viewId === 'favorites') favorites.loadFavorites();
+                if (viewId === 'metrics') this.loadMetricsData();
+            },
+
+            requestAuth(targetView) {
+                this.pendingView = targetView;
+                alert('Faça login para continuar neste fluxo.');
+                this.navigate('login');
+            },
+
+            updateActiveNav(viewId) {
+                document.querySelectorAll('[data-flow-link]').forEach(link => {
+                    link.classList.toggle('flow-link-active', link.dataset.flowLink === viewId);
+                });
+            },
+
+            updateMenu() {
+                const user = auth.getUser();
+                const authBtn = document.getElementById('nav-auth-btn');
+                const favNav = document.getElementById('nav-favorites');
+                const crudNav = document.getElementById('nav-crud');
+
+                if (user) {
+                    authBtn.innerHTML = `
+                        <div class="flex items-center gap-4 border-l border-white/20 pl-6 ml-2">
+                            <div class="text-right hidden lg:block">
+                                <p class="text-sm font-bold text-white leading-none">${user.nome.split(' ')[0]}</p>
+                                <p class="text-[0.65rem] text-academic-gold uppercase tracking-wider">Sessão ativa</p>
+                            </div>
+                            <button onclick="auth.logout()" class="bg-white/10 hover:bg-red-500/80 border border-white/20 text-white px-4 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 transition-colors" title="Desconectar">
+                                <i class="fa-solid fa-power-off text-sm"></i> Logout
+                            </button>
+                        </div>`;
+                    favNav.style.display = 'block';
+                    crudNav.style.display = user.admin ? 'block' : 'none';
+                } else {
+                    authBtn.innerHTML = `<button class="bg-gradient-to-r from-academic-gold to-academic-gold_hover text-white px-6 py-2.5 rounded-full text-sm font-bold transition-transform hover:-translate-y-0.5 shadow-gold ml-4" onclick="app.navigate('login')"><i class="fa-solid fa-right-to-bracket mr-2"></i>Entrar</button>`;
+                    favNav.style.display = 'none';
+                    crudNav.style.display = 'none';
+                }
+            },
+
+            async loadHomeData() {
+                const eventos = await api.get('eventos');
+                const user = auth.getUser();
+                
+                // 1. Lógica do Carrossel Vanilla JS
+                const destaques = eventos.filter(e => e.destaque);
+                this.carouselItems = destaques;
+                this.renderCarousel();
+
+                // 2. Renderização Otimizada dos Cards (Tailwind classes)
+                const searchInput = document.getElementById('catalog-search');
+                if (searchInput && searchInput.value !== this.searchTerm) searchInput.value = this.searchTerm;
+
+                const term = this.searchTerm.trim().toLowerCase();
+                const filteredEvents = term
+                    ? eventos.filter(e => [e.nome, e.tipo, e.local, e.organizador, e.descricao].some(value => (value || '').toLowerCase().includes(term)))
+                    : eventos;
+
+                const gridHtml = filteredEvents.length
+                    ? filteredEvents.map(e => this.createEventCard(e, user)).join('')
+                    : `<div class="col-span-full text-center py-16 bg-white rounded-3xl border border-slate-100 shadow-soft">
+                        <i class="fa-solid fa-magnifying-glass text-5xl text-slate-300 mb-4 block"></i>
+                        <h4 class="font-serif text-xl font-bold text-academic-deep">Nenhum item encontrado</h4>
+                        <p class="text-slate-500 mt-2">Tente pesquisar por nome, local, categoria ou organização.</p>
+                       </div>`;
+                document.getElementById('catalog-content').innerHTML = gridHtml;
+                this.renderHomeVisual(eventos);
+            },
+
+            filterCatalog(value) {
+                this.searchTerm = value || '';
+                this.loadHomeData();
+            },
+
+            renderHomeVisual(eventos) {
+                const target = document.getElementById('home-visual-content');
+                if (!target) return;
+
+                const countByType = eventos.reduce((acc, item) => {
+                    const type = item.tipo || 'Geral';
+                    acc[type] = (acc[type] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const total = Math.max(eventos.length, 1);
+                target.innerHTML = Object.entries(countByType).map(([type, count], index) => {
+                    const percent = Math.round((count / total) * 100);
+                    const colors = ['#22d3ee', '#f18821', '#38bdf8', '#cbd5e1', '#3b82f6'];
+                    const color = colors[index % colors.length];
+                    return `
+                        <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+                            <div class="flex items-center justify-between gap-3 mb-3">
+                                <span class="text-white font-bold text-sm">${type}</span>
+                                <span class="text-academic-gold font-mono text-xs">${count} item(ns)</span>
+                            </div>
+                            <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                                <div class="h-full rounded-full" style="width:${percent}%; background:${color}"></div>
+                            </div>
+                        </div>`;
+                }).join('');
+            },
+
+            async loadMetricsData() {
+                const eventos = await api.get('eventos');
+                this.renderChart(eventos);
+            },
+
+            renderCarousel() {
+                const container = document.getElementById('carousel-content');
+                if(this.carouselItems.length === 0) {
+                    container.innerHTML = '<div class="flex items-center justify-center h-full"><p class="text-white/50 text-xl font-serif">Nenhum evento em destaque no radar.</p></div>';
+                    return;
+                }
+
+                container.innerHTML = this.carouselItems.map((e, i) => `
+                    <div class="carousel-item-custom ${i === this.currentSlide ? 'active' : ''}">
+                        <img src="${e.imagemPrincipal}" alt="${e.nome}" class="w-full h-full object-cover opacity-60">
+                        
+                        <div class="absolute inset-0 flex flex-col justify-end px-8 pb-16 lg:px-24 lg:pb-24 max-w-7xl mx-auto z-20">
+                            <span class="inline-block px-4 py-1.5 rounded-full bg-academic-gold/90 text-white text-xs font-bold tracking-widest uppercase mb-4 w-max backdrop-blur-sm shadow-md">
+                                <i class="fa-solid fa-bolt mr-1"></i> Principal Competitivo
+                            </span>
+                            <h2 class="carousel-title font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">${e.nome}</h2>
+                            <p class="carousel-description text-lg mb-8 max-w-2xl">${e.descricao}</p>
+                            <button onclick="app.showDetails('${e.id}')" class="carousel-cta w-max px-8 py-3.5 rounded-full font-bold transition-all flex items-center gap-3">
+                                Analisar Especificações <i class="fa-solid fa-microchip"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            nextSlide() {
+                if(this.carouselItems.length <= 1) return;
+                this.currentSlide = (this.currentSlide + 1) % this.carouselItems.length;
+                this.renderCarousel();
+            },
+
+            prevSlide() {
+                if(this.carouselItems.length <= 1) return;
+                this.currentSlide = (this.currentSlide - 1 + this.carouselItems.length) % this.carouselItems.length;
+                this.renderCarousel();
+            },
+
+            createEventCard(e, user) {
+                const isFav = user && user.favoritos.includes(e.id);
+                const heartClass = isFav ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+                const heartColor = isFav ? 'text-red-500 bg-red-50' : 'text-slate-400 bg-white/90 hover:text-red-500';
+                
+                return `
+                <div class="bg-white rounded-3xl border border-slate-100 shadow-soft card-hover-effect relative flex flex-col overflow-hidden group cursor-pointer" onclick="app.showDetails('${e.id}')">
+                    
+                    <button class="absolute top-4 left-4 z-20 w-10 h-10 rounded-full flex items-center justify-center shadow-sm backdrop-blur-md transition-all hover:scale-110 ${heartColor}" onclick="event.stopPropagation(); favorites.toggle('${e.id}')">
+                        <i class="${heartClass} text-lg"></i>
+                    </button>
+                    
+                    <div class="relative h-56 overflow-hidden bg-slate-100">
+                        ${e.destaque ? '<span class="absolute top-4 right-4 z-20 bg-academic-gold/90 backdrop-blur text-white px-3 py-1 rounded-full text-xs font-bold shadow-md uppercase tracking-wider"><i class="fa-solid fa-fire mr-1"></i> Hot</span>' : ''}
+                        <img src="${e.imagemPrincipal}" alt="${e.nome}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                        <div class="absolute bottom-4 left-5 z-20">
+                            <span class="bg-academic-blue/80 backdrop-blur text-white px-3 py-1 rounded-md text-xs font-bold border border-white/20"><i class="fa-solid fa-tag mr-1"></i> ${e.tipo || 'Geral'}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex-grow flex flex-col relative z-20 bg-white">
+                        <h5 class="font-serif text-xl font-bold text-academic-deep mb-4 leading-snug">${e.nome}</h5>
+                        
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center text-sm text-slate-500 font-medium">
+                                <i class="fa-regular fa-calendar text-academic-gold w-6 text-center"></i> ${e.data}
+                            </div>
+                            <div class="flex items-center text-sm text-slate-500 font-medium">
+                                <i class="fa-solid fa-location-dot text-academic-gold w-6 text-center"></i> <span class="truncate">${e.local}</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">${e.descricao}</p>
+                        
+                        <div class="pt-4 border-t border-slate-100 mt-auto">
+                            <span class="event-card-link text-sm flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-magnifying-glass"></i> Detalhes Operacionais
+                            </span>
+                        </div>
+                    </div>
+                </div>`;
+            },
+
+            getEventPhotos(currentEvent, eventos) {
+                const pool = [
+                    currentEvent.imagemPrincipal,
+                    ...eventos
+                        .filter(item => item.id !== currentEvent.id)
+                        .slice(0, 4)
+                        .map(item => item.imagemPrincipal)
+                ].filter(Boolean);
+
+                return pool.slice(0, 4);
+            },
+
+            async showDetails(id) {
+                const eventos = await api.get('eventos');
+                const e = eventos.find(x => x.id == id);
+                if(!e) return;
+
+                const user = auth.getUser();
+                const isFav = user && user.favoritos.includes(e.id);
+                const photos = this.getEventPhotos(e, eventos);
+                const photosHtml = photos.map((photo, index) => `
+                    <button class="group rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-soft text-left" onclick="document.getElementById('details-hero-img').src='${photo}'">
+                        <div class="h-44 overflow-hidden bg-slate-100">
+                            <img src="${photo}" alt="Foto ${index + 1} de ${e.nome}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs uppercase tracking-widest text-slate-500 font-bold">Imagem ${index + 1}</p>
+                            <p class="text-sm text-academic-deep font-bold mt-1">${index === 0 ? 'Imagem principal' : 'Registro complementar'}</p>
+                        </div>
+                    </button>
+                `).join('');
+                
+                const btnFavProps = isFav 
+                    ? `class="bg-red-50 hover:bg-red-100 text-red-500 border border-red-200 px-6 py-2.5 rounded-full font-bold transition-colors flex items-center gap-2 text-sm shadow-sm" onclick="favorites.toggle('${e.id}', true)"><i class="fa-solid fa-heart"></i> Remover Radar`
+                    : `class="bg-academic-deep hover:bg-academic-blue text-white px-6 py-2.5 rounded-full font-bold transition-colors flex items-center gap-2 text-sm shadow-md" onclick="favorites.toggle('${e.id}', true)"><i class="fa-regular fa-heart"></i> Adicionar ao Radar`;
+
+                document.getElementById('details-content').innerHTML = `
+                    <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
+                        <button onclick="app.navigate('home')" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-5 py-2.5 rounded-full font-semibold transition-colors flex items-center gap-2 text-sm shadow-sm">
+                            <i class="fa-solid fa-arrow-left"></i> Retornar à Base
+                        </button>
+                        <button ${btnFavProps}</button>
+                    </div>
+
+                    <div class="mb-8">
+                        <span class="text-academic-gold font-bold text-xs tracking-widest uppercase">Tela de Detalhes do Item</span>
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mt-2">Detalhes do Item</h2>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 gap-10">
+                        <div class="lg:col-span-7">
+                            <div class="rounded-3xl overflow-hidden shadow-soft border border-slate-200 relative h-96 lg:h-[32rem]">
+                                <img id="details-hero-img" src="${e.imagemPrincipal}" alt="${e.nome}" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono text-xs px-3 py-1.5 rounded-lg tracking-widest">
+                                        SYS ID: EVT-${e.id.toString().substring(0,6).toUpperCase()}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:col-span-5">
+                            <div class="bg-white rounded-3xl p-8 shadow-soft border border-slate-100 h-full">
+                                <span class="inline-block px-3 py-1 rounded-lg bg-academic-gold/10 text-academic-gold text-xs font-bold tracking-widest uppercase mb-4 border border-academic-gold/20">
+                                    <i class="fa-solid fa-microchip mr-1"></i> Categoria: ${e.tipo || 'Geral'}
+                                </span>
+                                
+                                <h1 class="font-serif text-3xl md:text-4xl font-bold text-academic-deep mb-6 leading-tight">${e.nome}</h1>
+                                <p class="text-slate-600 text-lg leading-relaxed mb-8 font-light">${e.conteudo}</p>
+                                
+                                <ul class="space-y-5 border-t border-slate-100 pt-8">
+                                    <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                        <div class="w-10 h-10 rounded-xl bg-academic-blue/10 flex items-center justify-center text-academic-blue text-lg flex-shrink-0">
+                                            <i class="fa-regular fa-calendar-check"></i>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">Janela Operacional</span>
+                                            <strong class="text-slate-800 text-sm">${e.data}</strong>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                        <div class="w-10 h-10 rounded-xl bg-academic-gold/10 flex items-center justify-center text-academic-gold text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-map-pin"></i>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">Sede Logística</span>
+                                            <strong class="text-slate-800 text-sm">${e.local}</strong>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                        <div class="w-10 h-10 rounded-xl bg-slate-200 flex items-center justify-center text-slate-600 text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-sitemap"></i>
+                                        </div>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">Organização Matriz</span>
+                                            <strong class="text-slate-800 text-sm">${e.organizador}</strong>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="mt-12">
+                        <div class="flex items-end justify-between gap-4 mb-6 border-b border-slate-200 pb-4">
+                            <div>
+                                <span class="text-academic-gold font-bold text-xs tracking-widest uppercase">Fotos do Item</span>
+                                <h3 class="font-serif text-2xl font-bold text-academic-deep mt-2">Galeria operacional</h3>
+                            </div>
+                            <button onclick="app.navigate('favorites')" class="hidden sm:inline-flex items-center gap-2 text-sm font-bold text-academic-blue hover:text-academic-gold transition-colors">
+                                Ver favoritos <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${photosHtml}
+                        </div>
+                    </section>
+                `;
+                history.replaceState(null, '', `#details-${e.id}`);
+                this.navigate('details');
+            },
+
+            renderChart(eventos) {
+                const ctx = document.getElementById('categoriaChart').getContext('2d');
+                if (renderChartInstance) renderChartInstance.destroy();
+                const isLightTheme = document.documentElement.dataset.theme === 'light';
+
+                const contagem = eventos.reduce((acc, curr) => {
+                    const tipo = curr.tipo || 'Geral';
+                    acc[tipo] = (acc[tipo] || 0) + 1;
+                    return acc;
+                }, {});
+
+                renderChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(contagem),
+                        datasets: [{
+                            data: Object.values(contagem),
+                            backgroundColor: ['#22d3ee', '#fb923c', '#38bdf8', '#cbd5e1', '#3b82f6'],
+                            borderColor: 'rgba(7, 19, 29, 0.72)',
+                            borderWidth: 2,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: { 
+                        maintainAspectRatio: false, 
+                        plugins: { 
+                            legend: { 
+                                position: 'right', 
+                                labels: {
+                                    boxWidth: 40,
+                                    boxHeight: 12,
+                                    color: isLightTheme ? '#334155' : '#dbeafe',
+                                    padding: 22,
+                                    font: { family: 'Inter', size: 14, weight: '800' }
+                                } 
+                            },
+                            tooltip: {
+                                backgroundColor: isLightTheme ? 'rgba(255, 255, 255, 0.98)' : 'rgba(7, 19, 29, 0.96)',
+                                titleColor: isLightTheme ? '#0f2d40' : '#ffffff',
+                                bodyColor: isLightTheme ? '#334155' : '#dbeafe',
+                                borderColor: isLightTheme ? 'rgba(15, 45, 64, 0.14)' : 'rgba(34, 211, 238, 0.28)',
+                                borderWidth: 1,
+                                padding: 12
+                            }
+                        },
+                        cutout: '70%',
+                        layout: { padding: 0 }
+                    }
+                });
+            }
+        };
+
+        // ==========================================
+        // 6. MÓDULO DE ADMINISTRAÇÃO (CRUD)
+        // ==========================================
+        const admin = {
+            async loadTable() {
+                const eventos = await api.get('eventos');
+                const tbody = document.getElementById('crud-table-body');
+                
+                tbody.innerHTML = eventos.map(e => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-4 px-6 text-sm font-mono text-slate-500">${e.id.substring(0,6)}</td>
+                        <td class="py-4 px-6 text-sm font-bold text-academic-deep">${e.nome}</td>
+                        <td class="py-4 px-6 text-sm">
+                            <span class="bg-slate-100 text-slate-600 px-2.5 py-1 rounded border border-slate-200 text-xs font-semibold">${e.tipo || 'Geral'}</span>
+                        </td>
+                        <td class="py-4 px-6 text-sm text-slate-600">${e.data}</td>
+                        <td class="py-4 px-6 text-center">
+                            ${e.destaque ? '<span class="inline-flex w-6 h-6 rounded-full bg-green-100 text-green-600 items-center justify-center text-xs"><i class="fa-solid fa-check"></i></span>' : '<span class="text-slate-300">-</span>'}
+                        </td>
+                        <td class="py-4 px-6 text-right space-x-2">
+                            <button class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors shadow-sm border border-blue-100" onclick="admin.edit('${e.id}')" title="Editar Registro"><i class="fa-solid fa-pen text-xs"></i></button>
+                            <button class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors shadow-sm border border-red-100" onclick="admin.delete('${e.id}')" title="Remover"><i class="fa-solid fa-trash text-xs"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+
+            async saveEvent(e) {
+                e.preventDefault();
+                const id = document.getElementById('crud-id').value;
+                const payload = {
+                    nome: document.getElementById('crud-nome').value,
+                    tipo: document.getElementById('crud-tipo').value,
+                    data: document.getElementById('crud-data').value,
+                    local: document.getElementById('crud-local').value,
+                    organizador: document.getElementById('crud-organizador').value,
+                    imagemPrincipal: document.getElementById('crud-img').value,
+                    destaque: document.getElementById('crud-destaque').checked,
+                    descricao: document.getElementById('crud-desc').value,
+                    conteudo: document.getElementById('crud-conteudo').value
+                };
+
+                if (id) await api.put('eventos', id, payload);
+                else await api.post('eventos', payload);
+                
+                this.resetForm();
+                this.loadTable();
+                alert('Registro validado e processado com sucesso no banco de dados.');
+            },
+
+            async edit(id) {
+                const eventos = await api.get('eventos');
+                const e = eventos.find(x => x.id == id);
+                document.getElementById('crud-id').value = e.id;
+                document.getElementById('crud-nome').value = e.nome;
+                document.getElementById('crud-tipo').value = e.tipo || 'Combate';
+                document.getElementById('crud-data').value = e.data;
+                document.getElementById('crud-local').value = e.local;
+                document.getElementById('crud-organizador').value = e.organizador;
+                document.getElementById('crud-img').value = e.imagemPrincipal;
+                document.getElementById('crud-destaque').checked = e.destaque;
+                document.getElementById('crud-desc').value = e.descricao;
+                document.getElementById('crud-conteudo').value = e.conteudo;
+                
+                document.getElementById('crud-form-title').innerHTML = '<i class="fa-solid fa-pen-to-square text-academic-blue"></i> Alteração de Item Selecionado';
+                document.getElementById('crud-submit-label').textContent = 'Alterar';
+                window.scrollTo({ top: document.getElementById('crud-form').offsetTop - 100, behavior: 'smooth' });
+            },
+
+            submitSelectedUpdate() {
+                if (!document.getElementById('crud-id').value) {
+                    alert('Selecione um item na listagem para alterar.');
+                    return;
+                }
+                document.getElementById('crud-form').requestSubmit();
+            },
+
+            async delete(id) {
+                if(confirm("ALERTA CRÍTICO: Remoção vetorial de registro do banco de dados. Confirma a exclusão?")) {
+                    await api.delete('eventos', id);
+                    this.loadTable();
+                    this.resetForm();
+                }
+            },
+
+            deleteSelected() {
+                const id = document.getElementById('crud-id').value;
+                if (!id) {
+                    alert('Selecione um item na listagem para excluir.');
+                    return;
+                }
+                this.delete(id);
+            },
+
+            resetForm() {
+                document.getElementById('crud-form').reset();
+                document.getElementById('crud-id').value = '';
+                document.getElementById('crud-form-title').innerHTML = '<i class="fa-solid fa-pen-to-square text-academic-gold"></i> Cadastro de Item';
+                document.getElementById('crud-submit-label').textContent = 'Inserir';
+            }
+        };
+
+        // ==========================================
+        // BOOTSTRAP DO SISTEMA
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            app.init();
+            window.addEventListener('hashchange', () => app.handleRoute());
+            
+            // Inicia o auto-play simples do carrossel
+            setInterval(() => {
+                if(document.getElementById('view-home').classList.contains('active')) {
+                    app.nextSlide();
+                }
+            }, 6000);
+        });
+
+    </script>
+</body>
+</html>

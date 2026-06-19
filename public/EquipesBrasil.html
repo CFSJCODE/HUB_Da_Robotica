@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Equipes de Robótica do Brasil | HUB Da Robótica</title>
+
+<!-- GOOGLE FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                serif: ['Merriweather', 'serif'],
+                mono: ['Fira Code', 'monospace']
+            },
+            colors: {
+                academic: {
+                    blue: '#1b4b6b',
+                    deep: '#07131d',
+                    gold: '#f18821',
+                    gold_hover: '#d8761a'
+                }
+            },
+            boxShadow: {
+                gold: '0 20px 60px rgba(241,136,33,.25)',
+                soft: '0 10px 40px rgba(0,0,0,.15)'
+            },
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-14px)' }
+                },
+                pulseLine: {
+                    '0%, 100%': { opacity: '.25' },
+                    '50%': { opacity: '.75' }
+                },
+                drift: {
+                    '0%': { transform: 'translate3d(0,0,0)', opacity: '.2' },
+                    '50%': { opacity: '.9' },
+                    '100%': { transform: 'translate3d(26px,-34px,0)', opacity: '.2' }
+                }
+            },
+            animation: {
+                float: 'float 6s ease-in-out infinite',
+                pulseLine: 'pulseLine 3s ease-in-out infinite',
+                drift: 'drift 8s ease-in-out infinite'
+            }
+        }
+    }
+}
+</script>
+<script src="assets/scripts/app.js"></script>
+
+<style>
+body {
+    background: #07131d;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glass-nav {
+    background: rgba(15,45,64,.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(34,211,238,.18);
+    box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+
+.card-glass {
+    background: rgba(15,45,64,.38);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(34,211,238,.14);
+}
+
+.card-glass-hover {
+    transition: .4s ease;
+}
+
+.card-glass-hover:hover {
+    transform: translateY(-8px);
+    background: rgba(27,75,107,.46);
+    border-color: rgba(34,211,238,.45);
+    box-shadow: 0 24px 56px -18px rgba(34,211,238,.35), 0 18px 42px -18px rgba(241,136,33,.32);
+}
+
+.bg-pattern {
+    background-image: radial-gradient(rgba(34,211,238,.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+.tag {
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(34,211,238,.16);
+    color: #dbeafe;
+}
+
+.team-card {
+    transition: .4s ease;
+}
+
+.team-card.is-hidden {
+    display: none;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.filter-btn.active,
+.sort-btn.active {
+    background: #f18821;
+    color: #fff;
+    border-color: rgba(241,136,33,.75);
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(34,211,238,.85);
+    box-shadow: 0 0 18px rgba(34,211,238,.7);
+}
+
+.timeline-line {
+    background: linear-gradient(180deg, transparent, rgba(34,211,238,.7), rgba(241,136,33,.7), transparent);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #07131d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1b4b6b;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f18821;
+}
+</style>
+<link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body class="text-slate-300 overflow-x-hidden">
+
+<!-- BACKGROUND -->
+<div class="fixed inset-0 -z-10 overflow-hidden bg-pattern">
+    <div class="absolute -top-40 -left-32 w-[700px] h-[700px] bg-blue-700/10 rounded-full blur-[160px]"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[140px]"></div>
+    <div class="absolute top-1/3 left-1/2 w-[420px] h-[420px] bg-cyan-500/10 rounded-full blur-[150px]"></div>
+</div>
+
+<!-- HEADER -->
+<header class="fixed top-0 w-full z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="h-20 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-14 h-14 rounded-full border border-white/10 group-hover:scale-105 duration-300">
+                <div>
+                    <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                    <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Equipes Brasil</p>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex gap-7">
+                <a href="index.html" class="hover:text-white duration-300">Início</a>
+                <a href="Garagem_De_Projetos.html" class="hover:text-white duration-300">Garagem</a>
+                <a href="RadarDeCompeticoes.html" class="hover:text-white duration-300">Radar de Competições</a>
+                <a href="EquipesBrasil.html" class="text-orange-400 border-b-2 border-orange-400 pb-1">Equipes do Brasil</a>
+                <a href="Contatos.html" class="hover:text-white duration-300">Contatos</a>
+            </nav>
+
+            <a href="#join" class="hidden md:inline-flex items-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl px-4 py-3 text-white font-semibold duration-300">
+                <i class="fa-solid fa-plus"></i>
+                Cadastrar
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ===================================================== -->
+<!-- HERO SECTION -->
+<!-- ===================================================== -->
+<section class="relative pt-40 pb-28 overflow-hidden border-b border-white/10">
+    <div class="absolute inset-0">
+        <div class="particle left-[12%] top-[28%] animate-drift"></div>
+        <div class="particle left-[26%] top-[62%] animate-drift [animation-delay:1s]"></div>
+        <div class="particle right-[18%] top-[26%] animate-drift [animation-delay:2s]"></div>
+        <div class="particle right-[30%] bottom-[18%] animate-drift [animation-delay:3s]"></div>
+        <div class="absolute left-0 right-0 top-1/2 h-px bg-cyan-400/20 animate-pulseLine"></div>
+        <div class="absolute left-1/2 top-0 h-full w-px bg-orange-400/10 animate-pulseLine"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-mono text-sm mb-8">
+                    <i class="fa-solid fa-flag"></i>
+                    Portal Nacional de Equipes
+                </div>
+
+                <h1 class="font-serif text-5xl md:text-7xl text-white leading-tight mb-8">
+                    EQUIPES DE ROBÓTICA DO
+                    <span class="text-orange-400">BRASIL</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mb-10">
+                    Conectando talentos, inovação e excelência em robótica educacional.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#equipes" class="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-xl text-white font-semibold shadow-gold duration-300">
+                        <i class="fa-solid fa-compass me-2"></i>
+                        Explorar Equipes
+                    </a>
+                    <a href="#hall" class="bg-white/5 border border-white/10 hover:bg-white/10 px-8 py-4 rounded-xl text-white font-semibold duration-300">
+                        <i class="fa-solid fa-trophy me-2"></i>
+                        Hall da Fama
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative min-h-[440px] hidden lg:flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/10 via-blue-600/10 to-orange-500/10 blur-3xl"></div>
+
+                <div class="relative w-[420px] h-[420px] rounded-full border border-cyan-400/20 flex items-center justify-center animate-[spin_50s_linear_infinite]">
+                    <div class="absolute inset-10 rounded-full border border-orange-400/20"></div>
+                    <div class="absolute inset-24 rounded-full border border-white/10"></div>
+
+                    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-20 h-20 rounded-3xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300 text-3xl shadow-soft">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="absolute right-8 top-1/2 -translate-y-1/2 w-20 h-20 rounded-3xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-300 text-3xl shadow-soft">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-20 h-20 rounded-3xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-300 text-3xl shadow-soft">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="absolute left-8 top-1/2 -translate-y-1/2 w-20 h-20 rounded-3xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-300 text-3xl shadow-soft">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+
+                    <div class="w-36 h-36 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur flex flex-col items-center justify-center animate-[spin_50s_linear_infinite_reverse]">
+                        <i class="fa-solid fa-map-location-dot text-5xl text-orange-400 mb-3"></i>
+                        <span class="font-mono text-xs text-slate-400 uppercase tracking-widest">Brasil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- STATISTICS SECTION -->
+<!-- ===================================================== -->
+<section class="py-20 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
+                <i class="fa-solid fa-people-group text-orange-400 text-4xl mb-5"></i>
+                <h3 class="text-5xl text-white font-bold mb-2">11+</h3>
+                <p class="text-slate-500 uppercase tracking-widest text-sm">Equipes</p>
+            </div>
+
+            <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
+                <i class="fa-solid fa-layer-group text-cyan-400 text-4xl mb-5"></i>
+                <h3 class="text-5xl text-white font-bold mb-2">4</h3>
+                <p class="text-slate-500 uppercase tracking-widest text-sm">Categorias</p>
+            </div>
+
+            <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
+                <i class="fa-solid fa-location-dot text-green-400 text-4xl mb-5"></i>
+                <h3 class="text-4xl text-white font-bold mb-2">Alcance</h3>
+                <p class="text-slate-500 uppercase tracking-widest text-sm">Nacional</p>
+            </div>
+
+            <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
+                <i class="fa-solid fa-lightbulb text-purple-400 text-4xl mb-5"></i>
+                <h3 class="text-3xl text-white font-bold mb-2">Inovação &</h3>
+                <p class="text-slate-500 uppercase tracking-widest text-sm">Educação</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- SEARCH AND FILTER SYSTEM -->
+<!-- ===================================================== -->
+<section class="py-20" id="equipes">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row justify-between items-end gap-10 mb-12">
+            <div>
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 font-mono text-sm mb-5">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    Diretório Nacional
+                </div>
+                <h2 class="font-serif text-4xl md:text-5xl text-white mb-4">Buscar Equipes</h2>
+                <p class="text-slate-400 text-lg max-w-2xl">
+                    Pesquise por nome, categoria ou tecnologia e explore os times que constroem a robótica educacional brasileira.
+                </p>
+            </div>
+            <div id="resultCount" class="font-mono text-sm text-slate-500">11 equipes listadas</div>
+        </div>
+
+        <div class="card-glass rounded-3xl p-6 md:p-8 mb-10">
+            <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-center">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                    <input id="searchInput" type="text" placeholder="Pesquisar equipe..." class="w-full bg-black/30 border border-white/10 rounded-2xl py-4 pl-14 pr-5 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <button class="sort-btn tag active" data-sort="nome">Nome</button>
+                    <button class="sort-btn tag" data-sort="categoria">Categoria</button>
+                    <button class="sort-btn tag" data-sort="recentes">Mais recentes</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mb-16">
+            <button class="filter-btn tag active" data-filter="Todas">Todas</button>
+            <button class="filter-btn tag" data-filter="FLL">FLL</button>
+            <button class="filter-btn tag" data-filter="FTC">FTC</button>
+            <button class="filter-btn tag" data-filter="FRC">FRC</button>
+            <button class="filter-btn tag" data-filter="F1 in Schools">F1 in Schools</button>
+        </div>
+
+        <div id="emptyState" class="hidden card-glass rounded-3xl p-10 text-center mb-16">
+            <i class="fa-solid fa-radar text-5xl text-slate-600 mb-6"></i>
+            <h3 class="text-2xl text-white font-bold mb-3">Nenhuma equipe encontrada</h3>
+            <p class="text-slate-500">Ajuste a busca ou selecione outra categoria.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- FIRST LEGO LEAGUE SECTION -->
+<!-- ===================================================== -->
+<section class="team-section pb-24" data-section-category="FLL">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+            <h2 class="font-serif text-4xl text-white mb-4">FIRST LEGO League</h2>
+            <p class="text-slate-400 max-w-3xl">Equipes que unem pesquisa, programação, design mecânico e valores fundamentais em desafios internacionais de STEM.</p>
+        </div>
+
+        <div class="team-grid grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Teen Wolf" data-category="FLL" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center overflow-hidden">
+                        <img src="assets/equipes/LogoTeenWolf.png" alt="Logo Teen Wolf" class="w-full h-full object-cover">
+                    </div>
+                    <span class="tag text-cyan-300">FIRST LEGO League</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">Teen Wolf</h3>
+                <span class="text-xs text-slate-500 font-mono tracking-wider uppercase block mb-3">Belo Horizonte</span>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe focada em inovação, pesquisa aplicada e soluções criativas para desafios educacionais da FLL.</p>
+                
+                <!-- Links Integrados -->
+                <div class="mt-auto flex gap-3">
+                    <a href="Equipes/TeenWolf.html" class="flex-grow bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">
+                        Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </a>
+                    <a href="https://www.instagram.com/teenwolf_goba/" target="_blank" class="w-12 flex items-center justify-center bg-white/5 hover:bg-pink-500/20 border border-white/10 hover:border-pink-500/30 rounded-xl text-slate-300 hover:text-pink-400 duration-300" title="Instagram">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="LegoTunes" data-category="FLL" data-year="2024">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-cubes text-3xl text-yellow-400"></i>
+                    </div>
+                    <span class="tag text-cyan-300">FIRST LEGO League</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">LegoTunes</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe com identidade criativa, prototipagem LEGO e desenvolvimento colaborativo de robôs autônomos.</p>
+                <a href="Equipes/LegoTunes.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Amigos Droids" data-category="FLL" data-year="2023">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-3xl text-green-400"></i>
+                    </div>
+                    <span class="tag text-cyan-300">FIRST LEGO League</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Amigos Droids</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe dedicada a robótica educacional, estratégia de missões e comunicação científica para jovens inovadores.</p>
+                <a href="Equipes/AmigosDroids.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- F1 IN SCHOOLS SECTION -->
+<!-- ===================================================== -->
+<section class="team-section py-24 border-y border-white/10 bg-black/20" data-section-category="F1 in Schools">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+            <h2 class="font-serif text-4xl text-white mb-4">F1 in Schools</h2>
+            <p class="text-slate-400 max-w-3xl">Equipes que combinam engenharia, aerodinâmica, gestão, identidade visual e desempenho em pistas de alta precisão.</p>
+        </div>
+
+        <div class="team-grid grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Pacce Scuderia" data-category="F1 in Schools" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center"><i class="fa-solid fa-gauge-high text-3xl text-red-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Pacce Scuderia</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe de alto desempenho com foco em engenharia de produto, comunicação e velocidade competitiva.</p>
+                <a href="Equipes/PacceScuderia.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Minerskills" data-category="F1 in Schools" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center"><i class="fa-solid fa-helmet-safety text-3xl text-orange-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Minerskills</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Scuderia com DNA mineiro, cultura de prototipagem e projeto orientado por dados, manufatura e colaboração.</p>
+                <a href="Equipes/Minerskills.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Turbon Scuderia" data-category="F1 in Schools" data-year="2024">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center"><i class="fa-solid fa-wind text-3xl text-cyan-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Turbon Scuderia</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe orientada a aerodinâmica, branding e melhoria contínua no desenvolvimento de carros em miniatura.</p>
+                <a href="Equipes/TurbonScuderia.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Factum Scuderia" data-category="F1 in Schools" data-year="2024">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center"><i class="fa-solid fa-drafting-compass text-3xl text-purple-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Factum Scuderia</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Time com foco em planejamento, prototipagem e excelência no ciclo completo de engenharia escolar.</p>
+                <a href="Equipes/FactumScuderia.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Senna Rain Race" data-category="F1 in Schools" data-year="2023">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-cloud-showers-heavy text-3xl text-blue-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Senna Rain Race</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Scuderia inspirada em legado, controle sob pressão e design técnico para ambientes competitivos.</p>
+                <a href="Equipes/SennaRainRace.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Alaris Scuderia" data-category="F1 in Schools" data-year="2023">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center"><i class="fa-solid fa-feather-pointed text-3xl text-emerald-400"></i></div>
+                    <span class="tag text-red-300">F1 in Schools</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Alaris Scuderia</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe com ênfase em leveza, precisão, comunicação visual e desenvolvimento integrado de produto.</p>
+                <a href="Equipes/AlarisScuderia.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- FTC / FRC SECTION -->
+<!-- ===================================================== -->
+<section class="team-section py-24" data-section-category="FTC/FRC">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+            <h2 class="font-serif text-4xl text-white mb-4">FTC / FRC</h2>
+            <p class="text-slate-400 max-w-3xl">Equipes com robôs robustos, estratégia de arena, integração eletromecânica e cultura de engenharia competitiva.</p>
+        </div>
+
+        <div class="team-grid grid md:grid-cols-2 gap-8">
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Guardiões do Império" data-category="FTC" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"><i class="fa-solid fa-shield-halved text-3xl text-indigo-400"></i></div>
+                    <span class="tag text-indigo-300">FTC</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Guardiões do Império</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe dedicada a robôs de arena, integração de sensores, estratégia competitiva e formação STEM.</p>
+                <a href="Equipes/GuardioesDoImperio.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Black Cygnus" data-category="FRC" data-year="2024">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-slate-500/10 border border-slate-500/20 flex items-center justify-center"><i class="fa-solid fa-chess-knight text-3xl text-slate-300"></i></div>
+                    <span class="tag text-slate-300">FRC</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">Black Cygnus</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe voltada a projetos de grande escala, colaboração multidisciplinar e desempenho em desafios FRC.</p>
+                <a href="Equipes/BlackCygnus.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- HALL OF FAME -->
+<!-- ===================================================== -->
+<section class="py-28 border-y border-white/10 bg-black/20" id="hall">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-300 font-mono text-sm mb-8">
+                <i class="fa-solid fa-trophy"></i>
+                Hall da Fama
+            </div>
+            <h2 class="font-serif text-5xl text-white mb-5">Equipes em Destaque</h2>
+            <p class="text-slate-400 text-lg max-w-3xl mx-auto">Seleção editorial de equipes com trajetória, impacto e identidade competitiva no ecossistema brasileiro.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <article class="group card-glass card-glass-hover rounded-[32px] overflow-hidden">
+                <div class="relative h-72 bg-gradient-to-br from-cyan-600/30 via-blue-600/20 to-slate-950 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-pattern opacity-30"></div>
+                    <span class="absolute top-5 left-5 bg-cyan-500/20 text-cyan-200 border border-cyan-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest z-10">Pesquisa & Core Values</span>
+                    <img src="assets/equipes/LogoTeenWolf.png" alt="Logo Teen Wolf" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-cyan-500/30 group-hover:scale-110 duration-500 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+                </div>
+                <div class="p-8">
+                    <h3 class="text-3xl text-white font-bold mb-1">Teen Wolf</h3>
+                    <span class="text-xs text-cyan-400 font-mono tracking-wider uppercase block mb-4">Belo Horizonte</span>
+                    <p class="text-slate-400 mb-6">Destaque em criatividade, pesquisa e cultura de colaboração na FIRST LEGO League.</p>
+                    
+                    <!-- Redes e Plataforma -->
+                    <div class="flex gap-4 items-center">
+                        <a href="https://cfsjcode.github.io/Teen-Wolf/index.html" target="_blank" class="text-slate-400 hover:text-cyan-400 duration-300" title="Acessar Plataforma Oficial">
+                            <i class="fa-solid fa-globe text-2xl"></i>
+                        </a>
+                        <a href="https://www.instagram.com/teenwolf_goba/" target="_blank" class="text-slate-400 hover:text-pink-400 duration-300" title="Acessar Instagram">
+                            <i class="fa-brands fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="group card-glass card-glass-hover rounded-[32px] overflow-hidden">
+                <div class="relative h-72 bg-gradient-to-br from-orange-600/30 via-red-600/20 to-slate-950 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-pattern opacity-30"></div>
+                    <span class="absolute top-5 left-5 bg-orange-500/20 text-orange-200 border border-orange-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Engenharia & Gestão</span>
+                    <i class="fa-solid fa-helmet-safety text-8xl text-orange-300 group-hover:scale-110 duration-500"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-3xl text-white font-bold mb-3">Minerskills</h3>
+                    <p class="text-slate-400">Referência em identidade técnica, projeto integrado e visão de equipe no F1 in Schools.</p>
+                </div>
+            </article>
+
+            <article class="group card-glass card-glass-hover rounded-[32px] overflow-hidden">
+                <div class="relative h-72 bg-gradient-to-br from-red-600/30 via-purple-600/20 to-slate-950 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-pattern opacity-30"></div>
+                    <span class="absolute top-5 left-5 bg-red-500/20 text-red-200 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Desempenho</span>
+                    <i class="fa-solid fa-gauge-high text-8xl text-red-300 group-hover:scale-110 duration-500"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-3xl text-white font-bold mb-3">Pacce Scuderia</h3>
+                    <p class="text-slate-400">Equipe destacada por velocidade, comunicação e engenharia aplicada à competição.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- TIMELINE SECTION -->
+<!-- ===================================================== -->
+<section class="py-28">
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono text-sm mb-8">
+                <i class="fa-solid fa-timeline"></i>
+                Linha do Tempo
+            </div>
+            <h2 class="font-serif text-5xl text-white mb-5">Robótica Brasileira em Movimento</h2>
+            <p class="text-slate-400 text-lg max-w-3xl mx-auto">Marcos simbólicos de expansão, maturidade e internacionalização da cultura competitiva.</p>
+        </div>
+
+        <div class="relative">
+            <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px timeline-line"></div>
+
+            <div class="space-y-10">
+                <article class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="hidden md:block text-right text-4xl font-bold text-cyan-400 font-mono">2015</div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-7 h-7 rounded-full bg-cyan-400 shadow-[0_0_25px_rgba(34,211,238,.7)] border-4 border-[#07131d]"></div>
+                    <div class="ml-16 md:ml-0 card-glass rounded-3xl p-7">
+                        <span class="md:hidden text-cyan-400 font-mono font-bold mb-2 block">2015</span>
+                        <h3 class="text-xl text-white font-bold mb-2">Fundação de equipes pioneiras</h3>
+                        <p class="text-slate-400">Primeiros grupos consolidam práticas de mentoria, prototipagem e competições educacionais.</p>
+                    </div>
+                </article>
+
+                <article class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="md:col-start-2 hidden md:block text-left text-4xl font-bold text-orange-400 font-mono">2018</div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-7 h-7 rounded-full bg-orange-400 shadow-[0_0_25px_rgba(241,136,33,.7)] border-4 border-[#07131d]"></div>
+                    <div class="ml-16 md:ml-0 md:row-start-1 card-glass rounded-3xl p-7">
+                        <span class="md:hidden text-orange-400 font-mono font-bold mb-2 block">2018</span>
+                        <h3 class="text-xl text-white font-bold mb-2">Expansão da FLL</h3>
+                        <p class="text-slate-400">A FIRST LEGO League amplia sua presença e inspira novos núcleos escolares.</p>
+                    </div>
+                </article>
+
+                <article class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="hidden md:block text-right text-4xl font-bold text-green-400 font-mono">2020</div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-7 h-7 rounded-full bg-green-400 shadow-[0_0_25px_rgba(74,222,128,.7)] border-4 border-[#07131d]"></div>
+                    <div class="ml-16 md:ml-0 card-glass rounded-3xl p-7">
+                        <span class="md:hidden text-green-400 font-mono font-bold mb-2 block">2020</span>
+                        <h3 class="text-xl text-white font-bold mb-2">Crescimento nacional</h3>
+                        <p class="text-slate-400">Comunidades digitais aproximam equipes e aceleram o compartilhamento de conhecimento.</p>
+                    </div>
+                </article>
+
+                <article class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="md:col-start-2 hidden md:block text-left text-4xl font-bold text-purple-400 font-mono">2023</div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-7 h-7 rounded-full bg-purple-400 shadow-[0_0_25px_rgba(192,132,252,.7)] border-4 border-[#07131d]"></div>
+                    <div class="ml-16 md:ml-0 md:row-start-1 card-glass rounded-3xl p-7">
+                        <span class="md:hidden text-purple-400 font-mono font-bold mb-2 block">2023</span>
+                        <h3 class="text-xl text-white font-bold mb-2">Internacionalização</h3>
+                        <p class="text-slate-400">Mais equipes brasileiras passam a competir e comunicar seus projetos em escala global.</p>
+                    </div>
+                </article>
+
+                <article class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <div class="hidden md:block text-right text-4xl font-bold text-yellow-300 font-mono">2025</div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-7 h-7 rounded-full bg-yellow-300 shadow-[0_0_25px_rgba(253,224,71,.7)] border-4 border-[#07131d]"></div>
+                    <div class="ml-16 md:ml-0 card-glass rounded-3xl p-7">
+                        <span class="md:hidden text-yellow-300 font-mono font-bold mb-2 block">2025</span>
+                        <h3 class="text-xl text-white font-bold mb-2">Consolidação do ecossistema</h3>
+                        <p class="text-slate-400">Times, mentores e instituições consolidam uma rede nacional de inovação educacional.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- FUTURE BRAZIL MAP -->
+<!-- ===================================================== -->
+<section class="py-28 border-y border-white/10 bg-black/20">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-mono text-sm mb-8">
+                    <i class="fa-solid fa-map"></i>
+                    Recurso Futuro
+                </div>
+                <h2 class="font-serif text-5xl text-white mb-6">Mapa das Equipes pelo Brasil</h2>
+                <p class="text-slate-400 text-xl">Em breve.</p>
+            </div>
+
+            <div class="relative card-glass rounded-[32px] p-8 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-orange-500/10"></div>
+                <div class="relative grid sm:grid-cols-2 gap-5">
+                    <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+                        <i class="fa-solid fa-location-crosshairs text-cyan-400 text-3xl mb-5"></i>
+                        <h3 class="text-white text-xl font-bold">Minas Gerais</h3>
+                    </div>
+                    <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+                        <i class="fa-solid fa-location-dot text-orange-400 text-3xl mb-5"></i>
+                        <h3 class="text-white text-xl font-bold">São Paulo</h3>
+                    </div>
+                    <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+                        <i class="fa-solid fa-map-pin text-green-400 text-3xl mb-5"></i>
+                        <h3 class="text-white text-xl font-bold">Ceará</h3>
+                    </div>
+                    <div class="rounded-3xl bg-white/5 border border-white/10 p-6">
+                        <i class="fa-solid fa-compass text-purple-400 text-3xl mb-5"></i>
+                        <h3 class="text-white text-xl font-bold">Paraná</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- JOIN THE ECOSYSTEM SECTION -->
+<!-- ===================================================== -->
+<section class="py-28" id="join">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="dark-cta-panel relative overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-blue-950 via-slate-900 to-orange-950">
+            <div class="absolute inset-0">
+                <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[120px]"></div>
+                <div class="absolute right-0 bottom-0 w-[350px] h-[350px] bg-orange-500/20 rounded-full blur-[120px]"></div>
+            </div>
+
+            <div class="relative z-10 p-10 md:p-20 text-center">
+                <div class="text-7xl text-orange-400 mb-10">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h2 class="dark-cta-title font-serif text-4xl md:text-6xl mb-8">Sua equipe faz parte da robótica brasileira?</h2>
+                <p class="dark-cta-copy max-w-3xl mx-auto text-lg md:text-xl leading-relaxed mb-12">
+                    Compartilhe sua trajetória e faça parte do HUB Da Robótica.
+                </p>
+                <a href="Contatos.html" class="dark-cta-action inline-flex items-center gap-4 bg-orange-500 hover:bg-orange-600 duration-300 px-10 py-5 rounded-2xl font-semibold shadow-gold">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Cadastrar Equipe
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
+<footer class="border-t border-white/10 bg-[#040a0f]">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-14 h-14 rounded-full border border-white/10">
+                    <div>
+                        <h3 class="font-serif text-2xl text-white leading-tight">HUB Da Robótica</h3>
+                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Equipes Brasil</p>
+                    </div>
+                </div>
+                <p class="text-slate-500 leading-relaxed">
+                    Plataforma colaborativa dedicada a projetos, competições, equipes e iniciativas de robótica educacional no Brasil.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Navegação</h3>
+                <ul class="space-y-4 text-slate-400">
+                    <li><a href="index.html" class="hover:text-white duration-300">Início</a></li>
+                    <li><a href="Garagem_De_Projetos.html" class="hover:text-white duration-300">Garagem</a></li>
+                    <li><a href="RadarDeCompeticoes.html" class="hover:text-white duration-300">Radar de Competições</a></li>
+                    <li><a href="EquipesBrasil.html" class="hover:text-white duration-300">Equipes do Brasil</a></li>
+                    <li><a href="Contatos.html" class="hover:text-white duration-300">Contatos</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Comunidade</h3>
+                <div class="flex gap-5 text-2xl">
+                    <a href="https://github.com/CFSJCODE?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white duration-300" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://cfsjcode.github.io/CFSJ_TECH/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-orange-400 duration-300" aria-label="Site CFSJ TECH">
+                        <i class="fa-solid fa-globe"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/claudio-francisco-dos-santos-junior/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-blue-400 duration-300" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="http://lattes.cnpq.br/9581278395342699" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-300 duration-300" aria-label="Currículo Lattes">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-cyan-400/20 my-10">
+
+        <div class="flex flex-col lg:flex-row justify-between gap-6 text-xs text-slate-300 font-mono tracking-wide">
+            <p class="text-slate-300">© 2026 HUB Da Robótica</p>
+            <p class="text-cyan-300">Equipes de Robótica do Brasil</p>
+            <p class="text-orange-300">SYS_VER 1.0.0</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+const state = {
+    filter: 'Todas',
+    sort: 'nome',
+    query: ''
+};
+
+const normalizeText = (value) => value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+const cards = Array.from(document.querySelectorAll('.team-card'));
+const sections = Array.from(document.querySelectorAll('.team-section'));
+const resultCount = document.getElementById('resultCount');
+const emptyState = document.getElementById('emptyState');
+
+function categoryMatches(cardCategory, activeFilter) {
+    if (activeFilter === 'Todas') return true;
+    if (activeFilter === 'FLL') return cardCategory === 'FLL';
+    if (activeFilter === 'F1 in Schools') return cardCategory === 'F1 in Schools';
+    if (activeFilter === 'FTC') return cardCategory === 'FTC';
+    if (activeFilter === 'FRC') return cardCategory === 'FRC';
+    return true;
+}
+
+function sortCards() {
+    const sorted = [...cards].sort((a, b) => {
+        if (state.sort === 'categoria') {
+            return a.dataset.category.localeCompare(b.dataset.category) || a.dataset.name.localeCompare(b.dataset.name);
+        }
+
+        if (state.sort === 'recentes') {
+            return Number(b.dataset.year) - Number(a.dataset.year) || a.dataset.name.localeCompare(b.dataset.name);
+        }
+
+        return a.dataset.name.localeCompare(b.dataset.name);
+    });
+
+    sorted.forEach((card) => {
+        const grid = card.closest('.team-grid');
+        if (grid) grid.appendChild(card);
+    });
+}
+
+function applyFilters() {
+    sortCards();
+
+    let visibleCount = 0;
+    const query = normalizeText(state.query);
+
+    cards.forEach((card) => {
+        const searchable = normalizeText(`${card.dataset.name} ${card.dataset.category} ${card.textContent}`);
+        const matchesSearch = !query || searchable.includes(query);
+        const matchesCategory = categoryMatches(card.dataset.category, state.filter);
+        const visible = matchesSearch && matchesCategory;
+
+        card.classList.toggle('is-hidden', !visible);
+        if (visible) visibleCount += 1;
+    });
+
+    sections.forEach((section) => {
+        const visibleCards = section.querySelectorAll('.team-card:not(.is-hidden)').length;
+        section.classList.toggle('hidden', visibleCards === 0);
+    });
+
+    emptyState.classList.toggle('hidden', visibleCount !== 0);
+    resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'equipe listada' : 'equipes listadas'}`;
+}
+
+document.querySelectorAll('.filter-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        state.filter = button.dataset.filter;
+        applyFilters();
+    });
+});
+
+document.querySelectorAll('.sort-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.sort-btn').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        state.sort = button.dataset.sort;
+        applyFilters();
+    });
+});
+
+document.getElementById('searchInput').addEventListener('input', (event) => {
+    state.query = event.target.value;
+    applyFilters();
+});
+
+applyFilters();
+</script>
+
+</body>
+</html>

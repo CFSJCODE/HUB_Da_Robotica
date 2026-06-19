@@ -1,0 +1,76 @@
+body {
+    background: #07131d;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #f18821 #07131d;
+}
+
+.hub-logo-mark {
+    display: block;
+    background: #ffffff;
+    object-fit: contain !important;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+.glass-nav {
+    background: rgba(15,45,64,.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(34,211,238,.18);
+    box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+
+.card-glass {
+    background: rgba(15,45,64,.38);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(34,211,238,.14);
+}
+
+.card-glass-hover {
+    transition: .4s ease;
+}
+
+.card-glass-hover:hover {
+    transform: translateY(-8px);
+    background: rgba(27,75,107,.46);
+    border-color: rgba(34,211,238,.45);
+    box-shadow: 0 24px 56px -18px rgba(34,211,238,.35), 0 18px 42px -18px rgba(241,136,33,.32);
+}
+
+.bg-pattern {
+    background-image: radial-gradient(rgba(34,211,238,.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+.tag {
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(34,211,238,.16);
+    color: #dbeafe;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #07131d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff9f3f 0%, #f18821 55%, #d8761a 100%);
+    border: 2px solid #07131d;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ffb15f 0%, #f18821 45%, #c96410 100%);
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minerskills | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'Minerskills',
+category:'F1 in Schools',
+region:'Brasil',
+logo:'../assets/equipes/team-placeholder.svg',
+summary:'Scuderia com DNA mineiro, cultura de prototipagem e projeto orientado por dados, manufatura e colaboração.',
+about:'A Minerskills foi posicionada como referência em identidade técnica, organização de processo e integração entre engenharia, comunicação e gestão.',
+stats:[{value:'F1',label:'Categoria'},{value:'MG',label:'Identidade'},{value:'Dados',label:'Método'},{value:'Brasil',label:'Atuação'}],
+skills:['Análise de desempenho e melhoria contínua baseada em dados.','Construção de portfólio, pitch e marca competitiva.','Prototipagem, acabamento e controle de qualidade.','Gestão de cronograma, patrocínio e comunicação.'],
+timeline:[{year:'Origem',title:'Cultura mineira',text:'Identidade preparada para representar criatividade, técnica e colaboração.'},{year:'Engenharia',title:'Produto completo',text:'Integração entre carro, box, portfólio e apresentação.'},{year:'Hall',title:'Destaque editorial',text:'Selecionada no portal como equipe em destaque.'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garagem de Projetos | HUB Da Robótica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    colors: {
+                        academic: {
+                            blue: '#1b4b6b',
+                            deep: '#0f2d40',
+                            gold: '#f18821',
+                            gold_hover: '#d8761a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/scripts/app.js"></script>
+    <style>
+        body {
+            background-color: #07131d;
+            background-image:
+                radial-gradient(circle at 16% 12%, rgba(34, 211, 238, 0.12), transparent 30rem),
+                radial-gradient(circle at 82% 18%, rgba(241, 136, 33, 0.12), transparent 30rem),
+                radial-gradient(circle at 48% 86%, rgba(27, 75, 107, 0.35), transparent 36rem);
+            color: #cbd5e1;
+            font-family: Inter, sans-serif;
+        }
+
+        .font-serif { font-family: Merriweather, serif; }
+        .glass-nav {
+            background: rgba(15, 45, 64, 0.95);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(14px);
+        }
+        .bg-pattern {
+            background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .card-glass,
+        .project-card {
+            background: rgba(15, 45, 64, 0.42);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 24px 56px -28px rgba(34, 211, 238, 0.34);
+            backdrop-filter: blur(18px);
+        }
+        .project-card {
+            transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease, background .28s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(241, 136, 33, 0.58);
+            box-shadow: 0 28px 62px -30px rgba(241, 136, 33, 0.48);
+            background: rgba(21, 58, 80, 0.58);
+        }
+        .project-thumb {
+            min-height: 13rem;
+            background-size: cover;
+            background-position: center;
+        }
+        .source-badge {
+            background: rgba(15, 23, 42, .92);
+            border: 1px solid rgba(34, 211, 238, .22);
+            color: #ffffff;
+        }
+        .dark-cta-panel {
+            background:
+                linear-gradient(135deg, rgba(12, 35, 58, .98) 0%, rgba(15, 23, 42, .98) 54%, rgba(91, 33, 18, .96) 100%);
+            border: 1px solid rgba(34, 211, 238, .20);
+            box-shadow: 0 34px 80px -46px rgba(34, 211, 238, .52);
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="min-h-screen">
+    <header class="fixed top-0 z-50 w-full glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between gap-6">
+                <a href="index.html#home" class="flex items-center gap-3">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-12 h-12 rounded-full border border-white/10">
+                    <div>
+                        <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Terminal Maker</p>
+                    </div>
+                </a>
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+                    <a href="index.html#home" class="text-white/80 hover:text-white transition-colors">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="text-orange-400 border-b-2 border-orange-400 pb-1">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="text-white/80 hover:text-white transition-colors">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="text-white/80 hover:text-white transition-colors">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="text-white/80 hover:text-white transition-colors">Contatos</a>
+                    <span class="h-6 w-px bg-white/20"></span>
+                    <a href="RadarDeCompeticoes.html#metrics" class="text-white/80 hover:text-white transition-colors">Métricas</a>
+                    <a href="index.html#favorites" class="text-white/80 hover:text-white transition-colors">Favoritos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative overflow-hidden py-20 lg:py-28">
+            <div class="absolute inset-0 bg-pattern opacity-30"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid lg:grid-cols-[1.02fr_0.98fr] gap-12 items-center">
+                    <div>
+                        <span class="inline-flex items-center gap-2 rounded-full source-badge px-4 py-2 text-xs font-bold uppercase tracking-[0.24em]">
+                            <i class="fa-solid fa-screwdriver-wrench text-orange-400"></i>
+                            Laboratório de ideias
+                        </span>
+                        <h2 class="font-serif text-5xl md:text-7xl text-white leading-tight mt-7">Garagem de Projetos</h2>
+                        <p class="text-slate-300 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl">
+                            Uma vitrine para protótipos de robótica, automação, visão computacional, sistemas embarcados e projetos práticos prontos para inspirar novas equipes.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mt-9">
+                            <a href="#projetos" class="inline-flex items-center gap-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-all shadow-lg shadow-orange-500/20">
+                                <i class="fa-solid fa-compass"></i>
+                                Explorar Projetos
+                            </a>
+                            <a href="Contatos.html" class="inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 hover:border-cyan-300/60 text-white px-8 py-4 font-bold transition-all">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                Compartilhar Projeto
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-3 gap-5 mt-12 max-w-2xl">
+                            <div class="card-glass rounded-2xl p-5 text-center">
+                                <strong class="block text-3xl text-orange-400">100+</strong>
+                                <span class="text-xs uppercase tracking-widest text-slate-400">Projetos</span>
+                            </div>
+                            <div class="card-glass rounded-2xl p-5 text-center">
+                                <strong class="block text-3xl text-cyan-300">15+</strong>
+                                <span class="text-xs uppercase tracking-widest text-slate-400">Categorias</span>
+                            </div>
+                            <div class="card-glass rounded-2xl p-5 text-center">
+                                <strong class="block text-3xl text-green-400">Open</strong>
+                                <span class="text-xs uppercase tracking-widest text-slate-400">Source</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-glass rounded-[2rem] overflow-hidden">
+                        <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(7,19,29,.08), rgba(7,19,29,.82)), url('https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80');"></div>
+                        <div class="p-8">
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="rounded-full bg-orange-500 text-white text-xs font-bold uppercase tracking-[0.18em] px-4 py-2">Destaque</span>
+                                <span class="text-cyan-300 text-sm font-bold">Robótica autônoma</span>
+                            </div>
+                            <h3 class="font-serif text-3xl text-white mt-6">Autonomous Delivery Robot</h3>
+                            <p class="text-slate-300 leading-relaxed mt-4">Plataforma autônoma com navegação, sensores e telemetria para transporte interno de pequenos objetos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="py-20 bg-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+                    <div>
+                        <span class="text-orange-400 font-bold uppercase tracking-[0.28em] text-xs">Galeria técnica</span>
+                        <h2 class="font-serif text-4xl md:text-5xl text-white mt-4">Projetos em destaque</h2>
+                    </div>
+                    <p class="text-slate-300 max-w-xl leading-relaxed">Cartões com o mesmo comportamento visual do restante da plataforma: contraste forte, estados de interação e organização por categorias.</p>
+                </div>
+                <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-7">
+                    <article class="project-card rounded-3xl overflow-hidden">
+                        <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(7,19,29,.02), rgba(7,19,29,.84)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80');"></div>
+                        <div class="p-7">
+                            <span class="source-badge rounded-full px-3 py-1 text-xs font-bold">ESP32</span>
+                            <h3 class="font-serif text-2xl text-white mt-5">ESP32 Camera Rover</h3>
+                            <p class="text-slate-300 mt-3 leading-relaxed">Carrinho com câmera embarcada, controle via Wi-Fi e streaming local para testes de visão.</p>
+                            <a href="detalhes.html?id=3" class="inline-flex items-center gap-2 mt-6 text-cyan-300 hover:text-orange-400 font-bold">Detalhes Operacionais <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="project-card rounded-3xl overflow-hidden">
+                        <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(7,19,29,.02), rgba(7,19,29,.84)), url('https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=900&q=80');"></div>
+                        <div class="p-7">
+                            <span class="source-badge rounded-full px-3 py-1 text-xs font-bold">Combate</span>
+                            <h3 class="font-serif text-2xl text-white mt-5">RC Sumo Brushless</h3>
+                            <p class="text-slate-300 mt-3 leading-relaxed">Plataforma de sumô com motores brushless, estrutura otimizada e alta resposta de controle.</p>
+                            <a href="detalhes.html?id=2" class="inline-flex items-center gap-2 mt-6 text-cyan-300 hover:text-orange-400 font-bold">Detalhes Operacionais <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    <article class="project-card rounded-3xl overflow-hidden">
+                        <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(7,19,29,.02), rgba(7,19,29,.84)), url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80');"></div>
+                        <div class="p-7">
+                            <span class="source-badge rounded-full px-3 py-1 text-xs font-bold">IA</span>
+                            <h3 class="font-serif text-2xl text-white mt-5">Visão Computacional</h3>
+                            <p class="text-slate-300 mt-3 leading-relaxed">Detecção de objetos com pipeline de treinamento, inferência e métricas de desempenho.</p>
+                            <a href="detalhes.html?id=6" class="inline-flex items-center gap-2 mt-6 text-cyan-300 hover:text-orange-400 font-bold">Detalhes Operacionais <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
+                    <div>
+                        <span class="text-orange-400 font-bold uppercase tracking-[0.28em] text-xs">Categorias</span>
+                        <h2 class="font-serif text-4xl text-white mt-4">Mapa de tecnologias</h2>
+                        <p class="text-slate-300 mt-5 leading-relaxed">As cores seguem a identidade visual forte da plataforma e mantêm leitura adequada no tema escuro e no tema claro.</p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div class="card-glass rounded-2xl p-5 flex items-center gap-4"><span class="h-3 w-12 rounded-full bg-cyan-400"></span><strong class="text-white">Autônomo</strong></div>
+                        <div class="card-glass rounded-2xl p-5 flex items-center gap-4"><span class="h-3 w-12 rounded-full bg-orange-500"></span><strong class="text-white">Combate</strong></div>
+                        <div class="card-glass rounded-2xl p-5 flex items-center gap-4"><span class="h-3 w-12 rounded-full bg-green-400"></span><strong class="text-white">Educacional</strong></div>
+                        <div class="card-glass rounded-2xl p-5 flex items-center gap-4"><span class="h-3 w-12 rounded-full bg-blue-500"></span><strong class="text-white">Inovação</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="dark-cta-panel dark-cta-panel rounded-[2rem] p-10 md:p-16 text-center">
+                    <i class="fa-solid fa-rocket text-5xl text-orange-400 mb-8"></i>
+                    <h2 class="dark-cta-title font-serif text-4xl md:text-5xl text-white">Tem um projeto pronto para entrar na garagem?</h2>
+                    <p class="dark-cta-copy text-lg text-slate-300 mt-5 max-w-3xl mx-auto leading-relaxed">Compartilhe protótipos, documentações, fotos e aprendizados para fortalecer a comunidade de robótica.</p>
+                    <a href="Contatos.html" class="dark-cta-action inline-flex items-center gap-3 mt-9 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-colors">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Enviar proposta
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-[#040a0f] py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-400">
+            <span>&copy; 2026 HUB Da Robótica</span>
+            <span>Garagem de Projetos</span>
+            <span>SYS_VER 1.0.0</span>
+        </div>
+    </footer>
+</body>
+</html>

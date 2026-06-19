@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guardiões do Império | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'Guardiões do Império',
+category:'FTC',
+region:'Brasil',
+logo:'../assets/equipes/team-placeholder.svg',
+summary:'Equipe FTC dedicada a robôs de arena, integração de sensores, estratégia competitiva e formação STEM.',
+about:'Guardiões do Império foi preparada no portal como uma equipe FTC voltada a construção robusta, controle, teleop, autonomia e cultura de engenharia.',
+stats:[{value:'FTC',label:'Categoria'},{value:'Arena',label:'Ambiente'},{value:'Controle',label:'Foco'},{value:'Brasil',label:'Atuação'}],
+skills:['Projeto mecânico de robôs para arena FTC.','Programação de teleop, automação e integração de sensores.','Estratégia de jogo, scouting e análise de partidas.','Mentoria, documentação e gestão técnica.'],
+timeline:[{year:'Base',title:'Equipe de arena',text:'Perfil estruturado para robótica competitiva FTC.'},{year:'Robô',title:'Integração eletromecânica',text:'Espaço para registrar subsistemas e arquitetura.'},{year:'Futuro',title:'Temporadas oficiais',text:'Preparado para receber conquistas, rankings e fotos.'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

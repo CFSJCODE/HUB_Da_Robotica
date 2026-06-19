@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Teen Wolf | Memorial Histórico SESI</title>
+  <meta name="description" content="Memorial histórico da equipe de robótica Teen Wolf - SESI Barreiro. FLL Challenge.">
+  <meta name="theme-color" content="#080A0F">
+
+  <!-- Pré-conexão para otimização de fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    body {
+      overscroll-behavior-y: none;
+    }
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #FF6B00 #080A0F;
+    }
+    .hub-logo-mark {
+      display: block;
+      background: #ffffff;
+      object-fit: contain !important;
+      padding: 5%;
+      box-sizing: border-box;
+    }
+    .gpu-accelerated {
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+    /* Animação CSS pura para substituir o antigo comportamento JS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080A0F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ff9f3f 0%, #FF6B00 55%, #d8761a 100%);
+      border: 2px solid #080A0F;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #ffb15f 0%, #FF6B00 45%, #c96410 100%);
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          colors: {
+            wolfOrange: '#FF6B00',
+            wolfDark: '#080A0F',
+            wolfBlue: '#0B3B8C',
+            wolfRed: '#D71920'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="text-slate-300 overflow-x-hidden bg-wolfDark antialiased relative">
+  
+  <main id="app-root" class="animate-fade-in gpu-accelerated relative">
+    
+    <!-- Navegação -->
+    <nav class="absolute top-0 left-0 w-full p-6 z-10 flex justify-start">
+      <a href="../EquipesBrasil.html" class="flex items-center gap-3 text-slate-400 hover:text-wolfOrange transition-colors font-mono text-sm tracking-widest group">
+        <i class="fa-solid fa-arrow-left mr-3 transform group-hover:-translate-x-1 transition-transform"></i>
+        <img src="../assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-10 h-10 rounded-full border border-white/10">
+        <span class="flex flex-col">
+          <span class="font-serif text-lg text-white leading-tight tracking-normal normal-case">HUB Da Robótica</span>
+          <span class="text-[0.6rem] uppercase tracking-[0.35em] text-wolfOrange font-bold">Equipes Brasil</span>
+        </span>
+      </a>
+    </nav>
+
+    <!-- Header (Hero Section) -->
+    <header class="relative w-full py-28 px-6 flex flex-col items-center text-center bg-gradient-to-b from-black to-wolfDark border-b border-gray-900 mt-4">
+      <span class="inline-block px-3 py-1 bg-wolfOrange/20 border border-wolfOrange text-wolfOrange font-mono text-xs tracking-[0.2em] rounded-full mb-6">
+        <i class="fa-solid fa-bookmark mr-2"></i> DESDE 2018
+      </span>
+      <h1 class="font-serif text-5xl md:text-7xl font-black text-white mb-4 tracking-tight drop-shadow-md">
+        Teen Wolf
+      </h1>
+      <p class="text-wolfBlue font-mono text-sm uppercase tracking-widest mb-4">FIRST LEGO League Challenge</p>
+      <p class="text-slate-400 font-light max-w-2xl mx-auto mb-8 text-lg">Memorial Histórico da Matilha Robótica do SESI Barreiro</p>
+      
+      <a href="https://www.instagram.com/teenwolf_goba/" target="_blank" rel="noopener noreferrer" 
+         class="px-8 py-3 bg-wolfOrange text-white font-bold rounded hover:bg-orange-600 transition-all shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)]">
+        <i class="fa-brands fa-instagram mr-2"></i> @teenwolf_goba
+      </a>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      
+      <!-- Coluna da Esquerda (Conteúdo Narrativo) -->
+      <div class="lg:col-span-2 space-y-16">
+        
+        <!-- O Legado -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+            <i class="fa-solid fa-book-open text-wolfBlue mr-3"></i> O Legado da Matilha
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-400 leading-relaxed font-light space-y-6">
+            <p>A Teen Wolf é uma equipe de robótica educacional do SESI Barreiro, em Belo Horizonte/MG, com trajetória documentada publicamente desde 03 de outubro de 2018. A equipe atua na FIRST LEGO League Challenge, integrando construção de robôs LEGO autônomos, programação, estratégia de missões, pesquisa aplicada, projeto de inovação, comunicação científica, design do robô e valores fundamentais da FIRST. Ao longo dos anos, consolidou uma cultura de "matilha", marcada por colaboração, renovação de gerações, identidade visual própria, participação em torneios, eventos institucionais do SESI e desenvolvimento técnico contínuo.</p>
+            
+            <div class="bg-gray-900/40 border-l-4 border-wolfOrange p-5 rounded-r">
+              <h3 class="text-white font-bold text-lg mb-2"><i class="fa-solid fa-seedling text-wolfOrange mr-2"></i> Origem (03 de outubro de 2018)</h3>
+              <p class="text-sm">Primeiro registro público identificado. A legenda "Focados na mesa" e as evidências de integrantes operando na arena oficial indicam que a equipe já estava formada, treinando e desenvolvendo robótica FLL ativamente neste período.</p>
+            </div>
+
+            <div class="bg-gray-900/20 border border-gray-800 p-5 rounded-lg">
+              <p><strong class="text-white">Identidade Central:</strong> O conceito de matilha rege a equipe: estratégia, inteligência coletiva, liderança, persistência e colaboração.</p>
+              <p class="mt-2"><strong class="text-white">Cores Oficiais:</strong> Laranja, preto, azul, branco e vermelho.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Temporadas -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+            <i class="fa-solid fa-map-location-dot text-wolfBlue mr-3"></i> Temporadas Confirmadas
+          </h2>
+          <div class="space-y-4">
+            
+            <!-- Temporada 1 -->
+            <div class="flex items-start p-5 bg-gray-900/40 border border-gray-800 rounded-xl hover:border-wolfBlue transition-colors">
+              <div class="w-12 h-12 flex-shrink-0 bg-wolfBlue/20 rounded-full flex items-center justify-center border border-wolfBlue/50 mr-5">
+                <i class="fa-solid fa-city text-wolfBlue text-xl"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-lg font-black text-white uppercase tracking-wide">CITY SHAPER</h3>
+                  <span class="font-mono text-xs bg-gray-800 text-slate-300 px-2 py-0.5 rounded">2019/2020</span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed">Cidades, infraestrutura urbana e futuro dos espaços urbanos. Evidência visual do tapete oficial.</p>
+              </div>
+            </div>
+
+            <!-- Temporada 2 -->
+            <div class="flex items-start p-5 bg-gray-900/40 border border-gray-800 rounded-xl hover:border-wolfBlue transition-colors">
+              <div class="w-12 h-12 flex-shrink-0 bg-wolfBlue/20 rounded-full flex items-center justify-center border border-wolfBlue/50 mr-5">
+                <i class="fa-solid fa-palette text-wolfBlue text-xl"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-lg font-black text-white uppercase tracking-wide">MASTERPIECE</h3>
+                  <span class="font-mono text-xs bg-gray-800 text-slate-300 px-2 py-0.5 rounded">2023/2024</span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed">Arte, criatividade, cultura e entretenimento. Participação documentada em torneios SESI/FLL e Festival SESI de Educação + NerdXP.</p>
+              </div>
+            </div>
+
+            <!-- Temporada 3 -->
+            <div class="flex items-start p-5 bg-gray-900/40 border border-gray-800 rounded-xl hover:border-wolfBlue transition-colors">
+              <div class="w-12 h-12 flex-shrink-0 bg-wolfBlue/20 rounded-full flex items-center justify-center border border-wolfBlue/50 mr-5">
+                <i class="fa-solid fa-water-arrow-down text-wolfBlue text-xl"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-lg font-black text-white uppercase tracking-wide">SUBMERGED</h3>
+                  <span class="font-mono text-xs bg-gray-800 text-slate-300 px-2 py-0.5 rounded">2024/2025</span>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed">Oceanos, ecossistemas aquáticos e exploração submarina. Uniformes modernos, identidade consolidada e participação regional.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Linha do Tempo -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-8 flex items-center">
+            <i class="fa-solid fa-timeline text-wolfBlue mr-3"></i> Linha do Tempo Histórica
+          </h2>
+          <div class="space-y-8 border-l-2 border-gray-800 ml-4 pl-8 relative">
+            
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2018</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Origem da Matilha</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Primeiro registro público (03/10/2018). Equipe já ativa e operando em mesa FLL.</p>
+            </div>
+
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2019/2020</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Temporada CITY SHAPER</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Formação da geração inicial, estruturação de treinos e participação competitiva.</p>
+            </div>
+
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2020–2022</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Período de Consolidação</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Crescimento da equipe, projeto de inovação no Museu da PUC Minas e transição de legado geracional.</p>
+            </div>
+
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2023/2024</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Temporada MASTERPIECE</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Retorno forte em eventos institucionais, Prêmio Técnico Destaque no Festival SESI + NerdXP.</p>
+            </div>
+
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2024/2025</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Temporada SUBMERGED</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Identidade visual madura, novos uniformes, premiação parcial documentada em desempenho do robô.</p>
+            </div>
+
+            <div class="relative group">
+              <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-wolfOrange border-4 border-wolfDark group-hover:scale-125 transition-transform"></span>
+              <span class="font-mono text-xs text-wolfOrange tracking-widest font-bold">2025/2026</span>
+              <h3 class="text-xl font-bold text-white mt-1 mb-2">Renovação Contínua</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Manutenção da presença digital ativa, treinamento e preparação para novos ciclos competitivos.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Gerações e Cultura -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Gerações -->
+          <div>
+            <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Gerações da Equipe</h2>
+            <ul class="space-y-3">
+              <li class="flex justify-between items-center bg-gray-900/30 p-3 rounded border border-gray-800/50">
+                <span class="text-slate-300 font-medium">Geração Fundadora</span>
+                <span class="font-mono text-xs text-wolfOrange">2018–2020</span>
+              </li>
+              <li class="flex justify-between items-center bg-gray-900/30 p-3 rounded border border-gray-800/50">
+                <span class="text-slate-300 font-medium">Geração de Consolidação</span>
+                <span class="font-mono text-xs text-wolfOrange">2020–2022</span>
+              </li>
+              <li class="flex justify-between items-center bg-gray-900/30 p-3 rounded border border-gray-800/50">
+                <span class="text-slate-300 font-medium">Geração MASTERPIECE</span>
+                <span class="font-mono text-xs text-wolfOrange">2023–2024</span>
+              </li>
+              <li class="flex justify-between items-center bg-gray-900/30 p-3 rounded border border-gray-800/50">
+                <span class="text-slate-300 font-medium">Geração SUBMERGED</span>
+                <span class="font-mono text-xs text-wolfOrange">2024–2025</span>
+              </li>
+              <li class="flex justify-between items-center bg-gray-900/30 p-3 rounded border border-gray-800/50">
+                <span class="text-slate-300 font-medium">Geração Atual</span>
+                <span class="font-mono text-xs text-wolfOrange">2025–2026</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Cultura -->
+          <div>
+            <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Cultura de Matilha</h2>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Colaboração</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Inclusão</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Aprendizado</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Diversão</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Persistência</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Liderança</span>
+              <span class="px-3 py-1 bg-gray-800 text-slate-300 text-xs uppercase tracking-wider rounded-full border border-gray-700">Transmissão de legado</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Coluna da Direita (Métricas e Widgets) -->
+      <div class="space-y-8">
+        
+        <!-- Telemetria -->
+        <section>
+          <h2 class="text-xl font-bold text-white mb-4 font-mono text-sm tracking-widest uppercase border-b border-gray-800 pb-2">Telemetria Histórica</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">2018</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Desde</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">FLL</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Categoria</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">SESI</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Instituição</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">BH/MG</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Localização</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">3+</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Temporadas Confirmadas</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-5 bg-gray-900/50 rounded-lg border border-gray-800">
+              <span class="text-2xl font-black text-white">2+</span>
+              <span class="text-[10px] text-wolfOrange font-mono uppercase tracking-widest mt-1 text-center">Premiações Documentadas</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Premiações -->
+        <section class="bg-gray-900/50 p-6 rounded-xl border border-gray-800 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+            <i class="fa-solid fa-trophy text-9xl"></i>
+          </div>
+          <h2 class="text-lg font-bold text-white mb-6 border-b border-gray-800 pb-2 relative z-10">Premiações e Honrarias</h2>
+          <div class="space-y-5 relative z-10">
+            
+            <div class="border-l-2 border-yellow-500 pl-4">
+              <div class="flex items-center gap-2 mb-1">
+                <i class="fa-solid fa-medal text-yellow-500"></i>
+                <h4 class="text-white font-bold text-sm">Prêmio Técnico Destaque</h4>
+              </div>
+              <p class="text-xs text-wolfOrange font-mono font-bold mb-1">2º Lugar</p>
+              <p class="text-xs text-slate-300 mb-1"><strong>Alvo:</strong> Flávia G. N. Pereira (Teen Wolf)</p>
+              <p class="text-[11px] text-slate-500">Festival SESI de Educação + NerdXP</p>
+            </div>
+
+            <div class="border-l-2 border-gray-600 pl-4">
+              <div class="flex items-center gap-2 mb-1">
+                <i class="fa-solid fa-circle-question text-gray-500"></i>
+                <h4 class="text-white font-bold text-sm">Desempenho do Robô</h4>
+              </div>
+              <p class="text-xs text-wolfOrange font-mono font-bold mb-1">2º Lugar</p>
+              <p class="text-xs text-slate-300 mb-1"><strong>Alvo:</strong> Teen Wolf</p>
+              <p class="text-[11px] text-slate-500">Evidência visual parcial</p>
+              <p class="text-[10px] text-wolfRed italic mt-1 bg-red-900/20 px-2 py-1 rounded inline-block"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Pendente de confirmação detalhada do evento/ano.</p>
+            </div>
+
+            <div class="border-l-2 border-yellow-500 pl-4">
+              <div class="flex items-center gap-2 mb-1">
+                <i class="fa-solid fa-medal text-yellow-500"></i>
+                <h4 class="text-white font-bold text-sm">Reconhecimento Institucional</h4>
+              </div>
+              <p class="text-xs text-wolfOrange font-mono font-bold mb-1">Menção Honrosa</p>
+              <p class="text-xs text-slate-300 mb-1"><strong>Alvo:</strong> Equipe Teen Wolf</p>
+              <p class="text-[11px] text-slate-500">SESI Barreiro e SESI MG</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Mentoria -->
+        <section class="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+          <h2 class="text-lg font-bold text-white mb-4 border-b border-gray-800 pb-2">Mentoria Técnica</h2>
+          <div class="flex items-center gap-4 mb-3">
+            <div class="w-12 h-12 rounded-full bg-wolfOrange/20 border border-wolfOrange flex items-center justify-center">
+              <i class="fa-solid fa-user-tie text-wolfOrange text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-white font-bold">Flávia G. N. Pereira</h3>
+              <p class="text-xs text-wolfBlue font-mono uppercase">Técnica / Mentora Destaque</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 italic">Papel fundamental na orientação técnica, continuidade geracional e transmissão do legado da equipe ao longo das temporadas.</p>
+        </section>
+
+        <!-- Estrutura Operacional -->
+        <section class="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+          <h2 class="text-lg font-bold text-white mb-4 border-b border-gray-800 pb-2">Estrutura Operacional</h2>
+          <ul class="space-y-3">
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-robot text-gray-500 w-6 text-center mr-2"></i> Robô Autônomo
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-code text-gray-500 w-6 text-center mr-2"></i> Programação
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-chess-knight text-gray-500 w-6 text-center mr-2"></i> Estratégia de Missões
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-pen-ruler text-gray-500 w-6 text-center mr-2"></i> Design do Robô
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-lightbulb text-gray-500 w-6 text-center mr-2"></i> Projeto de Inovação
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-bullhorn text-gray-500 w-6 text-center mr-2"></i> Comunicação Científica
+            </li>
+            <li class="flex items-center text-sm text-slate-300">
+              <i class="fa-solid fa-users text-gray-500 w-6 text-center mr-2"></i> Core Values
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full bg-black border-t border-gray-900 py-16 px-6 text-center mt-12 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiMzMzMiLz48L3N2Zz4=')] opacity-20"></div>
+      <div class="relative z-10">
+        <h2 class="text-3xl font-bold text-white mb-4">Preserve o Legado</h2>
+        <p class="text-slate-400 max-w-2xl mx-auto mb-8">Apoie a Teen Wolf. Buscamos parceiros institucionais, patrocinadores e entusiastas da educação STEAM para continuar nossa história.</p>
+        <a href="https://www.instagram.com/teenwolf_goba/" target="_blank" rel="noopener noreferrer" 
+           class="inline-block px-8 py-3 bg-wolfBlue text-white font-bold rounded hover:bg-blue-800 transition-colors">
+          Acessar Acervo (Instagram)
+        </a>
+      </div>
+    </footer>
+  </main>
+
+</body>
+</html>

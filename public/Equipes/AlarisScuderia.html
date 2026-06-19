@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alaris Scuderia | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'Alaris Scuderia',
+category:'F1 in Schools',
+region:'Brasil',
+logo:'../assets/equipes/team-placeholder.svg',
+summary:'Equipe com ênfase em leveza, precisão, comunicação visual e desenvolvimento integrado de produto.',
+about:'A Alaris Scuderia foi preparada para destacar engenharia leve, clareza de marca e integração entre produto, gestão e apresentação.',
+stats:[{value:'F1',label:'Categoria'},{value:'Leveza',label:'Foco'},{value:'Design',label:'Marca'},{value:'Brasil',label:'Atuação'}],
+skills:['Otimização de massa e acabamento do carro.','Identidade visual e narrativa de scuderia.','Documentação de processo e portfólio.','Validação de desempenho e melhoria iterativa.'],
+timeline:[{year:'Conceito',title:'Leveza e precisão',text:'Identidade orientada a eficiência e refinamento.'},{year:'Engenharia',title:'Produto integrado',text:'Espaço para registrar design, testes e decisões.'},{year:'Perfil',title:'Página pronta',text:'Aguardando dados oficiais para enriquecer o histórico.'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

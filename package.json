@@ -1,0 +1,19 @@
+{
+  "name": "hub-da-robotica",
+  "version": "1.0.0",
+  "description": "Plataforma web academica para conectar equipes, projetos e competicoes de robotica.",
+  "private": true,
+  "scripts": {
+    "start": "npm run site",
+    "api": "json-server --watch db/db.json --port 3000",
+    "api:deploy": "node scripts/start-api.js",
+    "site": "python -m http.server 8765 --bind 127.0.0.1 --directory public",
+    "validate": "node scripts/validate-project.js"
+  },
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

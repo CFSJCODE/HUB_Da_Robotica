@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factum Scuderia | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'Factum Scuderia',
+category:'F1 in Schools',
+region:'Brasil',
+logo:'../assets/equipes/team-placeholder.svg',
+summary:'Time com foco em planejamento, prototipagem e excelência no ciclo completo de engenharia escolar.',
+about:'A Factum Scuderia foi estruturada no portal como uma equipe orientada a método, tomada de decisão e construção de um produto competitivo completo.',
+stats:[{value:'F1',label:'Categoria'},{value:'CAD',label:'Design'},{value:'Gestão',label:'Processo'},{value:'Brasil',label:'Atuação'}],
+skills:['Planejamento de requisitos e matriz de decisões.','Modelagem e prototipagem de carro F1 in Schools.','Portfólio técnico e apresentação executiva.','Gestão de riscos, cronograma e validação de desempenho.'],
+timeline:[{year:'Base',title:'Engenharia planejada',text:'Perfil desenhado para enfatizar processo e organização.'},{year:'Produto',title:'Prototipagem',text:'Ambiente preparado para versões, testes e aprendizados.'},{year:'Próximo passo',title:'Dados reais',text:'Receberá fotos, premiações e histórico oficial quando disponíveis.'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

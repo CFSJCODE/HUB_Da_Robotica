@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amigos Droids | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'Amigos Droids',
+category:'FIRST LEGO League',
+region:'Brasil',
+logo:'../assets/equipes/team-placeholder.svg',
+summary:'Equipe dedicada à robótica educacional, estratégia de missões e comunicação científica para jovens inovadores.',
+about:'A Amigos Droids foi preparada no portal como uma equipe FLL voltada a colaboração, autonomia, pesquisa e desenvolvimento de soluções com impacto educacional.',
+stats:[{value:'FLL',label:'Categoria'},{value:'Core',label:'Values'},{value:'STEM',label:'Educação'},{value:'Brasil',label:'Atuação'}],
+skills:['Robôs autônomos para desafios com múltiplas missões.','Pesquisa e validação de soluções para problemas reais.','Comunicação visual, pitch e apresentação técnica.','Gestão de tempo e divisão de papéis em equipe.'],
+timeline:[{year:'Equipe',title:'Base colaborativa',text:'Estrutura focada em amizade, criatividade e aprendizado.'},{year:'Desafio',title:'Projeto e robô',text:'Integração entre solução inovadora e desempenho na mesa.'},{year:'Hub',title:'Perfil público',text:'Pronto para receber identidade oficial, prêmios e mídia.'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

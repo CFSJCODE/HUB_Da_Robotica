@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HUB Da Robótica - Plataforma de conexão, inovação e visibilidade para equipes, projetos e competições da robótica brasileira.">
+    <meta name="keywords" content="robótica, competições, FIRST, FLL, FTC, FRC, educação, projetos, Brasil">
+    <title>HUB Da Robótica - Ecossistema Nacional de Robótica</title>
+
+    <!-- Otimização de Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuração Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        academic: {
+                            blue: '#1b4b6b',
+                            deep: '#0f2d40',
+                            gold: '#f18821',
+                            gold_hover: '#d8761a',
+                            light: '#f8fafc',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Gradiente de fundo dinâmico */
+        body {
+            background-color: #07131d;
+            background-image:
+                radial-gradient(circle at 15% 10%, rgba(34, 211, 238, 0.12), transparent 35rem),
+                radial-gradient(circle at 88% 18%, rgba(241, 136, 33, 0.13), transparent 32rem),
+                radial-gradient(circle at 50% 88%, rgba(27, 75, 107, 0.32), transparent 38rem);
+            color: #cbd5e1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-serif { font-family: Merriweather, serif; }
+
+        /* Padrão de fundo sutil */
+        .bg-pattern {
+            background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Nav com vidro fosco */
+        .glass-nav {
+            background: rgba(15, 45, 64, 0.95);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(14px);
+        }
+
+        /* Cartões com efeito vidro */
+        .card-glass {
+            background: rgba(15, 45, 64, 0.42);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 24px 56px -28px rgba(34, 211, 238, 0.34);
+            backdrop-filter: blur(18px);
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card-glass:hover {
+            transform: translateY(-8px);
+            border-color: rgba(241, 136, 33, 0.48);
+            box-shadow: 0 32px 72px -24px rgba(241, 136, 33, 0.42);
+            background: rgba(21, 58, 80, 0.52);
+        }
+
+        /* Painel CTA escuro */
+        .dark-cta-panel {
+            background: linear-gradient(135deg, rgba(12, 35, 58, 0.98) 0%, rgba(15, 23, 42, 0.98) 54%, rgba(91, 33, 18, 0.96) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.20);
+            box-shadow: 0 34px 80px -46px rgba(34, 211, 238, 0.52);
+        }
+
+        /* Botões primários */
+        .btn-primary {
+            background: linear-gradient(135deg, #f18821 0%, #d8761a 100%);
+            transition: all 0.28s ease;
+            box-shadow: 0 10px 32px -8px rgba(241, 136, 33, 0.32);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 42px -4px rgba(241, 136, 33, 0.48);
+        }
+
+        /* Animação suave */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Efeito de brilho sutil */
+        .glow-accent {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ícones com animação */
+        .icon-feature {
+            transition: all 0.3s ease;
+        }
+
+        .card-glass:hover .icon-feature {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Hero section */
+        .hero-content {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline estilo académico */
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: rgba(34, 211, 238, 0.2);
+            border: 2px solid rgba(241, 136, 33, 0.8);
+            transition: all 0.28s ease;
+        }
+
+        .timeline-item:hover::before {
+            background: rgba(241, 136, 33, 0.3);
+            transform: scale(1.2);
+        }
+
+        /* Grid responsivo de valores */
+        .values-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .values-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="min-h-screen">
+    <!-- NAVBAR -->
+    <header class="fixed top-0 z-50 w-full glass-nav">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between gap-6">
+                <a href="#home" class="flex items-center gap-3 shrink-0 min-w-[14rem]">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-12 h-12 rounded-full border border-white/10">
+                    <div>
+                        <h1 class="font-serif text-xl text-white leading-tight whitespace-nowrap">HUB Da Robótica</h1>
+                        <p class="text-[0.65rem] uppercase tracking-[0.32em] text-orange-400 font-bold whitespace-nowrap">Ecossistema Nacional</p>
+                    </div>
+                </a>
+                <nav class="hidden xl:flex items-center gap-4 text-sm font-semibold">
+                    <a href="#home" class="text-orange-400 border-b-2 border-orange-400 pb-1 whitespace-nowrap">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Contatos</a>
+                    <span class="h-6 w-px bg-white/20"></span>
+                    <a href="RadarDeCompeticoes.html#home" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap"><i class="fas fa-home"></i> Visão Geral</a>
+                    <a href="RadarDeCompeticoes.html#rules" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap"><i class="fas fa-book"></i> Regulamentos</a>
+                    <a href="RadarDeCompeticoes.html#metrics" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap"><i class="fas fa-chart-pie"></i> Métricas</a>
+                    <a href="login.html" class="btn-primary text-white px-6 py-2 rounded-full font-bold inline-flex items-center gap-2 whitespace-nowrap"><i class="fas fa-right-to-bracket"></i> Entrar</a>
+                </nav>
+                <button class="xl:hidden text-white text-2xl" id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 pb-5">
+                <nav class="grid gap-2 pt-4 text-sm font-semibold">
+                    <a href="#home" class="rounded-xl px-4 py-3 text-orange-400 bg-white/5">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Contatos</a>
+                    <a href="RadarDeCompeticoes.html#home" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Visão Geral</a>
+                    <a href="RadarDeCompeticoes.html#rules" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Regulamentos</a>
+                    <a href="RadarDeCompeticoes.html#metrics" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Métricas</a>
+                    <a href="RadarDeCompeticoes.html#favorites" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Favoritos</a>
+                    <a href="cadastro_itens.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Cadastro de Itens</a>
+                    <a href="login.html" class="btn-primary mt-2 rounded-full px-5 py-3 text-center text-white font-bold">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- HERO SECTION -->
+        <section id="home" class="relative overflow-hidden py-20 lg:py-32">
+            <div class="absolute inset-0 bg-pattern opacity-25"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+                    <div class="hero-content">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-orange-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                            <i class="fas fa-rocket"></i>
+                            Plataforma Inovadora
+                        </div>
+                        <h2 class="font-serif text-6xl md:text-7xl lg:text-8xl text-white leading-tight mb-6">
+                            Conecte a Robótica
+                        </h2>
+                        <p class="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 max-w-2xl">
+                            Plataforma integrada que conecta equipes, projetos e competições da robótica brasileira em um único ecossistema.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="RadarDeCompeticoes.html" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-3">
+                                <i class="fas fa-compass"></i>
+                                Explorar Competições
+                            </a>
+                            <a href="Garagem_De_Projetos.html" class="border-2 border-cyan-400 text-cyan-300 px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-3 hover:bg-cyan-400/10 transition-colors">
+                                <i class="fas fa-screwdriver-wrench"></i>
+                                Ver Projetos
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative hidden lg:block">
+                        <div class="relative">
+                            <div class="w-80 h-80 rounded-3xl bg-gradient-to-br from-cyan-400/20 to-orange-500/20 flex items-center justify-center animate-float">
+                                <div class="w-64 h-64 rounded-2xl bg-gradient-to-br from-cyan-400/30 to-orange-500/30 flex items-center justify-center">
+                                    <i class="fas fa-robot text-white text-8xl opacity-80"></i>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-8 -right-8 w-40 h-40 rounded-full border-2 border-orange-400/30 opacity-50"></div>
+                            <div class="absolute -top-8 -left-8 w-32 h-32 rounded-full border-2 border-cyan-400/30 opacity-50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE O PROJETO -->
+        <section id="about" class="py-20 lg:py-28 bg-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-cyan-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                        Conceito
+                    </span>
+                    <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">O que é o HUB Da Robótica?</h2>
+                    <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                        Uma plataforma web integrada desenvolvida para centralizar, organizar e visibilizar o ecossistema brasileiro de robótica, conectando equipes competitivas, projetos inovadores, pesquisadores e instituições.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="card-glass rounded-2xl p-8">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-400/20 flex items-center justify-center mb-6">
+                            <i class="fas fa-network-wired text-cyan-300 text-3xl"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl text-white mb-4">Para Equipes</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Visibilidade de competições, busca de patrocinadores, compartilhamento de experiências e networking entre times da FIRST LEGO League, FTC e FRC.
+                        </p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8">
+                        <div class="w-16 h-16 rounded-2xl bg-orange-500/20 flex items-center justify-center mb-6">
+                            <i class="fas fa-flask text-orange-400 text-3xl"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl text-white mb-4">Para Pesquisadores</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Documentação técnica, publicação de projetos de extensão, colaboração acadêmica e suporte para artigos científicos em robótica educacional.
+                        </p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8">
+                        <div class="w-16 h-16 rounded-2xl bg-green-500/20 flex items-center justify-center mb-6">
+                            <i class="fas fa-building text-green-400 text-3xl"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl text-white mb-4">Para Instituições</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Impacto institucional, visibilidade de competições patrocinadas, relatórios de extensão e engajamento com comunidade acadêmica e industrial.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-glass rounded-3xl p-10 md:p-12 grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-serif text-3xl text-white mb-6">Desenvolvedor</h3>
+                        <div class="flex gap-6">
+                            <img src="assets/img/img1.jpg" alt="Cláudio Francisco" class="w-20 h-20 rounded-full object-cover border-2 border-cyan-400/30">
+                            <div>
+                                <p class="font-bold text-white text-lg">Cláudio Francisco Dos Santos Júnior</p>
+                                <p class="text-slate-400 text-sm mt-1">Engenharia de Computação - ICEI PUC Minas</p>
+                                <p class="text-slate-400 text-sm">CEO & Founder - CFSJ TECH</p>
+                                <div class="flex gap-3 mt-3">
+                                    <a href="https://github.com/CFSJCODE?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-cyan-400 transition-colors" aria-label="GitHub de Cláudio Francisco">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/claudio-francisco-dos-santos-junior/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-cyan-400 transition-colors" aria-label="LinkedIn de Cláudio Francisco">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                    <a href="https://cfsjcode.github.io/CFSJ_TECH/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-cyan-400 transition-colors" aria-label="Site CFSJ TECH">
+                                        <i class="fas fa-globe text-xl"></i>
+                                    </a>
+                                    <a href="http://lattes.cnpq.br/9581278395342699" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-cyan-400 transition-colors" aria-label="Currículo Lattes de Cláudio Francisco">
+                                        <i class="fas fa-graduation-cap text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-3xl text-white mb-6">Tecnologia</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <i class="fas fa-check text-orange-400"></i>
+                                <span>Frontend: HTML5, Tailwind CSS, Vanilla JavaScript</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <i class="fas fa-check text-orange-400"></i>
+                                <span>Backend: JSON Server (API simulada)</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <i class="fas fa-check text-orange-400"></i>
+                                <span>Design System: Componentes Glass Morphism</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <i class="fas fa-check text-orange-400"></i>
+                                <span>Responsivo: Mobile-first, Desktop-optimized</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÚBLICO-ALVO -->
+        <section class="py-20 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-purple-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                        <i class="fas fa-users-rays"></i>
+                        Público
+                    </span>
+                    <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">Quem usa o HUB Da Robótica?</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-blue-500/20 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-graduation-cap text-blue-400 text-4xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-white mb-3">Estudantes</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Participantes de competições FIRST, exploradores de projetos e aprendizes em robótica educacional.</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-emerald-500/20 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-award text-emerald-400 text-4xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-white mb-3">Equipes</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">FLL, FTC e FRC buscando visibilidade, parcerias e compartilhamento de conhecimento técnico.</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-orange-500/20 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-microscope text-orange-400 text-4xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-white mb-3">Pesquisadores</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Docentes e pesquisadores de extensão em robótica, eletrônica e sistemas embarcados.</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-cyan-500/20 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-building text-cyan-400 text-4xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl text-white mb-3">Instituições</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Universidades, escolas e centros de inovação impulsionando a robótica brasileira.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FUNCIONALIDADES -->
+        <section id="features" class="py-20 lg:py-28 bg-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-cyan-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                        <i class="fas fa-sparkles"></i>
+                        Capacidades
+                    </span>
+                    <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">Funcionalidades Principais</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                            <i class="fas fa-compass icon-feature text-orange-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">Radar de Competições</h3>
+                            <p class="text-slate-300 leading-relaxed">Calendário centralizado de todas as competições de robótica brasileiras com filtros, detalhes técnicos e inscrições diretas.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center">
+                            <i class="fas fa-screwdriver-wrench icon-feature text-cyan-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">Garagem de Projetos</h3>
+                            <p class="text-slate-300 leading-relaxed">Repositório de projetos de robótica com documentação técnica, código-fonte, vídeos e componentes usados.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center">
+                            <i class="fas fa-users-gear icon-feature text-purple-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">Equipes do Brasil</h3>
+                            <p class="text-slate-300 leading-relaxed">Diretório de equipes, perfis profissionais, histórico competitivo e networking entre times nacionais.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-green-500/20 flex items-center justify-center">
+                            <i class="fas fa-star icon-feature text-green-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">Favoritos & Perfil</h3>
+                            <p class="text-slate-300 leading-relaxed">Sistema de usuário autenticado com histórico de favoritos, preferências personalizadas e recomendações.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-red-500/20 flex items-center justify-center">
+                            <i class="fas fa-chart-line icon-feature text-red-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">Métricas & Analytics</h3>
+                            <p class="text-slate-300 leading-relaxed">Dashboards de análise sobre tendências de competições, participação de equipes e crescimento do ecossistema.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 flex gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-2xl bg-indigo-500/20 flex items-center justify-center">
+                            <i class="fas fa-cogs icon-feature text-indigo-400 text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-white mb-2">CRUD Administrativo</h3>
+                            <p class="text-slate-300 leading-relaxed">Painel de administração para inserir, editar e remover competições, projetos e equipes na plataforma.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MISSÃO, VISÃO E VALORES -->
+        <section id="mission" class="py-20 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-3 gap-8 mb-20">
+                    <!-- MISSÃO -->
+                    <div class="card-glass rounded-3xl p-10 relative overflow-hidden">
+                        <div class="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-orange-500/10 blur-3xl"></div>
+                        <div class="relative">
+                            <div class="w-16 h-16 rounded-2xl bg-orange-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-bullseye text-orange-400 text-3xl"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl text-white mb-4">Missão</h3>
+                            <p class="text-slate-300 leading-relaxed text-lg">
+                                Conectar, visibilizar e fortalecer o ecossistema brasileiro de robótica através de uma plataforma integrada que centraliza oportunidades de aprendizado, competição, inovação e colaboração entre estudantes, equipes, pesquisadores e instituições.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- VISÃO -->
+                    <div class="card-glass rounded-3xl p-10 relative overflow-hidden">
+                        <div class="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-cyan-500/10 blur-3xl"></div>
+                        <div class="relative">
+                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-eye text-cyan-400 text-3xl"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl text-white mb-4">Visão</h3>
+                            <p class="text-slate-300 leading-relaxed text-lg">
+                                Ser a plataforma de referência nacional que impulsiona a robótica brasileira como ferramenta estratégica de educação STEM, inovação tecnológica e desenvolvimento de talentos capazes de enfrentar desafios globais.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- OBJETIVOS -->
+                    <div class="card-glass rounded-3xl p-10 relative overflow-hidden">
+                        <div class="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-green-500/10 blur-3xl"></div>
+                        <div class="relative">
+                            <div class="w-16 h-16 rounded-2xl bg-green-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-rocket text-green-400 text-3xl"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl text-white mb-4">Objetivos</h3>
+                            <ul class="space-y-3 text-slate-300 text-sm">
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-orange-400 mt-1 shrink-0"></i>
+                                    <span>Centralizar informações sobre competições e projetos</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-orange-400 mt-1 shrink-0"></i>
+                                    <span>Facilitar networking entre equipes e instituições</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-orange-400 mt-1 shrink-0"></i>
+                                    <span>Apoiar pesquisa e documentação técnica</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-orange-400 mt-1 shrink-0"></i>
+                                    <span>Promover transparência e análise de dados</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VALORES -->
+                <div id="values" class="mt-20">
+                    <div class="text-center mb-16">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-purple-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                            <i class="fas fa-heart"></i>
+                            Princípios
+                        </span>
+                        <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">Nossos Valores</h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Inovação -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-lightbulb text-blue-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Inovação</h4>
+                            <p class="text-slate-300 leading-relaxed">Fomentamos a criatividade e o desenvolvimento de soluções tecnológicas que impulsionam a robótica brasileira.</p>
+                        </div>
+
+                        <!-- Colaboração -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-handshake text-emerald-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Colaboração</h4>
+                            <p class="text-slate-300 leading-relaxed">Conectamos equipes, conhecimentos e recursos para multiplicar o potencial coletivo do ecossistema.</p>
+                        </div>
+
+                        <!-- Transparência -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-eye text-cyan-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Transparência</h4>
+                            <p class="text-slate-300 leading-relaxed">Dados abertos, comunicação clara e acesso democrático às informações do ecossistema de robótica.</p>
+                        </div>
+
+                        <!-- Excelência -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-orange-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-crown text-orange-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Excelência</h4>
+                            <p class="text-slate-300 leading-relaxed">Comprometidos com qualidade, rigor técnico e continuous improvement em tudo que desenvolvemos.</p>
+                        </div>
+
+                        <!-- Acessibilidade -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-universal-access text-purple-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Acessibilidade</h4>
+                            <p class="text-slate-300 leading-relaxed">Garantimos que todos, independentemente de origem ou recursos, possam acessar e participar.</p>
+                        </div>
+
+                        <!-- Impacto Social -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-globe text-green-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Impacto Social</h4>
+                            <p class="text-slate-300 leading-relaxed">Robótica como ferramenta de transformação social, desenvolvimento educacional e inovação inclusiva.</p>
+                        </div>
+
+                        <!-- Sustentabilidade -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-red-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-leaf text-red-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Sustentabilidade</h4>
+                            <p class="text-slate-300 leading-relaxed">Práticas responsáveis que equilibram inovação com respeito ao meio ambiente e recursos futuros.</p>
+                        </div>
+
+                        <!-- Comunidade -->
+                        <div class="card-glass rounded-2xl p-8">
+                            <div class="w-14 h-14 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-6">
+                                <i class="fas fa-people-group text-indigo-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-serif text-xl text-white mb-3">Comunidade</h4>
+                            <p class="text-slate-300 leading-relaxed">Valorizamos cada membro, de iniciantes a especialistas, construindo juntos um movimento forte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARQUITETURA E ROADMAP -->
+        <section class="py-20 lg:py-28 bg-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-indigo-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] mb-6">
+                        <i class="fas fa-diagram-project"></i>
+                        Arquitetura
+                    </span>
+                    <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">Arquitetura Tecnológica</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-glass rounded-2xl p-8">
+                        <h3 class="font-serif text-2xl text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-code text-cyan-400"></i>
+                            Interface
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>HTML5 Semântico</strong> - Estrutura acessível e otimizada para SEO</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>Tailwind CSS</strong> - Sistema de design responsivo com tokens de cor</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>Vanilla JavaScript</strong> - Sem dependências, com máximo desempenho</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>Chart.js</strong> - Visualização de métricas e análises</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>FontAwesome 6.4+</strong> - Ícones e pictogramas</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8">
+                        <h3 class="font-serif text-2xl text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-server text-orange-400"></i>
+                            Dados e API
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>JSON Server</strong> - API RESTful simulada com persistência</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>Local Storage</strong> - Autenticação e estado do usuário</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>REST API</strong> - Endpoints CRUD padrão</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>JSON Schema</strong> - Validação de dados estruturados</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="text-orange-400 font-bold">•</span>
+                                <span><strong>Imagens Base64</strong> - Imagens embarcadas no JSON</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTATÍSTICAS -->
+        <section class="py-20 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="font-serif text-5xl text-orange-400 font-bold mb-2">8+</div>
+                        <p class="text-slate-300">Seções & Páginas</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="font-serif text-5xl text-cyan-400 font-bold mb-2">100%</div>
+                        <p class="text-slate-300">Responsivo (Mobile)</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="font-serif text-5xl text-green-400 font-bold mb-2">∞</div>
+                        <p class="text-slate-300">Escalabilidade</p>
+                    </div>
+
+                    <div class="card-glass rounded-2xl p-8 text-center">
+                        <div class="font-serif text-5xl text-purple-400 font-bold mb-2">0ms</div>
+                        <p class="text-slate-300">Load Time (Estático)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="py-20 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="dark-cta-panel rounded-[2.5rem] p-12 md:p-16 text-center relative overflow-hidden">
+                    <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl"></div>
+                    <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl"></div>
+                    <div class="relative">
+                        <i class="fas fa-rocket text-6xl text-orange-400 mb-8 block"></i>
+                        <h2 class="font-serif text-5xl md:text-6xl text-white mb-6">Pronto para explorar?</h2>
+                        <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                            Faça parte do maior ecossistema de robótica do Brasil. Conecte-se com equipes, descubra projetos inovadores e amplie seus horizontes tecnológicos.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="RadarDeCompeticoes.html" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-3">
+                                <i class="fas fa-compass"></i>
+                                Explorar Agora
+                            </a>
+                            <a href="Contatos.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-3 hover:bg-white/10 transition-colors">
+                                <i class="fas fa-envelope"></i>
+                                Entre em Contato
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-[#040a0f] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-10 h-10 rounded-full border border-white/10">
+                        <div>
+                            <h3 class="font-serif text-lg text-white leading-tight">HUB Da Robótica</h3>
+                            <p class="text-[0.6rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Ecossistema Nacional</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">Conectando o ecossistema brasileiro de robótica</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">Navegação</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">Sobre</a></li>
+                        <li><a href="#features" class="hover:text-white transition-colors">Funcionalidades</a></li>
+                        <li><a href="#mission" class="hover:text-white transition-colors">Missão</a></li>
+                        <li><a href="#values" class="hover:text-white transition-colors">Valores</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">Plataforma</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="RadarDeCompeticoes.html" class="hover:text-white transition-colors">Competições</a></li>
+                        <li><a href="Garagem_De_Projetos.html" class="hover:text-white transition-colors">Projetos</a></li>
+                        <li><a href="EquipesBrasil.html" class="hover:text-white transition-colors">Equipes</a></li>
+                        <li><a href="Contatos.html" class="hover:text-white transition-colors">Contatos</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">Acesso</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="login.html" class="hover:text-white transition-colors">Entrar</a></li>
+                        <li><a href="cadastro_itens.html" class="hover:text-white transition-colors">Cadastro de Itens</a></li>
+                        <li><a href="RadarDeCompeticoes.html#favorites" class="hover:text-white transition-colors">Favoritos</a></li>
+                        <li><a href="RadarDeCompeticoes.html#rules" class="hover:text-white transition-colors">Regulamentos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-400">
+                <span>&copy; 2026 HUB Da Robótica. Todos os direitos reservados.</span>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                    <a href="#" class="hover:text-white transition-colors">Licença</a>
+                </div>
+                <span>Versão 2.0.0 - Página Inicial</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu móvel
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        if (mobileMenuBtn) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuIcon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+                mobileMenu?.classList.toggle('hidden', isExpanded);
+                mobileMenuIcon?.classList.toggle('fa-bars', isExpanded);
+                mobileMenuIcon?.classList.toggle('fa-xmark', !isExpanded);
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenu?.classList.add('hidden');
+                    mobileMenuIcon?.classList.add('fa-bars');
+                    mobileMenuIcon?.classList.remove('fa-xmark');
+                });
+            });
+        }
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-glass, .dark-cta-panel').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
