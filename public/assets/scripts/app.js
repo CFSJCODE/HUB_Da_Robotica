@@ -1,5 +1,52 @@
 (function () {
     const STORAGE_KEY = 'hub-theme';
+    const RADAR_STORAGE_KEYS = ['hub_robotica_radar_db_v1', 'hub_robotica_radar_db_v2'];
+    const RADAR_PRIMARY_EVENT_ID = '5';
+    const RADAR_SEED_DB = {
+        usuarios: [
+            { id: '1', login: 'admin', senha: '123', nome: 'Cláudio (Admin)', email: 'admin@puc.br', admin: true, favoritos: [] },
+            { id: '2', login: 'user', senha: '123', nome: 'Usuário comum', email: 'user@puc.br', admin: false, favoritos: [] }
+        ],
+        eventos: [
+            { id: '1', nome: 'Festival SESI de Robótica', tipo: 'Educacional', descricao: 'O maior evento educacional do país. FLL, FTC, FRC e alto impacto tecnológico.', conteudo: 'O Festival SESI é o ponto de encontro nacional para jovens construtores e engenheiros. O evento promove a ciência e a tecnologia por meio de competições emocionantes, estimulando o raciocínio lógico e o trabalho em equipe.', local: 'Pavilhão da Bienal, Ibirapuera - SP', data: 'Março 2026', organizador: 'Rede SESI Brasil', destaque: false, imagemPrincipal: 'https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?auto=format&fit=crop&w=1200&q=80' },
+            { id: '2', nome: 'IRONCup Inatel', tipo: 'Combate', descricao: 'A elite do combate e sistemas autônomos. De Sumô 3kg até batalhas de Beetles.', conteudo: 'A IRONCup reúne equipes universitárias em desafios de engenharia mecânica e de software de alto nível. Inclui sumô de robôs, seguidor de linha pro e a clássica arena de combate fechada.', local: 'Campus Inatel - Santa Rita do Sapucaí, MG', data: 'Março 2026', organizador: 'Inatel & RoboCore', destaque: false, imagemPrincipal: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80' },
+            { id: '3', nome: 'Olimpíada Bras. de Robótica', tipo: 'Autônomo', descricao: 'Desafios de navegação autônoma, visão computacional e algoritmos de resgate.', conteudo: 'Na prática, microcontroladores como ESP32 e ARM são levados ao limite em robôs autônomos que devem navegar por terrenos acidentados, desviar de obstáculos e identificar/resgatar vítimas.', local: 'Etapa Nacional', data: 'Outubro 2026', organizador: 'Conselho Superior OBR', destaque: false, imagemPrincipal: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80' },
+            { id: '4', nome: 'RoboCore Experience (RCX)', tipo: 'Combate', descricao: 'Pura engenharia mecânica. Combate peso-pesado, Trekker e Hockey.', conteudo: 'A RCX é o ápice do combate robótico na América Latina. Exige cálculos insanos de torque e energia cinética, chegando a armas giratórias em máquinas de 113kg.', local: 'Campus Party Brasil', data: 'Julho 2026', organizador: 'RoboCore', destaque: false, imagemPrincipal: 'https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=1200&q=80' },
+            { id: '5', nome: 'Robótica 2026 (RoboCup Brasil)', tipo: 'Multi-modalidade', descricao: 'Maior evento da área na América Latina, reunindo a Competição Brasileira de Robótica, a Mostra Nacional de Robótica e a Olimpíada Brasileira de Robótica (OBR).', conteudo: 'Um megaevento que concentra as três maiores competições de robótica do Brasil em um único espaço. Reúne equipes de todas as regiões do país para disputas de alto nível, showcases de inovação e palestras com líderes da área.', local: 'Centro de Convenções de João Pessoa (PB)', data: '23 a 29 de novembro', organizador: 'OBR, CBR & Prefeitura de João Pessoa', destaque: true, imagemPrincipal: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80' },
+            { id: '6', nome: 'Feira de Robótica Cognitiva e IA', tipo: 'Inovação', descricao: 'Focada em inovações multidisciplinares da robótica cognitiva, integrando software, mineração de processos e IA.', conteudo: 'Um espaço dedicado ao futuro da robótica inteligente. Apresentações de pesquisas de ponta em machine learning, processamento de linguagem natural e sistemas autônomos. Networking entre pesquisadores, startups e empresas de tecnologia.', local: 'Ágora Tech Park, Joinville (SC)', data: '18 a 20 de junho', organizador: 'TechFair Brasil & ACIJ', destaque: false, imagemPrincipal: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80' }
+        ]
+    };
+
+    function normalizeRadarHighlights(db) {
+        if (!db || !Array.isArray(db.eventos)) return RADAR_SEED_DB;
+        return {
+            ...db,
+            eventos: db.eventos.map((event) => ({
+                ...event,
+                destaque: String(event.id) === RADAR_PRIMARY_EVENT_ID
+            }))
+        };
+    }
+
+    function syncRadarFallbackDb() {
+        try {
+            let baseDb = null;
+            for (const key of RADAR_STORAGE_KEYS) {
+                const stored = localStorage.getItem(key);
+                if (stored) {
+                    baseDb = normalizeRadarHighlights(JSON.parse(stored));
+                    break;
+                }
+            }
+
+            const normalizedDb = normalizeRadarHighlights(baseDb || RADAR_SEED_DB);
+            RADAR_STORAGE_KEYS.forEach((key) => {
+                localStorage.setItem(key, JSON.stringify(normalizedDb));
+            });
+        } catch (error) {
+            // Sem localStorage, o Radar continua usando a base embutida da página.
+        }
+    }
 
     function getStoredTheme() {
         try {
@@ -46,6 +93,7 @@
         }
     };
 
+    syncRadarFallbackDb();
     applyTheme(getStoredTheme());
 
     document.addEventListener('DOMContentLoaded', function () {
