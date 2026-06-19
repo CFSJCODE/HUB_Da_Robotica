@@ -257,3 +257,80 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
 html[data-theme="light"] ::-webkit-scrollbar-corner {
     background: #f8fafc;
 }
+
+/* Mantem o menu principal visivel no Radar em desktops com escala/zoom alto. */
+@media (min-width: 1181px) and (max-width: 1535px) {
+    .radar-main-nav {
+        overflow: visible !important;
+    }
+
+    .radar-header-shell > .flex {
+        height: auto !important;
+        min-height: 6.25rem !important;
+        align-items: center !important;
+    }
+
+    .radar-brand {
+        flex-basis: 15.5rem !important;
+        min-width: 15.5rem !important;
+    }
+
+    .radar-brand-title {
+        font-size: 1.05rem !important;
+    }
+
+    .radar-brand-subtitle {
+        font-size: 0.58rem !important;
+        letter-spacing: 0.28em !important;
+    }
+
+    .radar-main-nav > div {
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+        row-gap: 0.45rem !important;
+        column-gap: 0.75rem !important;
+    }
+
+    .radar-main-nav .radar-external-nav {
+        display: flex !important;
+        order: 1 !important;
+        width: 100% !important;
+        justify-content: flex-end !important;
+        gap: 0.8rem !important;
+    }
+
+    .radar-main-nav .radar-nav-separator {
+        display: none !important;
+    }
+
+    #nav-menu {
+        order: 2 !important;
+        justify-content: flex-end !important;
+        gap: 0.65rem !important;
+    }
+
+    .glass-nav nav a,
+    #nav-auth-btn button {
+        font-size: 0.78rem !important;
+    }
+
+    #theme-toggle {
+        padding: 0.4rem 0.65rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    #nav-auth-btn > div {
+        gap: 0.65rem !important;
+        padding-left: 0.75rem !important;
+        margin-left: 0 !important;
+    }
+
+    #nav-auth-btn button {
+        padding-left: 0.9rem !important;
+        padding-right: 0.9rem !important;
+    }
+
+    #app-content {
+        padding-top: 6.25rem !important;
+    }
+}
