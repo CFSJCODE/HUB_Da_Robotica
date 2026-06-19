@@ -34,11 +34,17 @@ O projeto foi desenvolvido como uma plataforma de interface web para apresentar 
 ## Arquitetura Geral
 
 ```mermaid
-flowchart LR
-    A["Usuário no navegador"] --> B["GitHub Pages / public"]
-    B --> C["RadarDeCompeticoes.html"]
-    C --> D["API JSON Server"]
-    D --> E["db/db.json"]
+flowchart TD
+    A["Usuário no navegador"]
+    B["Front-end estático<br/>GitHub Pages / public"]
+    C["Radar de Competições<br/>RadarDeCompeticoes.html"]
+    D["API REST<br/>JSON Server"]
+    E["Banco JSON<br/>db/db.json"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
 ```
 
 O front-end fica em `public/` e pode ser publicado como site estático. Os dados ficam em `db/db.json` e são expostos pela API REST do JSON Server em ambiente local ou em um serviço externo compatível com Node.js.
