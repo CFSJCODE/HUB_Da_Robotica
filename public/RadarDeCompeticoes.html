@@ -920,7 +920,7 @@
     <script>
         const API_URL = window.HUB_ROBOTICA_CONFIG?.API_URL || "http://localhost:3000";
         const USE_JSON_SERVER = window.HUB_ROBOTICA_CONFIG?.USE_JSON_SERVER !== false;
-        const FALLBACK_STORAGE_KEY = 'hub_robotica_radar_db_v1';
+        const FALLBACK_STORAGE_KEY = 'hub_robotica_radar_db_v2';
         const fallbackData = {
             usuarios: [
                 {
@@ -952,7 +952,7 @@
                     local: "Pavilhão da Bienal, Ibirapuera - SP",
                     data: "Março 2026",
                     organizador: "Rede SESI Brasil",
-                    destaque: true,
+                    destaque: false,
                     imagemPrincipal: "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?auto=format&fit=crop&w=1200&q=80"
                 },
                 {
@@ -964,7 +964,7 @@
                     local: "Campus Inatel - Santa Rita do Sapucaí, MG",
                     data: "Março 2026",
                     organizador: "Inatel & RoboCore",
-                    destaque: true,
+                    destaque: false,
                     imagemPrincipal: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80"
                 },
                 {
@@ -988,7 +988,7 @@
                     local: "Campus Party Brasil",
                     data: "Julho 2026",
                     organizador: "RoboCore",
-                    destaque: true,
+                    destaque: false,
                     imagemPrincipal: "https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=1200&q=80"
                 },
                 {
@@ -1366,6 +1366,7 @@
                 // 1. Lógica do Carrossel Vanilla JS
                 const destaques = eventos.filter(e => e.destaque);
                 this.carouselItems = destaques;
+                if (this.currentSlide >= this.carouselItems.length) this.currentSlide = 0;
                 this.renderCarousel();
 
                 // 2. Renderização Otimizada dos Cards (Tailwind classes)
