@@ -1,5 +1,6 @@
 (function () {
     window.HUB_ROBOTICA_CONFIG = {
-        API_URL: 'http://localhost:3000'
+        API_URL: 'http://localhost:3000',
+        USE_JSON_SERVER: true
     };
 })();

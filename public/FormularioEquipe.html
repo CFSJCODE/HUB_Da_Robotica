@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Informações da Equipe | HUB Da Robótica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    colors: { academic: { blue: '#1b4b6b', deep: '#0f2d40', gold: '#f18821', gold_hover: '#d8761a' } },
+                    boxShadow: { gold: '0 20px 60px rgba(241,136,33,.25)', soft: '0 10px 40px rgba(0,0,0,.15)' }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/scripts/app.js"></script>
+    <style>
+        body {
+            background-color: #07131d;
+            background-image:
+                radial-gradient(circle at 16% 12%, rgba(34, 211, 238, 0.12), transparent 30rem),
+                radial-gradient(circle at 86% 20%, rgba(241, 136, 33, 0.13), transparent 30rem),
+                radial-gradient(circle at 48% 86%, rgba(27, 75, 107, 0.34), transparent 36rem);
+            color: #cbd5e1;
+            font-family: Inter, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-serif { font-family: Merriweather, serif; }
+
+        .glass-nav {
+            background: rgba(15, 45, 64, 0.95);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(14px);
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .form-shell,
+        .form-section,
+        .info-card {
+            background: rgba(15, 45, 64, 0.42);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 24px 56px -28px rgba(34, 211, 238, 0.34);
+            backdrop-filter: blur(18px);
+        }
+
+        .form-section-title {
+            color: #ffffff;
+            font-family: Merriweather, serif;
+        }
+
+        .field-label {
+            display: block;
+            color: #dbeafe;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .field-label span {
+            color: #fb923c;
+        }
+
+        .form-control {
+            width: 100%;
+            border-radius: 1rem;
+            border: 1px solid rgba(34, 211, 238, 0.20);
+            background: rgba(2, 6, 23, 0.45);
+            color: #f8fafc;
+            padding: 0.9rem 1rem;
+            outline: none;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .form-control:focus {
+            border-color: rgba(241, 136, 33, 0.85);
+            box-shadow: 0 0 0 4px rgba(241, 136, 33, 0.12);
+            background: rgba(2, 6, 23, 0.62);
+        }
+
+        .form-control::placeholder {
+            color: #64748b;
+        }
+
+        .file-control {
+            cursor: pointer;
+            color: #cbd5e1;
+        }
+
+        .file-control::file-selector-button {
+            border: 0;
+            border-radius: 0.75rem;
+            background: #f18821;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 0.7rem 1rem;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .hint {
+            color: #94a3b8;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            margin-top: 0.55rem;
+        }
+
+        .status-panel {
+            display: none;
+        }
+
+        .status-panel.is-visible {
+            display: flex;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="min-h-screen">
+    <header class="fixed top-0 z-50 w-full glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between gap-6">
+                <a href="index.html#home" class="flex items-center gap-3">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-12 h-12 rounded-full border border-white/10">
+                    <div>
+                        <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Formulário</p>
+                    </div>
+                </a>
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+                    <a href="index.html#home" class="text-white/80 hover:text-white transition-colors">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="text-white/80 hover:text-white transition-colors">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="text-white/80 hover:text-white transition-colors">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="text-white/80 hover:text-white transition-colors">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="text-white/80 hover:text-white transition-colors">Contatos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative overflow-hidden py-16 lg:py-24">
+            <div class="absolute inset-0 bg-pattern opacity-30"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-[0.82fr_1.18fr] gap-10 items-start">
+                    <aside class="lg:sticky lg:top-28">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-orange-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em]">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Divulgação pública
+                        </span>
+                        <h2 class="font-serif text-4xl md:text-6xl text-white leading-tight mt-7">Enviar informações da equipe</h2>
+                        <p class="text-slate-300 text-lg leading-relaxed mt-6">
+                            Preencha os dados oficiais para atualizar ou cadastrar uma equipe no HUB Da Robótica. O envio será encaminhado por e-mail via FormSubmit para análise editorial.
+                        </p>
+
+                        <div class="info-card rounded-3xl p-6 mt-8">
+                            <h3 class="font-serif text-xl text-white mb-4">O que será solicitado</h3>
+                            <ul class="space-y-3 text-slate-300 text-sm leading-relaxed">
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Logotipo oficial por arquivo ou link.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Fotos, conquistas, histórico e destaques públicos.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Integrantes, mentores e links oficiais.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Autorização para uso das informações no site.</span></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <section class="form-shell rounded-[2rem] p-5 sm:p-8">
+                        <div id="success-panel" class="status-panel items-start gap-4 rounded-2xl border border-green-400/30 bg-green-500/10 p-5 mb-6">
+                            <i class="fa-solid fa-circle-check text-green-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-white font-bold">Informações enviadas</h3>
+                                <p class="text-slate-300 text-sm mt-1">Recebemos a solicitação. O conteúdo será revisado antes de entrar na página pública.</p>
+                            </div>
+                        </div>
+
+                        <div id="error-panel" class="status-panel items-start gap-4 rounded-2xl border border-red-400/30 bg-red-500/10 p-5 mb-6">
+                            <i class="fa-solid fa-triangle-exclamation text-red-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-white font-bold">Revise os campos obrigatórios</h3>
+                                <p id="error-message" class="text-slate-300 text-sm mt-1">Há informações obrigatórias pendentes.</p>
+                            </div>
+                        </div>
+
+                        <form id="team-form" action="https://formsubmit.co/claudiofranciscojunior2006@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-8" novalidate>
+                            <input type="hidden" name="_subject" value="Nova solicitação de perfil de equipe - HUB Da Robótica">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" id="form-next-url" value="https://cfsjcode.github.io/HUB_Da_Robotica/FormularioEquipe.html?enviado=1">
+                            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-orange-500/15 text-orange-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-user-check"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Responsável pelo envio</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Dados usados apenas para contato editorial.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Nome completo <span>*</span></span>
+                                        <input class="form-control" type="text" name="responsavel_nome" id="responsavel_nome" placeholder="Seu nome completo" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">E-mail <span>*</span></span>
+                                        <input class="form-control" type="email" name="email" id="email" placeholder="email@exemplo.com" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Telefone ou WhatsApp</span>
+                                        <input class="form-control" type="tel" name="responsavel_telefone" placeholder="(31) 99999-9999">
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Vínculo com a equipe <span>*</span></span>
+                                        <select class="form-control" name="responsavel_vinculo" id="responsavel_vinculo" required>
+                                            <option value="">Selecione</option>
+                                            <option>Integrante</option>
+                                            <option>Mentor(a)</option>
+                                            <option>Professor(a)</option>
+                                            <option>Responsável institucional</option>
+                                            <option>Ex-integrante</option>
+                                            <option>Outro</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-cyan-500/15 text-cyan-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-people-group"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Identificação da equipe</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Use a grafia oficial da equipe.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Nome da equipe <span>*</span></span>
+                                        <input class="form-control" type="text" name="equipe_nome" id="equipe_nome" placeholder="Ex.: Pacce Scuderia" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Modalidade/categoria <span>*</span></span>
+                                        <select class="form-control" name="equipe_modalidade" id="equipe_modalidade" required>
+                                            <option value="">Selecione</option>
+                                            <option>FIRST LEGO League</option>
+                                            <option>F1 in Schools / STEM Racing</option>
+                                            <option>FTC</option>
+                                            <option>FRC</option>
+                                            <option>OBR</option>
+                                            <option>Combate</option>
+                                            <option>Projeto de robótica</option>
+                                            <option>Outra</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Instituição associada <span>*</span></span>
+                                        <input class="form-control" type="text" name="instituicao" id="instituicao" placeholder="Escola, universidade, ONG ou laboratório" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Cidade e estado <span>*</span></span>
+                                        <input class="form-control" type="text" name="cidade_estado" id="cidade_estado" placeholder="Belo Horizonte, MG" required>
+                                    </label>
+                                    <label class="md:col-span-2">
+                                        <span class="field-label">Descrição curta <span>*</span></span>
+                                        <textarea class="form-control min-h-28" name="descricao_curta" id="descricao_curta" placeholder="Resumo de 2 a 4 linhas sobre a equipe, foco técnico e identidade." required></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-orange-500/15 text-orange-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-image"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Logotipo e fotos</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Envie arquivos leves ou links públicos para Drive, Instagram, site oficial ou repositório.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Arquivo do logotipo</span>
+                                        <input class="form-control file-control" type="file" name="logotipo_arquivo" id="logotipo_arquivo" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+                                        <p class="hint">PNG, JPG, WEBP ou SVG. Se preferir, informe o link ao lado.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Link do logotipo</span>
+                                        <input class="form-control" type="url" name="logotipo_link" id="logotipo_link" placeholder="https://...">
+                                        <p class="hint">Obrigatório se não anexar arquivo de logotipo.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Fotos da equipe/projetos</span>
+                                        <input class="form-control file-control" type="file" name="fotos_arquivos" id="fotos_arquivos" accept="image/png,image/jpeg,image/webp" multiple>
+                                        <p class="hint">Selecione uma ou mais imagens. Evite arquivos muito pesados.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Links das fotos</span>
+                                        <textarea class="form-control min-h-28" name="fotos_links" id="fotos_links" placeholder="Cole um link por linha."></textarea>
+                                        <p class="hint">Obrigatório se não anexar fotos.</p>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-green-500/15 text-green-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-trophy"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Histórico e conquistas</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Inclua somente informações que podem ser divulgadas publicamente.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid gap-5">
+                                    <label>
+                                        <span class="field-label">Principais conquistas <span>*</span></span>
+                                        <textarea class="form-control min-h-32" name="conquistas" id="conquistas" placeholder="Ex.: 3º lugar no Regional MG 2024; classificação para etapa nacional; prêmios técnicos; temporadas." required></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Histórico e trajetória</span>
+                                        <textarea class="form-control min-h-32" name="historico" placeholder="Conte a origem da equipe, temporadas, desafios, evolução técnica e próximos objetivos."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Projetos, robôs ou protótipos</span>
+                                        <textarea class="form-control min-h-28" name="projetos" placeholder="Descreva carros, robôs, tecnologias, sensores, softwares, materiais ou diferenciais técnicos."></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-purple-500/15 text-purple-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-id-card-clip"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Integrantes e links oficiais</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Envie nomes públicos e canais oficiais da equipe.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid gap-5">
+                                    <label>
+                                        <span class="field-label">Integrantes e funções <span>*</span></span>
+                                        <textarea class="form-control min-h-32" name="integrantes" id="integrantes" placeholder="Ex.: Nome - função. Inclua apenas pessoas autorizadas para divulgação." required></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Mentores, professores ou orientadores</span>
+                                        <textarea class="form-control min-h-24" name="mentores" placeholder="Nome - função/instituição."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Links oficiais <span>*</span></span>
+                                        <textarea class="form-control min-h-32" name="links_oficiais" id="links_oficiais" placeholder="Instagram, site, LinkedIn, GitHub, Linktree, páginas institucionais ou notícias. Cole um link por linha." required></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Observações editoriais</span>
+                                        <textarea class="form-control min-h-24" name="observacoes" placeholder="Preferências de texto, correções, restrições de imagem ou informações que não devem ser publicadas."></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <label class="flex items-start gap-4">
+                                    <input type="checkbox" name="autorizacao_divulgacao" id="autorizacao_divulgacao" value="Autorizo o uso das informações enviadas para divulgação pública no HUB Da Robótica." class="mt-1 h-5 w-5 accent-orange-500" required>
+                                    <span class="text-slate-300 leading-relaxed">
+                                        <strong class="text-white">Autorização obrigatória:</strong>
+                                        confirmo que tenho autorização para enviar estas informações e permito que o HUB Da Robótica use os dados, links, imagens e textos enviados para preparar a página pública da equipe.
+                                    </span>
+                                </label>
+                            </section>
+
+                            <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+                                <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">
+                                    Campos com <span class="text-orange-400 font-bold">*</span> são obrigatórios. O primeiro envio pelo FormSubmit pode solicitar confirmação do e-mail destinatário.
+                                </p>
+                                <button id="submit-button" type="submit" class="inline-flex items-center justify-center gap-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-colors shadow-gold">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Enviar informações
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-[#040a0f] py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-400">
+            <span>&copy; 2026 HUB Da Robótica</span>
+            <span>Formulário de Equipes</span>
+            <span>FormSubmit</span>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('team-form');
+        const errorPanel = document.getElementById('error-panel');
+        const errorMessage = document.getElementById('error-message');
+        const successPanel = document.getElementById('success-panel');
+        const submitButton = document.getElementById('submit-button');
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get('enviado') === '1') {
+            successPanel.classList.add('is-visible');
+        }
+
+        if (params.has('equipe')) {
+            document.getElementById('equipe_nome').value = params.get('equipe');
+        }
+
+        const nextUrl = document.getElementById('form-next-url');
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            nextUrl.value = `${window.location.origin}${window.location.pathname}?enviado=1`;
+        }
+
+        function showError(message, target) {
+            errorMessage.textContent = message;
+            errorPanel.classList.add('is-visible');
+            successPanel.classList.remove('is-visible');
+            if (target) target.focus({ preventScroll: true });
+            errorPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        form.addEventListener('submit', (event) => {
+            errorPanel.classList.remove('is-visible');
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                const firstInvalid = form.querySelector(':invalid');
+                showError('Preencha todos os campos obrigatórios marcados com asterisco.', firstInvalid);
+                return;
+            }
+
+            const hasLogo = document.getElementById('logotipo_arquivo').files.length > 0 || document.getElementById('logotipo_link').value.trim();
+            if (!hasLogo) {
+                event.preventDefault();
+                showError('Envie o logotipo por arquivo ou informe um link público do logotipo.', document.getElementById('logotipo_link'));
+                return;
+            }
+
+            const hasPhotos = document.getElementById('fotos_arquivos').files.length > 0 || document.getElementById('fotos_links').value.trim();
+            if (!hasPhotos) {
+                event.preventDefault();
+                showError('Envie pelo menos uma foto por arquivo ou informe links públicos das fotos.', document.getElementById('fotos_links'));
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-70', 'cursor-wait');
+            submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+        });
+    </script>
+</body>
+</html>

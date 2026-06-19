@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Proposta de Projeto | HUB Da Robótica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    colors: { academic: { blue: '#1b4b6b', deep: '#0f2d40', gold: '#f18821', gold_hover: '#d8761a' } },
+                    boxShadow: { gold: '0 20px 60px rgba(241,136,33,.25)', soft: '0 10px 40px rgba(0,0,0,.15)' }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/scripts/app.js"></script>
+    <style>
+        body {
+            background-color: #07131d;
+            background-image:
+                radial-gradient(circle at 16% 12%, rgba(34, 211, 238, 0.12), transparent 30rem),
+                radial-gradient(circle at 86% 20%, rgba(241, 136, 33, 0.13), transparent 30rem),
+                radial-gradient(circle at 48% 86%, rgba(27, 75, 107, 0.34), transparent 36rem);
+            color: #cbd5e1;
+            font-family: Inter, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-serif { font-family: Merriweather, serif; }
+
+        .glass-nav {
+            background: rgba(15, 45, 64, 0.95);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(14px);
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .form-shell,
+        .form-section,
+        .info-card {
+            background: rgba(15, 45, 64, 0.42);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            box-shadow: 0 24px 56px -28px rgba(34, 211, 238, 0.34);
+            backdrop-filter: blur(18px);
+        }
+
+        .form-section-title {
+            color: #ffffff;
+            font-family: Merriweather, serif;
+        }
+
+        .field-label {
+            display: block;
+            color: #dbeafe;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .field-label span {
+            color: #fb923c;
+        }
+
+        .form-control {
+            width: 100%;
+            border-radius: 1rem;
+            border: 1px solid rgba(34, 211, 238, 0.20);
+            background: rgba(2, 6, 23, 0.45);
+            color: #f8fafc;
+            padding: 0.9rem 1rem;
+            outline: none;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .form-control:focus {
+            border-color: rgba(241, 136, 33, 0.85);
+            box-shadow: 0 0 0 4px rgba(241, 136, 33, 0.12);
+            background: rgba(2, 6, 23, 0.62);
+        }
+
+        .form-control::placeholder {
+            color: #64748b;
+        }
+
+        .file-control {
+            cursor: pointer;
+            color: #cbd5e1;
+        }
+
+        .file-control::file-selector-button {
+            border: 0;
+            border-radius: 0.75rem;
+            background: #f18821;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 0.7rem 1rem;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .hint {
+            color: #94a3b8;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            margin-top: 0.55rem;
+        }
+
+        .status-panel {
+            display: none;
+        }
+
+        .status-panel.is-visible {
+            display: flex;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="min-h-screen">
+    <header class="fixed top-0 z-50 w-full glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between gap-6">
+                <a href="index.html#home" class="flex items-center gap-3">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-12 h-12 rounded-full border border-white/10">
+                    <div>
+                        <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Projetos</p>
+                    </div>
+                </a>
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+                    <a href="index.html#home" class="text-white/80 hover:text-white transition-colors">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="text-orange-400 border-b-2 border-orange-400 pb-1">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="text-white/80 hover:text-white transition-colors">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="text-white/80 hover:text-white transition-colors">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="text-white/80 hover:text-white transition-colors">Contatos</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative overflow-hidden py-16 lg:py-24">
+            <div class="absolute inset-0 bg-pattern opacity-30"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-[0.82fr_1.18fr] gap-10 items-start">
+                    <aside class="lg:sticky lg:top-28">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-orange-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-[0.22em]">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            Garagem de Projetos
+                        </span>
+                        <h2 class="font-serif text-4xl md:text-6xl text-white leading-tight mt-7">Enviar proposta de projeto</h2>
+                        <p class="text-slate-300 text-lg leading-relaxed mt-6">
+                            Compartilhe protótipos, documentação, fotos, tecnologias usadas e aprendizados para publicar um projeto na Garagem do HUB Da Robótica.
+                        </p>
+
+                        <div class="info-card rounded-3xl p-6 mt-8">
+                            <h3 class="font-serif text-xl text-white mb-4">Prepare estes materiais</h3>
+                            <ul class="space-y-3 text-slate-300 text-sm leading-relaxed">
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Resumo, objetivo e estágio atual do projeto.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Fotos, vídeo, repositório ou documentação técnica.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Hardware, software, sensores, atuadores e tecnologias.</span></li>
+                                <li class="flex gap-3"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>Aprendizados, limitações e próximos passos.</span></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <section class="form-shell rounded-[2rem] p-5 sm:p-8">
+                        <div id="success-panel" class="status-panel items-start gap-4 rounded-2xl border border-green-400/30 bg-green-500/10 p-5 mb-6">
+                            <i class="fa-solid fa-circle-check text-green-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-white font-bold">Proposta enviada</h3>
+                                <p class="text-slate-300 text-sm mt-1">Recebemos o projeto. O conteúdo será revisado antes de entrar na Garagem.</p>
+                            </div>
+                        </div>
+
+                        <div id="error-panel" class="status-panel items-start gap-4 rounded-2xl border border-red-400/30 bg-red-500/10 p-5 mb-6">
+                            <i class="fa-solid fa-triangle-exclamation text-red-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-white font-bold">Revise os campos obrigatórios</h3>
+                                <p id="error-message" class="text-slate-300 text-sm mt-1">Há informações obrigatórias pendentes.</p>
+                            </div>
+                        </div>
+
+                        <form id="project-form" action="https://formsubmit.co/claudiofranciscojunior2006@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-8" novalidate>
+                            <input type="hidden" name="_subject" value="Nova proposta de projeto - HUB Da Robótica">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" id="form-next-href" value="https://cfsjcode.github.io/HUB_Da_Robotica/FormularioProjeto.html?enviado=1">
+                            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-orange-500/15 text-orange-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-user-gear"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Responsável pela proposta</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Usado para contato editorial e dúvidas técnicas.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Nome completo <span>*</span></span>
+                                        <input class="form-control" type="text" name="responsavel_nome" id="responsavel_nome" placeholder="Seu nome completo" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">E-mail <span>*</span></span>
+                                        <input class="form-control" type="email" name="email" id="email" placeholder="email@exemplo.com" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Telefone ou WhatsApp</span>
+                                        <input class="form-control" type="tel" name="responsavel_telefone" placeholder="(31) 99999-9999">
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Equipe, curso ou instituição</span>
+                                        <input class="form-control" type="text" name="responsavel_instituicao" placeholder="Equipe, escola, universidade ou laboratório">
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-cyan-500/15 text-cyan-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-microchip"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Identificação do projeto</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Informações que compõem o card e a página pública.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Nome do projeto <span>*</span></span>
+                                        <input class="form-control" type="text" name="projeto_nome" id="projeto_nome" placeholder="Ex.: ESP32 Camera Rover" required>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Categoria <span>*</span></span>
+                                        <select class="form-control" name="projeto_categoria" id="projeto_categoria" required>
+                                            <option value="">Selecione</option>
+                                            <option>Autônomo</option>
+                                            <option>Combate</option>
+                                            <option>Educacional</option>
+                                            <option>Inovação</option>
+                                            <option>Visão computacional</option>
+                                            <option>IoT / Sensores</option>
+                                            <option>IA / Software</option>
+                                            <option>Sistema embarcado</option>
+                                            <option>Outro</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Estágio atual <span>*</span></span>
+                                        <select class="form-control" name="estagio_atual" id="estagio_atual" required>
+                                            <option value="">Selecione</option>
+                                            <option>Ideia/conceito</option>
+                                            <option>Protótipo inicial</option>
+                                            <option>Protótipo funcional</option>
+                                            <option>Projeto em testes</option>
+                                            <option>Projeto finalizado</option>
+                                            <option>Projeto em competição</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Cidade e estado</span>
+                                        <input class="form-control" type="text" name="cidade_estado" placeholder="Belo Horizonte, MG">
+                                    </label>
+                                    <label class="md:col-span-2">
+                                        <span class="field-label">Resumo do projeto <span>*</span></span>
+                                        <textarea class="form-control min-h-28" name="resumo" id="resumo" placeholder="Explique em poucas linhas o que o projeto faz, para quem serve e por que ele é relevante." required></textarea>
+                                    </label>
+                                    <label class="md:col-span-2">
+                                        <span class="field-label">Objetivo e problema resolvido <span>*</span></span>
+                                        <textarea class="form-control min-h-28" name="objetivo" id="objetivo" placeholder="Descreva o problema, objetivo técnico e impacto esperado." required></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-blue-500/15 text-blue-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-gears"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Tecnologias e arquitetura</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Detalhes técnicos para uma publicação útil para outras equipes.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid gap-5">
+                                    <label>
+                                        <span class="field-label">Hardware, sensores e atuadores</span>
+                                        <textarea class="form-control min-h-28" name="hardware" placeholder="Ex.: ESP32, Raspberry Pi, motores, sensores, câmera, LiDAR, drivers, baterias."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Software, linguagens e bibliotecas</span>
+                                        <textarea class="form-control min-h-28" name="software" placeholder="Ex.: Python, C/C++, Arduino, OpenCV, ROS, TensorFlow, firmware, dashboard."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Funcionamento técnico <span>*</span></span>
+                                        <textarea class="form-control min-h-32" name="funcionamento" id="funcionamento" placeholder="Explique o fluxo do sistema, entrada de dados, processamento, controle, comunicação e saída." required></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-green-500/15 text-green-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-folder-open"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Documentação, fotos e mídia</h3>
+                                        <p class="text-slate-400 text-sm mt-1">Anexe arquivos leves ou informe links públicos.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <label>
+                                        <span class="field-label">Fotos do projeto</span>
+                                        <input class="form-control file-control" type="file" name="fotos_arquivos" id="fotos_arquivos" accept="image/png,image/jpeg,image/webp" multiple>
+                                        <p class="hint">Use imagens claras do protótipo, montagem, teste ou resultado.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Links de fotos ou vídeo</span>
+                                        <textarea class="form-control min-h-28" name="midia_links" id="midia_links" placeholder="Drive, YouTube, Instagram, LinkedIn, site ou galeria."></textarea>
+                                        <p class="hint">Obrigatório se não anexar fotos.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Documentação técnica</span>
+                                        <input class="form-control file-control" type="file" name="documentacao_arquivo" id="documentacao_arquivo" accept=".pdf,.doc,.docx,.txt,.md,.zip">
+                                        <p class="hint">PDF, DOCX, Markdown, TXT ou ZIP leve.</p>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Links de documentação/repositório</span>
+                                        <textarea class="form-control min-h-28" name="documentacao_links" id="documentacao_links" placeholder="GitHub, GitLab, Drive, Notion, site, relatório, artigo ou manual."></textarea>
+                                        <p class="hint">Obrigatório se não anexar documentação.</p>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="h-12 w-12 rounded-2xl bg-purple-500/15 text-purple-300 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="form-section-title text-2xl">Aprendizados e próximos passos</h3>
+                                        <p class="text-slate-400 text-sm mt-1">O que a comunidade pode aprender com o projeto.</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid gap-5">
+                                    <label>
+                                        <span class="field-label">Principais aprendizados <span>*</span></span>
+                                        <textarea class="form-control min-h-32" name="aprendizados" id="aprendizados" placeholder="Descreva descobertas, erros, ajustes, decisões técnicas e pontos de melhoria." required></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Limitações conhecidas</span>
+                                        <textarea class="form-control min-h-24" name="limitacoes" placeholder="Ex.: autonomia, custo, precisão, ambiente de teste, integração, robustez."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Próximos passos</span>
+                                        <textarea class="form-control min-h-24" name="proximos_passos" placeholder="Melhorias planejadas, testes futuros, versões ou metas de competição."></textarea>
+                                    </label>
+                                    <label>
+                                        <span class="field-label">Observações editoriais</span>
+                                        <textarea class="form-control min-h-24" name="observacoes" placeholder="Informações que não devem ser publicadas, créditos, restrições de imagem ou instruções para a curadoria."></textarea>
+                                    </label>
+                                </div>
+                            </section>
+
+                            <section class="form-section rounded-3xl p-6">
+                                <label class="flex items-start gap-4">
+                                    <input type="checkbox" name="autorizacao_divulgacao" id="autorizacao_divulgacao" value="Autorizo o uso das informações enviadas para divulgação pública na Garagem de Projetos do HUB Da Robótica." class="mt-1 h-5 w-5 accent-orange-500" required>
+                                    <span class="text-slate-300 leading-relaxed">
+                                        <strong class="text-white">Autorização obrigatória:</strong>
+                                        confirmo que tenho autorização para enviar as informações, links, imagens e documentação do projeto e permito o uso editorial no HUB Da Robótica.
+                                    </span>
+                                </label>
+                            </section>
+
+                            <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+                                <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">
+                                    Campos com <span class="text-orange-400 font-bold">*</span> são obrigatórios. O primeiro envio pelo FormSubmit pode solicitar confirmação do e-mail destinatário.
+                                </p>
+                                <button id="submit-button" type="submit" class="inline-flex items-center justify-center gap-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-colors shadow-gold">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Enviar proposta
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-[#040a0f] py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-400">
+            <span>&copy; 2026 HUB Da Robótica</span>
+            <span>Formulário de Projetos</span>
+            <span>FormSubmit</span>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('project-form');
+        const errorPanel = document.getElementById('error-panel');
+        const errorMessage = document.getElementById('error-message');
+        const successPanel = document.getElementById('success-panel');
+        const submitButton = document.getElementById('submit-button');
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get('enviado') === '1') {
+            successPanel.classList.add('is-visible');
+        }
+
+        if (params.has('projeto')) {
+            document.getElementById('projeto_nome').value = params.get('projeto');
+        }
+
+        const nextHref = document.getElementById('form-next-href');
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            nextHref.value = `${window.location.origin}${window.location.pathname}?enviado=1`;
+        }
+
+        function showError(message, target) {
+            errorMessage.textContent = message;
+            errorPanel.classList.add('is-visible');
+            successPanel.classList.remove('is-visible');
+            if (target) target.focus({ preventScroll: true });
+            errorPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        form.addEventListener('submit', (event) => {
+            errorPanel.classList.remove('is-visible');
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                const firstInvalid = form.querySelector(':invalid');
+                showError('Preencha todos os campos obrigatórios marcados com asterisco.', firstInvalid);
+                return;
+            }
+
+            const hasPhotos = document.getElementById('fotos_arquivos').files.length > 0 || document.getElementById('midia_links').value.trim();
+            if (!hasPhotos) {
+                event.preventDefault();
+                showError('Envie pelo menos uma foto do projeto ou informe links públicos de fotos/vídeo.', document.getElementById('midia_links'));
+                return;
+            }
+
+            const hasDocs = document.getElementById('documentacao_arquivo').files.length > 0 || document.getElementById('documentacao_links').value.trim();
+            if (!hasDocs) {
+                event.preventDefault();
+                showError('Envie documentação técnica ou informe links de documentação/repositório.', document.getElementById('documentacao_links'));
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-70', 'cursor-wait');
+            submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+        });
+    </script>
+</body>
+</html>

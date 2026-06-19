@@ -12,7 +12,7 @@ O projeto foi desenvolvido como uma plataforma de interface web para apresentar 
 
 - Página inicial institucional com proposta, público, funcionalidades, missão e objetivos.
 - Radar de competições com carrossel, busca, detalhes, favoritos e métricas.
-- CRUD de eventos conectado ao JSON Server.
+- CRUD de eventos conectado ao JSON Server, com fallback local no navegador para demonstração quando a API não estiver ativa.
 - Login didático com usuários cadastrados no banco JSON.
 - Páginas de equipes brasileiras de robótica.
 - Garagem de projetos e página de contatos.
@@ -40,14 +40,16 @@ flowchart TD
     C["Radar de Competições<br/>RadarDeCompeticoes.html"]
     D["API REST<br/>JSON Server"]
     E["Banco JSON<br/>db/db.json"]
+    F["Fallback local<br/>localStorage"]
 
     A --> B
     B --> C
     C --> D
     D --> E
+    C -. "se a API estiver indisponível" .-> F
 ```
 
-O front-end fica em `public/` e pode ser publicado como site estático. Os dados ficam em `db/db.json` e são expostos pela API REST do JSON Server em ambiente local ou em um serviço externo compatível com Node.js.
+O front-end fica em `public/` e pode ser publicado como site estático. Os dados ficam em `db/db.json` e são expostos pela API REST do JSON Server em ambiente local ou em um serviço externo compatível com Node.js. Para manter login, favoritos e CRUD utilizáveis em demonstrações sem backend, o Radar também possui um fallback em `localStorage` com a mesma estrutura do JSON Server.
 
 ## Estrutura de Pastas
 
@@ -98,11 +100,12 @@ Configuração local padrão:
 
 ```js
 window.HUB_ROBOTICA_CONFIG = {
-    API_URL: 'http://localhost:3000'
+    API_URL: 'http://localhost:3000',
+    USE_JSON_SERVER: true
 };
 ```
 
-Para publicar o front-end no GitHub Pages com uma API externa, altere `API_URL` para a URL pública do backend JSON Server.
+Para publicar o front-end no GitHub Pages com uma API externa, altere `API_URL` para a URL pública do backend JSON Server. Se a API não responder, o Radar usa o fallback local do navegador apenas para demonstração.
 
 ## Como Executar Localmente
 
@@ -159,6 +162,8 @@ Recursos principais:
 - `usuarios`: usuários didáticos com login, senha, nome, e-mail, permissão de administrador e favoritos.
 - `eventos`: competições exibidas no Radar.
 
+O fallback local do Radar replica esses recursos em `localStorage`. Ele não substitui o JSON Server como banco principal e não sincroniza alterações entre navegadores.
+
 Campos principais de `eventos`:
 
 - `id`
@@ -182,7 +187,9 @@ Páginas principais:
 - `public/RadarDeCompeticoes.html`: módulo principal com catálogo, detalhes, favoritos, métricas e CRUD.
 - `public/Garagem_De_Projetos.html`: projetos e garagem.
 - `public/EquipesBrasil.html`: diretório de equipes.
-- `public/Contatos.html`: autoria, instituição e contato.
+- `public/FormularioEquipe.html`: formulário FormSubmit para cadastro ou atualização pública de equipes.
+- `public/FormularioProjeto.html`: formulário FormSubmit para envio de protótipos, documentação, fotos e aprendizados para a Garagem.
+- `public/Contatos.html`: autoria, instituição, contato e formulário FormSubmit para mensagens gerais.
 - `public/Equipes/*.html`: perfis individuais de equipes.
 
 Mais detalhes: [docs/TECHNICAL.md](docs/TECHNICAL.md).
@@ -220,7 +227,7 @@ O validador confere:
 - JSON Server não é banco de produção.
 - Tailwind, Font Awesome e Chart.js são carregados por CDN.
 - O GitHub Pages não executa backend; a API precisa ficar em outro serviço.
-- CRUD online depende de backend com armazenamento persistente.
+- CRUD online persistente depende de backend com armazenamento persistente. Sem backend, o fallback local funciona apenas no navegador usado.
 
 ## Roadmap
 

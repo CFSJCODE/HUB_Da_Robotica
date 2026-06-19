@@ -1,12 +1,12 @@
 # Contribuindo
 
-Obrigado pelo interesse em contribuir com o HUB Da Robotica.
+Obrigado pelo interesse em contribuir com o HUB Da Robótica.
 
 ## Fluxo Recomendado
 
 1. Crie uma branch a partir de `main`.
-2. Faça alteracoes pequenas e focadas.
-3. Rode a validacao local:
+2. Faça alterações pequenas e focadas.
+3. Rode a validação local:
 
 ```bash
 npm run validate
@@ -17,13 +17,13 @@ npm run validate
    - Por que mudou.
    - Como foi validado.
 
-## Padroes do Projeto
+## Padrões do Projeto
 
 - Mantenha links internos relativos.
-- Nao adicione credenciais reais.
-- Nao versione `node_modules/`.
+- Não adicione credenciais reais.
+- Não versione `node_modules/`.
 - Preserve a estrutura `public/` para GitHub Pages.
-- Atualize a documentacao quando alterar fluxo, dados ou paginas.
+- Atualize a documentação quando alterar fluxo, dados ou páginas.
 
 ## Dados
 

@@ -89,6 +89,24 @@
             min-width: max-content;
         }
 
+        .radar-brand {
+            flex: 0 0 18.75rem;
+            min-width: 18.75rem;
+        }
+
+        .radar-brand-title,
+        .radar-brand-subtitle {
+            white-space: nowrap;
+        }
+
+        .radar-header-shell {
+            max-width: none;
+        }
+
+        .radar-main-nav {
+            overflow: hidden;
+        }
+
         .flow-link-active {
             color: #f18821 !important;
             border-bottom: 2px solid #f18821;
@@ -131,6 +149,44 @@
             #nav-auth-btn button {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
+            }
+
+            .radar-brand {
+                flex-basis: 16.75rem;
+                min-width: 16.75rem;
+            }
+
+            .radar-brand-title {
+                font-size: 1.05rem !important;
+            }
+
+            .radar-brand-subtitle {
+                font-size: 0.58rem !important;
+                letter-spacing: 0.28em !important;
+            }
+        }
+
+        @media (max-width: 1535px) {
+            .radar-external-nav,
+            .radar-nav-separator {
+                display: none !important;
+            }
+
+            #nav-menu {
+                gap: 0.85rem !important;
+            }
+        }
+
+        @media (max-width: 1180px) {
+            .radar-main-nav {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .radar-brand {
+                flex-basis: auto;
+                min-width: 0;
             }
         }
 
@@ -298,23 +354,23 @@
 
     <!-- Cabeçalho Institucional -->
     <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
-        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20 gap-8">
+        <div class="radar-header-shell mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 gap-6">
                 
                 <!-- Logo -->
-                <a href="#home" onclick="app.navigate('home')" class="flex items-center gap-3 group cursor-pointer shrink-0 min-w-[11.5rem]">
+                <a href="#home" onclick="app.navigate('home')" class="radar-brand flex items-center gap-3 group cursor-pointer shrink-0">
                     <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-11 h-11 rounded-xl border border-white/10 shadow-gold group-hover:scale-105 transition-transform">
-                    <div>
-                        <h1 class="font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
-                        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Competições</p>
+                    <div class="min-w-0">
+                        <h1 class="radar-brand-title font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
+                        <p class="radar-brand-subtitle text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Competições</p>
                     </div>
                 </a>
 
                 <!-- Nav Links Dinâmicos -->
-                <nav aria-label="Navegação principal" class="hidden lg:flex flex-1 items-center justify-end gap-4 min-w-0">
+                <nav aria-label="Navegação principal" class="radar-main-nav hidden lg:flex flex-1 items-center justify-end gap-4 min-w-0">
                     <div class="flex items-center justify-end gap-4 min-w-0">
                         <!-- Links Externos (Outras Páginas) -->
-                        <ul class="flex items-center gap-6 m-0 p-0 list-none">
+                        <ul class="radar-external-nav flex items-center gap-6 m-0 p-0 list-none">
                             <li><a href="index.html#home" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Início</a></li>
                             <li><a href="Garagem_De_Projetos.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Garagem</a></li>
                             <li><a href="RadarDeCompeticoes.html" class="text-sm font-medium text-academic-gold transition-colors pb-1 border-b-2 border-academic-gold">Radar de Competições</a></li>
@@ -323,7 +379,7 @@
                         </ul>
                         
                         <!-- Separador Vertical -->
-                        <span class="block h-6 w-px bg-white/20"></span>
+                        <span class="radar-nav-separator block h-6 w-px bg-white/20"></span>
                         
                         <!-- Links Internos da SPA (Views) -->
                         <ul class="flex items-center gap-6 m-0 p-0 list-none" id="nav-menu">
@@ -863,12 +919,185 @@
     <!-- System Core Logic (Vanilla JS + JSON Server Backend) -->
     <script>
         const API_URL = window.HUB_ROBOTICA_CONFIG?.API_URL || "http://localhost:3000";
+        const USE_JSON_SERVER = window.HUB_ROBOTICA_CONFIG?.USE_JSON_SERVER !== false;
+        const FALLBACK_STORAGE_KEY = 'hub_robotica_radar_db_v1';
+        const fallbackData = {
+            usuarios: [
+                {
+                    id: "1",
+                    login: "admin",
+                    senha: "123",
+                    nome: "Cláudio (Admin)",
+                    email: "admin@puc.br",
+                    admin: true,
+                    favoritos: []
+                },
+                {
+                    id: "2",
+                    login: "user",
+                    senha: "123",
+                    nome: "Usuário comum",
+                    email: "user@puc.br",
+                    admin: false,
+                    favoritos: []
+                }
+            ],
+            eventos: [
+                {
+                    id: "1",
+                    nome: "Festival SESI de Robótica",
+                    tipo: "Educacional",
+                    descricao: "O maior evento educacional do país. FLL, FTC, FRC e alto impacto tecnológico.",
+                    conteudo: "O Festival SESI é o ponto de encontro nacional para jovens construtores e engenheiros. O evento promove a ciência e a tecnologia por meio de competições emocionantes, estimulando o raciocínio lógico e o trabalho em equipe.",
+                    local: "Pavilhão da Bienal, Ibirapuera - SP",
+                    data: "Março 2026",
+                    organizador: "Rede SESI Brasil",
+                    destaque: true,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    id: "2",
+                    nome: "IRONCup Inatel",
+                    tipo: "Combate",
+                    descricao: "A elite do combate e sistemas autônomos. De Sumô 3kg até batalhas de Beetles.",
+                    conteudo: "A IRONCup reúne equipes universitárias em desafios de engenharia mecânica e de software de alto nível. Inclui sumô de robôs, seguidor de linha pro e a clássica arena de combate fechada.",
+                    local: "Campus Inatel - Santa Rita do Sapucaí, MG",
+                    data: "Março 2026",
+                    organizador: "Inatel & RoboCore",
+                    destaque: true,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    id: "3",
+                    nome: "Olimpíada Bras. de Robótica",
+                    tipo: "Autônomo",
+                    descricao: "Desafios de navegação autônoma, visão computacional e algoritmos de resgate.",
+                    conteudo: "Na prática, microcontroladores como ESP32 e ARM são levados ao limite em robôs autônomos que devem navegar por terrenos acidentados, desviar de obstáculos e identificar/resgatar vítimas.",
+                    local: "Etapa Nacional",
+                    data: "Outubro 2026",
+                    organizador: "Conselho Superior OBR",
+                    destaque: false,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    id: "4",
+                    nome: "RoboCore Experience (RCX)",
+                    tipo: "Combate",
+                    descricao: "Pura engenharia mecânica. Combate peso-pesado, Trekker e Hockey.",
+                    conteudo: "A RCX é o ápice do combate robótico na América Latina. Exige cálculos insanos de torque e energia cinética, chegando a armas giratórias em máquinas de 113kg.",
+                    local: "Campus Party Brasil",
+                    data: "Julho 2026",
+                    organizador: "RoboCore",
+                    destaque: true,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    id: "5",
+                    nome: "Robótica 2026 (RoboCup Brasil)",
+                    tipo: "Multi-modalidade",
+                    descricao: "Maior evento da área na América Latina, reunindo a Competição Brasileira de Robótica, a Mostra Nacional de Robótica e a Olimpíada Brasileira de Robótica (OBR).",
+                    conteudo: "Um megaevento que concentra as três maiores competições de robótica do Brasil em um único espaço. Reúne equipes de todas as regiões do país para disputas de alto nível, showcases de inovação e palestras com líderes da área.",
+                    local: "Centro de Convenções de João Pessoa (PB)",
+                    data: "23 a 29 de novembro",
+                    organizador: "OBR, CBR & Prefeitura de João Pessoa",
+                    destaque: true,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    id: "6",
+                    nome: "Feira de Robótica Cognitiva e IA",
+                    tipo: "Inovação",
+                    descricao: "Focada em inovações multidisciplinares da robótica cognitiva, integrando software, mineração de processos e IA.",
+                    conteudo: "Um espaço dedicado ao futuro da robótica inteligente. Apresentações de pesquisas de ponta em machine learning, processamento de linguagem natural e sistemas autônomos. Networking entre pesquisadores, startups e empresas de tecnologia.",
+                    local: "Ágora Tech Park, Joinville (SC)",
+                    data: "18 a 20 de junho",
+                    organizador: "TechFair Brasil & ACIJ",
+                    destaque: false,
+                    imagemPrincipal: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80"
+                }
+            ]
+        };
+
+        const cloneData = (value) => JSON.parse(JSON.stringify(value));
+
+        function loadFallbackDb() {
+            try {
+                const stored = localStorage.getItem(FALLBACK_STORAGE_KEY);
+                if (!stored) {
+                    const seeded = cloneData(fallbackData);
+                    localStorage.setItem(FALLBACK_STORAGE_KEY, JSON.stringify(seeded));
+                    return seeded;
+                }
+
+                const parsed = JSON.parse(stored);
+                if (!Array.isArray(parsed.usuarios) || !Array.isArray(parsed.eventos)) {
+                    throw new Error('Estrutura local inválida');
+                }
+
+                return parsed;
+            } catch (error) {
+                console.warn('Banco local reiniciado:', error);
+                const seeded = cloneData(fallbackData);
+                localStorage.setItem(FALLBACK_STORAGE_KEY, JSON.stringify(seeded));
+                return seeded;
+            }
+        }
+
+        function saveFallbackDb(db) {
+            localStorage.setItem(FALLBACK_STORAGE_KEY, JSON.stringify(db));
+        }
+
+        function nextFallbackId(items) {
+            const numericIds = items
+                .map((item) => Number(item.id))
+                .filter((id) => Number.isFinite(id));
+            return String((numericIds.length ? Math.max(...numericIds) : 0) + 1);
+        }
+
+        const fallbackApi = {
+            get(path) {
+                const [collection, id] = path.split('/');
+                const db = loadFallbackDb();
+                const rows = db[collection];
+                if (!Array.isArray(rows)) throw new Error(`Coleção local desconhecida: ${collection}`);
+                if (id) return cloneData(rows.find((item) => String(item.id) === String(id)));
+                return cloneData(rows);
+            },
+            post(collection, data) {
+                const db = loadFallbackDb();
+                if (!Array.isArray(db[collection])) throw new Error(`Coleção local desconhecida: ${collection}`);
+                const row = { ...data, id: data.id || nextFallbackId(db[collection]) };
+                db[collection].push(row);
+                saveFallbackDb(db);
+                return cloneData(row);
+            },
+            put(collection, id, data) {
+                const db = loadFallbackDb();
+                if (!Array.isArray(db[collection])) throw new Error(`Coleção local desconhecida: ${collection}`);
+                const index = db[collection].findIndex((item) => String(item.id) === String(id));
+                const row = { ...data, id: String(id) };
+                if (index >= 0) db[collection][index] = row;
+                else db[collection].push(row);
+                saveFallbackDb(db);
+                return cloneData(row);
+            },
+            delete(collection, id) {
+                const db = loadFallbackDb();
+                if (!Array.isArray(db[collection])) throw new Error(`Coleção local desconhecida: ${collection}`);
+                db[collection] = db[collection].filter((item) => String(item.id) !== String(id));
+                saveFallbackDb(db);
+                return {};
+            }
+        };
 
         // ==========================================
-        // 1. CAMADA DE PERSISTÊNCIA (JSON Server)
+        // 1. CAMADA DE PERSISTÊNCIA (JSON Server + fallback local)
         // ==========================================
         const api = {
             async request(path, options = {}) {
+                if (!USE_JSON_SERVER) {
+                    throw new Error('JSON Server desativado na configuração.');
+                }
                 const response = await fetch(`${API_URL}/${path}`, options);
                 if (!response.ok) {
                     throw new Error(`Falha ao acessar ${path}: ${response.status}`);
@@ -876,25 +1105,45 @@
                 if (response.status === 204) return null;
                 return response.json();
             },
+            async withFallback(operation, fallbackOperation) {
+                try {
+                    return await operation();
+                } catch (error) {
+                    console.warn(`Usando banco local do navegador porque o JSON Server não respondeu em ${API_URL}.`, error);
+                    return fallbackOperation();
+                }
+            },
             async get(endpoint) {
-                return this.request(endpoint);
+                return this.withFallback(
+                    () => this.request(endpoint),
+                    () => fallbackApi.get(endpoint)
+                );
             },
             async post(endpoint, data) {
-                return this.request(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                return this.withFallback(
+                    () => this.request(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    }),
+                    () => fallbackApi.post(endpoint, data)
+                );
             },
             async put(endpoint, id, data) {
-                return this.request(`${endpoint}/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...data, id })
-                });
+                return this.withFallback(
+                    () => this.request(`${endpoint}/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ...data, id })
+                    }),
+                    () => fallbackApi.put(endpoint, id, data)
+                );
             },
             async delete(endpoint, id) {
-                return this.request(`${endpoint}/${id}`, { method: 'DELETE' });
+                return this.withFallback(
+                    () => this.request(`${endpoint}/${id}`, { method: 'DELETE' }),
+                    () => fallbackApi.delete(endpoint, id)
+                );
             }
         };
 

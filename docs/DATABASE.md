@@ -4,7 +4,7 @@
 
 O projeto usa JSON Server para expor `db/db.json` como API REST.
 
-URL local padrao:
+URL local padrão:
 
 ```text
 http://localhost:3000
@@ -16,31 +16,31 @@ http://localhost:3000
 
 Campos:
 
-| Campo | Tipo | Descricao |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
-| `id` | string | Identificador do usuario |
+| `id` | string | Identificador do usuário |
 | `login` | string | Nome de login |
-| `senha` | string | Senha didatica em texto puro |
+| `senha` | string | Senha didática em texto puro |
 | `nome` | string | Nome exibido na interface |
-| `email` | string | Email de exemplo |
-| `admin` | boolean | Permissao para acessar CRUD |
+| `email` | string | E-mail de exemplo |
+| `admin` | boolean | Permissão para acessar CRUD |
 | `favoritos` | array | IDs de eventos favoritos |
 
 ### `eventos`
 
 Campos:
 
-| Campo | Tipo | Descricao |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
 | `id` | string | Identificador do evento |
-| `nome` | string | Nome da competicao ou evento |
+| `nome` | string | Nome da competição ou evento |
 | `tipo` | string | Modalidade ou categoria |
 | `descricao` | string | Resumo exibido em cards |
 | `conteudo` | string | Texto detalhado |
 | `local` | string | Local ou sede |
-| `data` | string | Janela de realizacao |
-| `organizador` | string | Organizacao responsavel |
-| `destaque` | boolean | Define exibicao no carrossel |
+| `data` | string | Janela de realização |
+| `organizador` | string | Organização responsável |
+| `destaque` | boolean | Define exibição no carrossel |
 | `imagemPrincipal` | string | URL da imagem do evento |
 
 ## Endpoints JSON Server
@@ -59,6 +59,12 @@ PUT    /eventos/:id
 DELETE /eventos/:id
 ```
 
-## Observacoes de Seguranca
+## Observações de Segurança
 
-As senhas em `db/db.json` sao apenas exemplos academicos. JSON Server nao deve ser usado como autenticacao de producao.
+As senhas em `db/db.json` são apenas exemplos acadêmicos. JSON Server não deve ser usado como autenticação de produção.
+
+## Fallback Local do Radar
+
+`public/RadarDeCompeticoes.html` tenta usar o JSON Server primeiro. Se a API configurada em `public/assets/scripts/config.js` não responder, a página usa uma cópia local dos recursos `usuarios` e `eventos` em `localStorage`.
+
+Esse fallback existe para manter login, favoritos e CRUD funcionais em demonstrações locais ou no GitHub Pages sem backend. Ele não sincroniza dados entre navegadores, não atualiza `db/db.json` e não deve ser tratado como banco de produção.

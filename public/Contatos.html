@@ -174,24 +174,63 @@
                         <h2 class="font-serif text-4xl text-white mt-4">Entre em contato</h2>
                         <p class="text-slate-300 leading-relaxed mt-5">Use o formulário como ponto visual de contato para propostas, equipes, novos projetos ou eventos de robótica.</p>
                     </div>
-                    <form class="card-glass rounded-3xl p-8 grid sm:grid-cols-2 gap-5">
+                    <form id="contact-form" action="https://formsubmit.co/claudiofranciscojunior2006@gmail.com" method="POST" class="card-glass rounded-3xl p-8 grid sm:grid-cols-2 gap-5" novalidate>
+                        <input type="hidden" name="_subject" value="Nova mensagem de contato - HUB Da Robótica">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" id="contact-next-href" value="https://cfsjcode.github.io/HUB_Da_Robotica/Contatos.html?enviado=1">
+                        <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+                        <div id="contact-success-panel" class="hidden sm:col-span-2 items-start gap-4 rounded-2xl border border-green-400/30 bg-green-500/10 p-5">
+                            <i class="fa-solid fa-circle-check mt-1 text-xl text-green-300"></i>
+                            <div>
+                                <h3 class="font-bold text-white">Mensagem enviada</h3>
+                                <p class="mt-1 text-sm leading-relaxed text-slate-300">Recebemos seu contato pelo FormSubmit. A curadoria do HUB Da Robótica poderá responder pelo e-mail informado.</p>
+                            </div>
+                        </div>
+
+                        <div id="contact-error-panel" class="hidden sm:col-span-2 items-start gap-4 rounded-2xl border border-red-400/30 bg-red-500/10 p-5">
+                            <i class="fa-solid fa-triangle-exclamation mt-1 text-xl text-red-300"></i>
+                            <div>
+                                <h3 class="font-bold text-white">Revise os campos</h3>
+                                <p id="contact-error-message" class="mt-1 text-sm leading-relaxed text-slate-300">Preencha os campos obrigatórios antes de enviar.</p>
+                            </div>
+                        </div>
+
                         <label class="block">
                             <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Nome</span>
-                            <input type="text" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Seu nome">
+                            <input id="contato-nome" type="text" name="nome" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Seu nome" autocomplete="name" required>
                         </label>
                         <label class="block">
                             <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Email</span>
-                            <input type="email" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="email@exemplo.com">
+                            <input id="contato-email" type="email" name="email" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="email@exemplo.com" autocomplete="email" required>
+                        </label>
+                        <label class="block sm:col-span-2">
+                            <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Tipo de contato</span>
+                            <select id="contato-tipo" name="tipo_contato" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" required>
+                                <option value="" selected disabled>Selecione o motivo do contato</option>
+                                <option value="Projeto">Projeto</option>
+                                <option value="Equipe">Equipe</option>
+                                <option value="Competição">Competição</option>
+                                <option value="Parceria">Parceria</option>
+                                <option value="Correção de informação">Correção de informação</option>
+                                <option value="Outro">Outro</option>
+                            </select>
                         </label>
                         <label class="block sm:col-span-2">
                             <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Assunto</span>
-                            <input type="text" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Projeto, equipe ou competição">
+                            <input id="contato-assunto" type="text" name="assunto" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Projeto, equipe ou competição" required>
                         </label>
                         <label class="block sm:col-span-2">
                             <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Mensagem</span>
-                            <textarea class="mt-2 w-full min-h-36 rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Descreva sua proposta"></textarea>
+                            <textarea id="contato-mensagem" name="mensagem" class="mt-2 w-full min-h-36 rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="Descreva sua proposta" required></textarea>
                         </label>
-                        <button type="button" class="sm:col-span-2 inline-flex justify-center items-center gap-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-colors">
+                        <label class="block sm:col-span-2">
+                            <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Link de referência</span>
+                            <input id="contato-link" type="url" name="link_referencia" class="mt-2 w-full rounded-2xl border border-cyan-400/20 bg-slate-950/40 px-4 py-3 text-white outline-none focus:border-orange-400" placeholder="https://instagram.com/equipe-ou-projeto">
+                            <span class="mt-2 block text-xs leading-relaxed text-slate-400">Opcional: envie site, Instagram, GitHub, regulamento ou página pública relacionada.</span>
+                        </label>
+                        <button id="contact-submit-button" type="submit" class="sm:col-span-2 inline-flex justify-center items-center gap-3 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-70">
                             <i class="fa-solid fa-paper-plane"></i>
                             Enviar mensagem
                         </button>
@@ -222,5 +261,50 @@
             <span>SYS_VER 1.0.0</span>
         </div>
     </footer>
+    <script>
+        const contactForm = document.getElementById('contact-form');
+        const contactSuccessPanel = document.getElementById('contact-success-panel');
+        const contactErrorPanel = document.getElementById('contact-error-panel');
+        const contactErrorMessage = document.getElementById('contact-error-message');
+        const contactSubmitButton = document.getElementById('contact-submit-button');
+        const contactNextHref = document.getElementById('contact-next-href');
+        const contactParams = new URLSearchParams(window.location.search);
+
+        if ((window.location.protocol === 'http:' || window.location.protocol === 'https:') && contactNextHref) {
+            contactNextHref.value = `${window.location.origin}${window.location.pathname}?enviado=1`;
+        }
+
+        function showContactSuccess() {
+            contactSuccessPanel.classList.remove('hidden');
+            contactSuccessPanel.classList.add('flex');
+            contactErrorPanel.classList.add('hidden');
+            contactErrorPanel.classList.remove('flex');
+        }
+
+        function showContactError(message) {
+            contactErrorMessage.textContent = message;
+            contactErrorPanel.classList.remove('hidden');
+            contactErrorPanel.classList.add('flex');
+            contactSuccessPanel.classList.add('hidden');
+            contactSuccessPanel.classList.remove('flex');
+        }
+
+        if (contactParams.get('enviado') === '1') {
+            showContactSuccess();
+            contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        contactForm.addEventListener('submit', (event) => {
+            if (!contactForm.checkValidity()) {
+                event.preventDefault();
+                showContactError('Preencha nome, e-mail, tipo de contato, assunto e mensagem antes de enviar.');
+                contactForm.reportValidity();
+                return;
+            }
+
+            contactSubmitButton.disabled = true;
+            contactSubmitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando mensagem...';
+        });
+    </script>
 </body>
 </html>

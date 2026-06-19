@@ -1,7 +1,7 @@
 {
   "name": "hub-da-robotica",
   "version": "1.0.0",
-  "description": "Plataforma web academica para conectar equipes, projetos e competicoes de robotica.",
+  "description": "Plataforma web acadêmica para conectar equipes, projetos e competições de robótica.",
   "private": true,
   "scripts": {
     "start": "npm run site",

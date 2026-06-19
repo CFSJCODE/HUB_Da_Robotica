@@ -20,7 +20,14 @@
     const root = document.getElementById('profile-root');
 
     const safe = (value, fallback = '') => value || fallback;
+    const buildFormHref = (teamName) => `../FormularioEquipe.html${teamName ? `?equipe=${encodeURIComponent(teamName)}` : ''}`;
     const list = (items) => (items || []).map((item) => `<li class="flex items-start gap-3 text-slate-400"><i class="fa-solid fa-check text-orange-400 mt-1"></i><span>${item}</span></li>`).join('');
+    const links = (items) => (items || []).map((item) => `
+        <a href="${item.href}" target="_blank" rel="noopener noreferrer" class="bg-white/5 border border-white/10 hover:bg-white/10 px-8 py-4 rounded-xl text-white font-semibold duration-300">
+            <i class="${item.icon || 'fa-solid fa-link'} me-2"></i>
+            ${item.label}
+        </a>
+    `).join('');
     const statCards = (stats) => (stats || []).map((stat) => `
         <div class="card-glass rounded-3xl p-6">
             <div class="text-3xl text-white font-bold mb-2">${stat.value}</div>
@@ -39,7 +46,8 @@
         'FIRST LEGO League': 'text-cyan-300 bg-cyan-500/10 border-cyan-500/20',
         'F1 in Schools': 'text-red-300 bg-red-500/10 border-red-500/20',
         'FTC': 'text-indigo-300 bg-indigo-500/10 border-indigo-500/20',
-        'FRC': 'text-slate-300 bg-slate-500/10 border-slate-500/20'
+        'FRC': 'text-slate-300 bg-slate-500/10 border-slate-500/20',
+        'Pesquisa e Extensão': 'text-cyan-300 bg-cyan-500/10 border-cyan-500/20'
     }[team.category] || 'text-orange-300 bg-orange-500/10 border-orange-500/20';
 
     document.title = `${safe(team.name, 'Equipe')} | HUB Da Robótica`;
@@ -92,7 +100,7 @@
                             <p class="text-lg md:text-xl text-slate-400 leading-relaxed max-w-3xl mb-10">${safe(team.summary, 'Perfil em construção no HUB Da Robótica.')}</p>
 
                             <div class="flex flex-wrap gap-4">
-                                <a href="../Contatos.html" class="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-xl text-white font-semibold shadow-gold duration-300">
+                                <a href="${buildFormHref(team.name)}" class="bg-orange-500 hover:bg-orange-600 px-8 py-4 rounded-xl text-white font-semibold shadow-gold duration-300">
                                     <i class="fa-solid fa-paper-plane me-2"></i>
                                     Atualizar Perfil
                                 </a>
@@ -100,6 +108,7 @@
                                     <i class="fa-solid fa-trophy me-2"></i>
                                     Hall da Fama
                                 </a>
+                                ${links(team.links)}
                             </div>
                         </div>
 
@@ -155,7 +164,7 @@
                             <i class="fa-solid fa-circle-nodes text-6xl text-orange-400 mb-8"></i>
                             <h3 class="font-serif text-4xl text-white mb-6">Quer completar este perfil?</h3>
                             <p class="text-slate-400 text-lg max-w-3xl mx-auto mb-10">Envie logotipo, fotos, conquistas, integrantes e links oficiais para deixar a página pronta para divulgação pública.</p>
-                            <a href="../Contatos.html" class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 duration-300 px-8 py-4 rounded-2xl text-white font-semibold shadow-gold">
+                            <a href="${buildFormHref(team.name)}" class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 duration-300 px-8 py-4 rounded-2xl text-white font-semibold shadow-gold">
                                 <i class="fa-solid fa-envelope"></i>
                                 Enviar Informações
                             </a>

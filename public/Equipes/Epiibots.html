@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EPIIBOTS | HUB Da Robótica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Merriweather','serif'],mono:['Fira Code','monospace']},boxShadow:{gold:'0 20px 60px rgba(241,136,33,.25)',soft:'0 10px 40px rgba(0,0,0,.15)'}}}}</script>
+<link rel="stylesheet" href="perfil-equipe.css">
+</head>
+<body class="text-slate-300 overflow-x-hidden">
+<div id="profile-root"></div>
+<script>
+window.TEAM_PROFILE={
+name:'EPIIBOTS',
+category:'Pesquisa e Extensão',
+region:'Ibirité, MG',
+logo:'../assets/equipes/epiibots-logo.svg',
+summary:'Grupo de pesquisa, extensão e clube de robótica do IFMG Campus Ibirité, focado em robótica e sistemas inteligentes.',
+about:'A EPIIBOTS é o grupo Robotics and Intelligent Systems do IFMG Campus Ibirité. A página oficial apresenta o grupo como iniciativa criada em 13 de maio de 2019, com atuação em pesquisa aplicada, inovação, educação em robótica e sistemas inteligentes. O trabalho reúne pesquisa, extensão, clube de robótica, monitorias, publicações científicas, divulgação educacional e participação em desafios como a Olimpíada Brasileira de Robótica. O perfil público da equipe também identifica a EPIIBOTS como Educational Research Center e direciona o público para o canal Robótica em Foco.',
+stats:[{value:'2019',label:'Origem'},{value:'IFMG',label:'Campus Ibirité'},{value:'OBR',label:'Robótica educacional'},{value:'CNPq',label:'Grupo de pesquisa'}],
+skills:['Pesquisa aplicada em robótica móvel, sistemas inteligentes e inteligência computacional.','Robótica educacional, STEM, OBR, LEGO Mindstorms EV3 e desenvolvimento de kits didáticos.','Clube de Robótica, monitorias, oficinas, visitas técnicas e ações de extensão em escolas.','Produção científica, eventos acadêmicos, divulgação tecnológica e canal Robótica em Foco.'],
+timeline:[{year:'13/05/2019',title:'Criação do grupo',text:'A página oficial registra o início da EPIIBOTS como grupo de pesquisa em robótica e sistemas inteligentes.'},{year:'2022',title:'Clube de Robótica',text:'A equipe divulgou inscrições, datas e funcionamento do Clube de Robótica, com conteúdos de matemática, ciências, linguagens e robótica.'},{year:'2023',title:'Pesquisa e eventos',text:'A EPIIBOTS divulgou participação em eventos acadêmicos e produções científicas, incluindo IEEE LA-CCI e trabalhos ligados a robótica educacional.'},{year:'2024',title:'OBR e extensão',text:'O grupo manteve inscrições e atividades da OBR, clube de robótica, monitorias e ações de extensão com estudantes.'},{year:'2025',title:'Clube de Robótica 2025',text:'As publicações recentes mostram atividades do Clube de Robótica, projeto de extensão, montagens com LEGO Mindstorms EV3, visitas e monitorias.'},{year:'2025',title:'Divulgação científica',text:'A equipe divulgou trabalhos e presença em eventos como CROS, ICRA e ICUAS, conectando pesquisa acadêmica e formação em robótica.'}],
+links:[{label:'Site oficial',href:'https://epiibots.notion.site/',icon:'fa-solid fa-globe'},{label:'Instagram oficial',href:'https://www.instagram.com/epiibots/',icon:'fa-brands fa-instagram'},{label:'Robótica em Foco',href:'https://www.youtube.com/@Rob%C3%B3ticaemFoco/videos',icon:'fa-brands fa-youtube'},{label:'Educação e clube',href:'https://ejrobotics.notion.site/edu?v=1cf373046fdf80c3ad8e000c0edaf9c3',icon:'fa-solid fa-graduation-cap'},{label:'Grupo CNPq',href:'http://dgp.cnpq.br/dgp/espelhogrupo/457477',icon:'fa-solid fa-database'}]
+};
+</script>
+<script src="perfil-equipe.js"></script>
+</body>
+</html>

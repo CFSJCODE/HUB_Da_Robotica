@@ -283,13 +283,13 @@ body {
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
                 <i class="fa-solid fa-people-group text-orange-400 text-4xl mb-5"></i>
-                <h3 class="text-5xl text-white font-bold mb-2">11+</h3>
+                <h3 class="text-5xl text-white font-bold mb-2">12+</h3>
                 <p class="text-slate-500 uppercase tracking-widest text-sm">Equipes</p>
             </div>
 
             <div class="card-glass card-glass-hover rounded-3xl p-8 text-center">
                 <i class="fa-solid fa-layer-group text-cyan-400 text-4xl mb-5"></i>
-                <h3 class="text-5xl text-white font-bold mb-2">4</h3>
+                <h3 class="text-5xl text-white font-bold mb-2">5</h3>
                 <p class="text-slate-500 uppercase tracking-widest text-sm">Categorias</p>
             </div>
 
@@ -324,7 +324,7 @@ body {
                     Pesquise por nome, categoria ou tecnologia e explore os times que constroem a robótica educacional brasileira.
                 </p>
             </div>
-            <div id="resultCount" class="font-mono text-sm text-slate-500">11 equipes listadas</div>
+            <div id="resultCount" class="font-mono text-sm text-slate-500">12 equipes listadas</div>
         </div>
 
         <div class="card-glass rounded-3xl p-6 md:p-8 mb-10">
@@ -348,6 +348,7 @@ body {
             <button class="filter-btn tag" data-filter="FTC">FTC</button>
             <button class="filter-btn tag" data-filter="FRC">FRC</button>
             <button class="filter-btn tag" data-filter="F1 in Schools">F1 in Schools</button>
+            <button class="filter-btn tag" data-filter="Pesquisa e Extensão">Pesquisa e Extensão</button>
         </div>
 
         <div id="emptyState" class="hidden card-glass rounded-3xl p-10 text-center mb-16">
@@ -419,6 +420,32 @@ body {
 </section>
 
 <!-- ===================================================== -->
+<!-- RESEARCH AND EXTENSION SECTION -->
+<!-- ===================================================== -->
+<section class="team-section py-24 border-y border-white/10 bg-black/20" data-section-category="Pesquisa e Extensão">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+            <h2 class="font-serif text-4xl text-white mb-4">Pesquisa e Extensão</h2>
+            <p class="text-slate-400 max-w-3xl">Grupos que conectam investigação científica, clubes de robótica, extensão, educação STEM e divulgação tecnológica.</p>
+        </div>
+
+        <div class="team-grid grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="EPIIBOTS" data-category="Pesquisa e Extensão" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-cyan-500/20 flex items-center justify-center overflow-hidden p-2">
+                        <img src="assets/equipes/epiibots-logo.svg" alt="Logo EPIIBOTS" class="w-full h-full object-contain">
+                    </div>
+                    <span class="tag text-cyan-300">IFMG Ibirité</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">EPIIBOTS</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Grupo Robotics and Intelligent Systems do IFMG Campus Ibirité, com pesquisa aplicada, clube de robótica, OBR, extensão, publicações e canal Robótica em Foco.</p>
+                <a href="Equipes/Epiibots.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
 <!-- F1 IN SCHOOLS SECTION -->
 <!-- ===================================================== -->
 <section class="team-section py-24 border-y border-white/10 bg-black/20" data-section-category="F1 in Schools">
@@ -431,22 +458,14 @@ body {
         <div class="team-grid grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Pacce Scuderia" data-category="F1 in Schools" data-year="2025">
                 <div class="flex justify-between items-start mb-6">
-                    <div class="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center"><i class="fa-solid fa-gauge-high text-3xl text-red-400"></i></div>
+                    <div class="w-16 h-16 rounded-2xl bg-white border border-red-500/20 flex items-center justify-center overflow-hidden p-2">
+                        <img src="assets/equipes/pacce-scuderia-logo.jpg" alt="Logo Pacce Scuderia" class="w-full h-full object-contain">
+                    </div>
                     <span class="tag text-red-300">F1 in Schools</span>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-3">Pacce Scuderia</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe de alto desempenho com foco em engenharia de produto, comunicação e velocidade competitiva.</p>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe da Escola SESI Barreiro, em Belo Horizonte, com atuação em F1 in Schools/STEM Racing, 3º lugar no Regional MG 2024 e classificação para a etapa nacional em Brasília.</p>
                 <a href="Equipes/PacceScuderia.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
-            </article>
-
-            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Minerskills" data-category="F1 in Schools" data-year="2025">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center"><i class="fa-solid fa-helmet-safety text-3xl text-orange-400"></i></div>
-                    <span class="tag text-red-300">F1 in Schools</span>
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-3">Minerskills</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Scuderia com DNA mineiro, cultura de prototipagem e projeto orientado por dados, manufatura e colaboração.</p>
-                <a href="Equipes/Minerskills.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
             </article>
 
             <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Turbon Scuderia" data-category="F1 in Schools" data-year="2024">
@@ -503,6 +522,18 @@ body {
         </div>
 
         <div class="team-grid grid md:grid-cols-2 gap-8">
+            <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="SESI SENAI Minerskills 10019" data-category="FRC" data-year="2025">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-400/20 flex items-center justify-center overflow-hidden p-2">
+                        <img src="assets/equipes/minerskills-logo.jpg" alt="Logo SESI SENAI Minerskills #10019" class="w-full h-full object-contain">
+                    </div>
+                    <span class="tag text-slate-300">FRC #10019</span>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3">SESI SENAI Minerskills</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Equipe FRC #10019 de Belo Horizonte, vinculada ao SESI Barreiro e ao SENAI Euvaldo Lodi, com Rookie All Star Award 2025, MinerNews e classificação nacional em 2026.</p>
+                <a href="Equipes/Minerskills.html" class="mt-auto bg-orange-500 hover:bg-orange-600 rounded-xl py-3 text-center font-semibold text-white duration-300">Ver Perfil <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </article>
+
             <article class="team-card card-glass card-glass-hover rounded-3xl p-7 flex flex-col" data-name="Guardiões do Império" data-category="FTC" data-year="2025">
                 <div class="flex justify-between items-start mb-6">
                     <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"><i class="fa-solid fa-shield-halved text-3xl text-indigo-400"></i></div>
@@ -567,12 +598,12 @@ body {
             <article class="group card-glass card-glass-hover rounded-[32px] overflow-hidden">
                 <div class="relative h-72 bg-gradient-to-br from-orange-600/30 via-red-600/20 to-slate-950 flex items-center justify-center">
                     <div class="absolute inset-0 bg-pattern opacity-30"></div>
-                    <span class="absolute top-5 left-5 bg-orange-500/20 text-orange-200 border border-orange-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Engenharia & Gestão</span>
-                    <i class="fa-solid fa-helmet-safety text-8xl text-orange-300 group-hover:scale-110 duration-500"></i>
+                    <span class="absolute top-5 left-5 bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">FRC #10019</span>
+                    <img src="assets/equipes/minerskills-logo.jpg" alt="Logo SESI SENAI Minerskills #10019" class="w-36 h-36 object-contain rounded-[2rem] bg-slate-950/80 p-4 border border-white/20 shadow-soft group-hover:scale-110 duration-500">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-3xl text-white font-bold mb-3">Minerskills</h3>
-                    <p class="text-slate-400">Referência em identidade técnica, projeto integrado e visão de equipe no F1 in Schools.</p>
+                    <h3 class="text-3xl text-white font-bold mb-3">SESI SENAI Minerskills</h3>
+                    <p class="text-slate-400">Equipe FRC #10019 vinculada ao SESI Barreiro e ao SENAI Euvaldo Lodi, destaque nacional em 2025 com Rookie All Star Award e classificada para a etapa nacional de 2026.</p>
                 </div>
             </article>
 
@@ -580,11 +611,11 @@ body {
                 <div class="relative h-72 bg-gradient-to-br from-red-600/30 via-purple-600/20 to-slate-950 flex items-center justify-center">
                     <div class="absolute inset-0 bg-pattern opacity-30"></div>
                     <span class="absolute top-5 left-5 bg-red-500/20 text-red-200 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Desempenho</span>
-                    <i class="fa-solid fa-gauge-high text-8xl text-red-300 group-hover:scale-110 duration-500"></i>
+                    <img src="assets/equipes/pacce-scuderia-logo.jpg" alt="Logo Pacce Scuderia" class="w-36 h-36 object-contain rounded-[2rem] bg-white p-4 border border-white/20 shadow-soft group-hover:scale-110 duration-500">
                 </div>
                 <div class="p-8">
                     <h3 class="text-3xl text-white font-bold mb-3">Pacce Scuderia</h3>
-                    <p class="text-slate-400">Equipe destacada por velocidade, comunicação e engenharia aplicada à competição.</p>
+                    <p class="text-slate-400">Equipe de Belo Horizonte vinculada ao SESI Barreiro, com identidade visual forte, atuação em STEM Racing/F1 in Schools e trajetória competitiva em ciclos regionais e nacionais.</p>
                 </div>
             </article>
         </div>
@@ -722,7 +753,7 @@ body {
                 <p class="dark-cta-copy max-w-3xl mx-auto text-lg md:text-xl leading-relaxed mb-12">
                     Compartilhe sua trajetória e faça parte do HUB Da Robótica.
                 </p>
-                <a href="Contatos.html" class="dark-cta-action inline-flex items-center gap-4 bg-orange-500 hover:bg-orange-600 duration-300 px-10 py-5 rounded-2xl font-semibold shadow-gold">
+                <a href="FormularioEquipe.html" class="dark-cta-action inline-flex items-center gap-4 bg-orange-500 hover:bg-orange-600 duration-300 px-10 py-5 rounded-2xl font-semibold shadow-gold">
                     <i class="fa-solid fa-paper-plane"></i>
                     Cadastrar Equipe
                 </a>
@@ -815,6 +846,7 @@ function categoryMatches(cardCategory, activeFilter) {
     if (activeFilter === 'F1 in Schools') return cardCategory === 'F1 in Schools';
     if (activeFilter === 'FTC') return cardCategory === 'FTC';
     if (activeFilter === 'FRC') return cardCategory === 'FRC';
+    if (activeFilter === 'Pesquisa e Extensão') return cardCategory === 'Pesquisa e Extensão';
     return true;
 }
 
