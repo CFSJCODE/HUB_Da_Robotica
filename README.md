@@ -1,23 +1,23 @@
-# HUB Da Robotica
+# HUB Da Robótica
 
-![Logo do HUB Da Robotica](public/assets/logos/logo-hub-icon.png)
+![Logo do HUB Da Robótica](public/assets/logos/logo-hub-icon.png)
 
-Plataforma web academica para centralizar competicoes, equipes, projetos e contatos do ecossistema brasileiro de robotica.
+Plataforma web acadêmica para centralizar competições, equipes, projetos e contatos do ecossistema brasileiro de robótica.
 
 ## Objetivo
 
-O projeto foi desenvolvido como uma plataforma de interface web para apresentar um hub de robotica com navegacao institucional, catalogo de competicoes, favoritos, autenticacao didatica, detalhes de eventos, graficos e CRUD administrativo usando JSON Server.
+O projeto foi desenvolvido como uma plataforma de interface web para apresentar um hub de robótica com navegação institucional, catálogo de competições, favoritos, autenticação didática, detalhes de eventos, gráficos e CRUD administrativo usando JSON Server.
 
 ## Principais Funcionalidades
 
-- Pagina inicial institucional com proposta, publico, funcionalidades, missao e objetivos.
-- Radar de competicoes com carrossel, busca, detalhes, favoritos e metricas.
+- Página inicial institucional com proposta, público, funcionalidades, missão e objetivos.
+- Radar de competições com carrossel, busca, detalhes, favoritos e métricas.
 - CRUD de eventos conectado ao JSON Server.
-- Login didatico com usuarios cadastrados no banco JSON.
-- Paginas de equipes brasileiras de robotica.
-- Garagem de projetos e pagina de contatos.
+- Login didático com usuários cadastrados no banco JSON.
+- Páginas de equipes brasileiras de robótica.
+- Garagem de projetos e página de contatos.
 - Tema visual responsivo com Tailwind CSS, CSS customizado e Font Awesome.
-- Grafico de distribuicao de modalidades com Chart.js.
+- Gráfico de distribuição de modalidades com Chart.js.
 
 ## Tecnologias Utilizadas
 
@@ -29,19 +29,19 @@ O projeto foi desenvolvido como uma plataforma de interface web para apresentar 
 - Chart.js via CDN
 - Node.js
 - JSON Server
-- GitHub Pages para hospedagem estatica do front-end
+- GitHub Pages para hospedagem estática do front-end
 
 ## Arquitetura Geral
 
 ```mermaid
 flowchart LR
-    A["Usuario no navegador"] --> B["GitHub Pages / public"]
+    A["Usuário no navegador"] --> B["GitHub Pages / public"]
     B --> C["RadarDeCompeticoes.html"]
     C --> D["API JSON Server"]
     D --> E["db/db.json"]
 ```
 
-O front-end fica em `public/` e pode ser publicado como site estatico. Os dados ficam em `db/db.json` e sao expostos pela API REST do JSON Server em ambiente local ou em um servico externo compativel com Node.js.
+O front-end fica em `public/` e pode ser publicado como site estático. Os dados ficam em `db/db.json` e são expostos pela API REST do JSON Server em ambiente local ou em um serviço externo compatível com Node.js.
 
 ## Estrutura de Pastas
 
@@ -49,23 +49,23 @@ O front-end fica em `public/` e pode ser publicado como site estatico. Os dados 
 .
 ├── .github/workflows/        # Workflow de deploy do GitHub Pages
 ├── db/                       # Banco JSON usado pelo JSON Server
-├── docs/                     # Documentacao tecnica e de deploy
-├── public/                   # Interface web estatica
+├── docs/                     # Documentação técnica e de deploy
+├── public/                   # Interface web estática
 │   ├── assets/               # CSS, scripts, imagens e logos
-│   └── Equipes/              # Paginas de perfil das equipes
-├── scripts/                  # Scripts auxiliares de execucao e validacao
-├── .env.example              # Exemplo de variaveis de ambiente
+│   └── Equipes/              # Páginas de perfil das equipes
+├── scripts/                  # Scripts auxiliares de execução e validação
+├── .env.example              # Exemplo de variáveis de ambiente
 ├── .gitignore                # Regras de versionamento
-├── CHANGELOG.md              # Historico de mudancas
-├── CONTRIBUTING.md           # Guia de contribuicao
-├── LICENSE                   # Licenca do projeto
-├── package.json              # Scripts npm e dependencias
-└── README.md                 # Documentacao principal
+├── CHANGELOG.md              # Histórico de mudanças
+├── CONTRIBUTING.md           # Guia de contribuição
+├── LICENSE                   # Licença do projeto
+├── package.json              # Scripts npm e dependências
+└── README.md                 # Documentação principal
 ```
 
 ## Requisitos de Hardware
 
-Nao ha hardware obrigatorio. Este repositorio contem uma plataforma web. Nao foram encontrados firmware, pinagem, sensores, atuadores ou dependencias de microcontrolador.
+Não há hardware obrigatório. Este repositório contém uma plataforma web. Não foram encontrados firmware, pinagem, sensores, atuadores ou dependências de microcontrolador.
 
 ## Requisitos de Software
 
@@ -74,21 +74,21 @@ Nao ha hardware obrigatorio. Este repositorio contem uma plataforma web. Nao for
 - Python 3, usado apenas para servir a pasta `public/` localmente
 - Navegador moderno
 
-## Instalacao
+## Instalação
 
 ```bash
 npm install
 ```
 
-## Configuracao
+## Configuração
 
-O front-end le a URL da API em:
+O front-end lê a URL da API em:
 
 ```text
 public/assets/scripts/config.js
 ```
 
-Configuracao local padrao:
+Configuração local padrão:
 
 ```js
 window.HUB_ROBOTICA_CONFIG = {
@@ -96,7 +96,7 @@ window.HUB_ROBOTICA_CONFIG = {
 };
 ```
 
-Para publicar o front no GitHub Pages com uma API externa, altere `API_URL` para a URL publica do backend JSON Server.
+Para publicar o front-end no GitHub Pages com uma API externa, altere `API_URL` para a URL pública do backend JSON Server.
 
 ## Como Executar Localmente
 
@@ -126,19 +126,19 @@ http://localhost:3000
 
 ## Como Usar
 
-1. Abra a pagina inicial.
-2. Acesse "Radar de Competicoes".
-3. Navegue pelos eventos, busque por nome/local/modalidade e abra os detalhes.
-4. Entre com um usuario didatico para testar favoritos e CRUD.
+1. Abra a página inicial.
+2. Acesse "Radar de Competições".
+3. Navegue pelos eventos, busque por nome, local ou modalidade e abra os detalhes.
+4. Entre com um usuário didático para testar favoritos e CRUD.
 
-Usuarios de desenvolvimento cadastrados em `db/db.json`:
+Usuários de desenvolvimento cadastrados em `db/db.json`:
 
 ```text
 admin / 123
 user  / 123
 ```
 
-Essas credenciais sao exemplos didaticos e nao devem ser usadas como autenticacao real em producao.
+Essas credenciais são exemplos didáticos e não devem ser usadas como autenticação real em produção.
 
 ## Banco de Dados
 
@@ -150,8 +150,8 @@ db/db.json
 
 Recursos principais:
 
-- `usuarios`: usuarios didaticos com login, senha, nome, email, permissao admin e favoritos.
-- `eventos`: competicoes exibidas no Radar.
+- `usuarios`: usuários didáticos com login, senha, nome, e-mail, permissão de administrador e favoritos.
+- `eventos`: competições exibidas no Radar.
 
 Campos principais de `eventos`:
 
@@ -170,30 +170,30 @@ Mais detalhes: [docs/DATABASE.md](docs/DATABASE.md).
 
 ## Interface Web
 
-Paginas principais:
+Páginas principais:
 
-- `public/index.html`: pagina inicial institucional.
-- `public/RadarDeCompeticoes.html`: modulo principal com catalogo, detalhes, favoritos, metricas e CRUD.
+- `public/index.html`: página inicial institucional.
+- `public/RadarDeCompeticoes.html`: módulo principal com catálogo, detalhes, favoritos, métricas e CRUD.
 - `public/Garagem_De_Projetos.html`: projetos e garagem.
-- `public/EquipesBrasil.html`: diretorio de equipes.
-- `public/Contatos.html`: autoria, instituicao e contato.
+- `public/EquipesBrasil.html`: diretório de equipes.
+- `public/Contatos.html`: autoria, instituição e contato.
 - `public/Equipes/*.html`: perfis individuais de equipes.
 
 Mais detalhes: [docs/TECHNICAL.md](docs/TECHNICAL.md).
 
-## Publicacao
+## Publicação
 
-O repositorio inclui um workflow para publicar `public/` no GitHub Pages:
+O repositório inclui um workflow para publicar `public/` no GitHub Pages:
 
 ```text
 .github/workflows/pages.yml
 ```
 
-Para o backend, hospede o JSON Server em um servico externo Node.js e configure a URL publica em `public/assets/scripts/config.js`.
+Para o backend, hospede o JSON Server em um serviço externo Node.js e configure a URL pública em `public/assets/scripts/config.js`.
 
 Guia de deploy: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-## Validacao
+## Validação
 
 Execute:
 
@@ -204,33 +204,32 @@ npm run validate
 O validador confere:
 
 - JSON do banco.
-- Campos obrigatorios dos eventos.
+- Campos obrigatórios dos eventos.
 - Links e assets internos.
-- Caminhos com espacos dentro do repositorio.
+- Caminhos com espaços dentro do repositório.
 
-## Limitacoes Conhecidas
+## Limitações Conhecidas
 
-- Autenticacao didatica sem criptografia de senha.
-- JSON Server nao e banco de producao.
-- Tailwind, Font Awesome e Chart.js sao carregados por CDN.
-- O GitHub Pages nao executa backend; a API precisa ficar em outro servico.
+- Autenticação didática sem criptografia de senha.
+- JSON Server não é banco de produção.
+- Tailwind, Font Awesome e Chart.js são carregados por CDN.
+- O GitHub Pages não executa backend; a API precisa ficar em outro serviço.
 - CRUD online depende de backend com armazenamento persistente.
 
 ## Roadmap
 
-- Migrar autenticacao para backend real.
+- Migrar autenticação para backend real.
 - Migrar dados para Supabase, PostgreSQL ou outro banco gerenciado.
 - Criar testes automatizados de UI.
-- Adicionar paginas legais reais para privacidade, termos e licenca.
-- Otimizar imagens grandes para reduzir peso do repositorio.
-- Padronizar nomes de paginas para lowercase/kebab-case em uma futura versao com redirects.
+- Adicionar páginas legais reais para privacidade, termos e licença.
+- Otimizar imagens grandes para reduzir o peso do repositório.
+- Padronizar nomes de páginas para lowercase/kebab-case em uma futura versão com redirects.
 
 ## Autor
 
-Claudio Francisco dos Santos Junior  
-Projeto academico de Desenvolvimento de Interfaces Web - PUC Minas.
+Cláudio Francisco dos Santos Junior  
+Projeto acadêmico de Desenvolvimento de Interfaces Web - PUC Minas.
 
-## Licenca
+## Licença
 
-Distribuido sob a licenca MIT. Consulte [LICENSE](LICENSE).
-# HUB_Da_Robotica
+Distribuído sob a licença MIT. Consulte [LICENSE](LICENSE).
