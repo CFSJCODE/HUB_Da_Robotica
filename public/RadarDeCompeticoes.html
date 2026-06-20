@@ -73,12 +73,6 @@
             box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
         }
 
-        .glass-nav nav,
-        .glass-nav nav > div,
-        .glass-nav nav ul {
-            gap: 1rem !important;
-        }
-
         .glass-nav nav a,
         #nav-auth-btn button {
             white-space: nowrap;
@@ -90,21 +84,12 @@
         }
 
         .radar-brand {
-            flex: 0 0 18.75rem;
-            min-width: 18.75rem;
+            min-width: 14rem;
         }
 
         .radar-brand-title,
         .radar-brand-subtitle {
             white-space: nowrap;
-        }
-
-        .radar-header-shell {
-            max-width: none;
-        }
-
-        .radar-main-nav {
-            overflow: hidden;
         }
 
         .flow-link-active {
@@ -128,59 +113,6 @@
             border: 1px solid rgba(34, 211, 238, 0.14);
             box-shadow: 0 22px 50px -24px rgba(34, 211, 238, 0.28);
             backdrop-filter: blur(18px);
-        }
-
-        @media (min-width: 1024px) and (max-width: 1360px) {
-            .glass-nav .max-w-7xl {
-                max-width: none;
-            }
-
-            .glass-nav nav,
-            .glass-nav nav > div,
-            .glass-nav nav ul {
-                gap: 0.55rem !important;
-            }
-
-            .glass-nav nav a,
-            #nav-auth-btn button {
-                font-size: 0.78rem !important;
-            }
-
-            #nav-auth-btn button {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-
-            .radar-brand {
-                flex-basis: 16.75rem;
-                min-width: 16.75rem;
-            }
-
-            .radar-brand-title {
-                font-size: 1.05rem !important;
-            }
-
-            .radar-brand-subtitle {
-                font-size: 0.58rem !important;
-                letter-spacing: 0.28em !important;
-            }
-        }
-
-        @media (max-width: 1535px) {
-            .radar-external-nav,
-            .radar-nav-separator {
-                display: none !important;
-            }
-
-            #nav-menu {
-                gap: 0.85rem !important;
-            }
-        }
-
-        @media (max-width: 1180px) {
-            .radar-main-nav {
-                display: none !important;
-            }
         }
 
         @media (max-width: 1023px) {
@@ -353,80 +285,57 @@
 <body class="text-slate-700 font-sans flex flex-col min-h-screen">
 
     <!-- Cabeçalho Institucional -->
-    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
-        <div class="radar-header-shell mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20 gap-6">
-                
-                <!-- Logo -->
-                <a href="#home" onclick="app.navigate('home')" class="radar-brand flex items-center gap-3 group cursor-pointer shrink-0">
-                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-11 h-11 rounded-xl border border-white/10 shadow-gold group-hover:scale-105 transition-transform">
-                    <div class="min-w-0">
-                        <h1 class="radar-brand-title font-serif text-xl text-white leading-tight">HUB Da Robótica</h1>
-                        <p class="radar-brand-subtitle text-[0.65rem] uppercase tracking-[0.35em] text-orange-400 font-bold">Competições</p>
+    <header class="fixed top-0 z-50 w-full glass-nav">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between gap-6">
+                <a href="#home" onclick="app.navigate('home')" class="radar-brand flex items-center gap-3 shrink-0 cursor-pointer">
+                    <img src="assets/logos/logo-hub-icon-compact.png" alt="Logo HUB Da Robótica" class="hub-logo-mark w-12 h-12 rounded-full border border-white/10">
+                    <div>
+                        <h1 class="radar-brand-title font-serif text-xl text-white leading-tight whitespace-nowrap">HUB Da Robótica</h1>
+                        <p class="radar-brand-subtitle text-[0.65rem] uppercase tracking-[0.32em] text-orange-400 font-bold whitespace-nowrap">Competições</p>
                     </div>
                 </a>
 
-                <!-- Nav Links Dinâmicos -->
-                <nav aria-label="Navegação principal" class="radar-main-nav hidden lg:flex flex-1 items-center justify-end gap-4 min-w-0">
-                    <div class="flex items-center justify-end gap-4 min-w-0">
-                        <!-- Links Externos (Outras Páginas) -->
-                        <ul class="radar-external-nav flex items-center gap-6 m-0 p-0 list-none">
-                            <li><a href="index.html#home" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Início</a></li>
-                            <li><a href="Garagem_De_Projetos.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Garagem</a></li>
-                            <li><a href="RadarDeCompeticoes.html" class="text-sm font-medium text-academic-gold transition-colors pb-1 border-b-2 border-academic-gold">Radar de Competições</a></li>
-                            <li><a href="EquipesBrasil.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Equipes do Brasil</a></li>
-                            <li><a href="Contatos.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Contatos</a></li>
-                        </ul>
-                        
-                        <!-- Separador Vertical -->
-                        <span class="radar-nav-separator block h-6 w-px bg-white/20"></span>
-                        
-                        <!-- Links Internos da SPA (Views) -->
-                        <ul class="flex items-center gap-6 m-0 p-0 list-none" id="nav-menu">
-                            <li>
-                                <a onclick="app.navigate('home')" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
-                                    <i class="fa-solid fa-house"></i> Visão Geral
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a onclick="app.navigate('rules')" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
-                                    <i class="fa-solid fa-book-journal-whills"></i> Regulamentos
-                                </a>
-                            </li>
+                <nav aria-label="Navegação principal" class="hidden xl:flex items-center gap-4 text-sm font-semibold">
+                    <a href="index.html#home" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="text-orange-400 border-b-2 border-orange-400 pb-1 whitespace-nowrap">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="text-white/80 hover:text-white transition-colors whitespace-nowrap">Contatos</a>
+                    <span class="h-6 w-px bg-white/20"></span>
+                    <a onclick="app.navigate('home')" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap cursor-pointer"><i class="fas fa-home"></i> Visão Geral</a>
+                    <a onclick="app.navigate('rules')" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap cursor-pointer"><i class="fas fa-book"></i> Regulamentos</a>
+                    <a onclick="app.navigate('metrics')" data-flow-link="metrics" class="text-white/80 hover:text-white transition-colors inline-flex items-center gap-2 whitespace-nowrap cursor-pointer"><i class="fas fa-chart-pie"></i> Métricas</a>
+                    <a id="nav-crud" onclick="app.navigate('crud')" data-flow-link="crud" class="hidden text-white/80 hover:text-white transition-colors items-center gap-2 whitespace-nowrap cursor-pointer"><i class="fas fa-plus"></i> Cadastro</a>
+                    <a id="nav-favorites" onclick="app.navigate('favorites')" data-flow-link="favorites" class="hidden text-white/80 hover:text-white transition-colors items-center gap-2 whitespace-nowrap cursor-pointer"><i class="fas fa-heart"></i> Favoritos</a>
+                    <button id="theme-toggle" type="button" onclick="HubTheme.toggle()" aria-pressed="false" class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-white/85 hover:border-academic-gold/70 hover:text-white transition-colors" title="Alternar tema">
+                        <span id="theme-toggle-label">Dark</span>
+                        <span class="relative inline-flex h-5 w-10 rounded-full bg-slate-950/70 border border-white/10 p-0.5">
+                            <span id="theme-toggle-knob" class="h-4 w-4 rounded-full bg-academic-gold shadow-gold transition-transform duration-200"></span>
+                        </span>
+                    </button>
+                    <span id="nav-auth-btn"></span>
+                </nav>
 
-                            <li id="nav-crud" style="display: none;">
-                                <a onclick="app.navigate('crud')" data-flow-link="crud" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
-                                    <i class="fa-solid fa-plus"></i> Cadastro
-                                </a>
-                            </li>
-                            
-                            <li id="nav-favorites" style="display: none;">
-                                <a onclick="app.navigate('favorites')" data-flow-link="favorites" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
-                                    <i class="fa-solid fa-heart"></i> Favoritos
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a onclick="app.navigate('metrics')" data-flow-link="metrics" class="text-sm font-medium text-white/80 hover:text-white transition-colors cursor-pointer flex items-center gap-2">
-                                    <i class="fa-solid fa-chart-pie"></i> Métricas
-                                </a>
-                            </li>
+                <button class="xl:hidden text-white text-2xl" id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
 
-                            <li>
-                                <button id="theme-toggle" type="button" onclick="HubTheme.toggle()" aria-pressed="false" class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-white/85 hover:border-academic-gold/70 hover:text-white transition-colors" title="Alternar tema">
-                                    <span id="theme-toggle-label">Dark</span>
-                                    <span class="relative inline-flex h-5 w-10 rounded-full bg-slate-950/70 border border-white/10 p-0.5">
-                                        <span id="theme-toggle-knob" class="h-4 w-4 rounded-full bg-academic-gold shadow-gold transition-transform duration-200"></span>
-                                    </span>
-                                </button>
-                            </li>
-                            
-                            <li id="nav-auth-btn">
-                                <!-- Injetado via JS -->
-                            </li>
-                        </ul>
-                    </div>
+            <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 pb-5">
+                <nav class="grid gap-2 pt-4 text-sm font-semibold">
+                    <a href="index.html#home" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Início</a>
+                    <a href="Garagem_De_Projetos.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Garagem</a>
+                    <a href="RadarDeCompeticoes.html" class="rounded-xl px-4 py-3 text-orange-400 bg-white/5">Radar de Competições</a>
+                    <a href="EquipesBrasil.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Equipes do Brasil</a>
+                    <a href="Contatos.html" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors">Contatos</a>
+                    <a onclick="app.navigate('home')" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors cursor-pointer">Visão Geral</a>
+                    <a onclick="app.navigate('rules')" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors cursor-pointer">Regulamentos</a>
+                    <a onclick="app.navigate('metrics')" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors cursor-pointer">Métricas</a>
+                    <a onclick="app.navigate('favorites')" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors cursor-pointer">Favoritos</a>
+                    <a onclick="app.navigate('crud')" class="rounded-xl px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white transition-colors cursor-pointer">Cadastro de Itens</a>
+                    <button type="button" onclick="HubTheme.toggle()" class="rounded-xl px-4 py-3 text-left text-white/80 hover:bg-white/5 hover:text-white transition-colors">Alternar tema</button>
+                    <a onclick="app.navigate('login')" class="btn-primary mt-2 rounded-full px-5 py-3 text-center text-white font-bold cursor-pointer">Entrar</a>
                 </nav>
             </div>
         </div>
@@ -1350,8 +1259,8 @@
                                 <i class="fa-solid fa-power-off text-sm"></i> Logout
                             </button>
                         </div>`;
-                    favNav.style.display = 'block';
-                    crudNav.style.display = user.admin ? 'block' : 'none';
+                    favNav.style.display = 'inline-flex';
+                    crudNav.style.display = user.admin ? 'inline-flex' : 'none';
                 } else {
                     authBtn.innerHTML = `<button class="bg-gradient-to-r from-academic-gold to-academic-gold_hover text-white px-6 py-2.5 rounded-full text-sm font-bold transition-transform hover:-translate-y-0.5 shadow-gold ml-4" onclick="app.navigate('login')"><i class="fa-solid fa-right-to-bracket mr-2"></i>Entrar</button>`;
                     favNav.style.display = 'none';
@@ -1788,6 +1697,29 @@
         // BOOTSTRAP DO SISTEMA
         // ==========================================
         window.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            if (mobileMenuBtn) {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuIcon = mobileMenuBtn.querySelector('i');
+
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                    mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+                    mobileMenu?.classList.toggle('hidden', isExpanded);
+                    mobileMenuIcon?.classList.toggle('fa-bars', isExpanded);
+                    mobileMenuIcon?.classList.toggle('fa-xmark', !isExpanded);
+                });
+
+                document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        mobileMenu?.classList.add('hidden');
+                        mobileMenuIcon?.classList.add('fa-bars');
+                        mobileMenuIcon?.classList.remove('fa-xmark');
+                    });
+                });
+            }
+
             app.init();
             window.addEventListener('hashchange', () => app.handleRoute());
             
